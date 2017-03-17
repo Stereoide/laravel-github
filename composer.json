@@ -1,0 +1,15 @@
+{
+    "name": "stereoide/laravel-github",
+    "description": "GitHub-API integration",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stereoide",
+            "email": "Stereoide@gmail.com"
+        }
+    ]
+}
