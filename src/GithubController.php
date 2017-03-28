@@ -123,4 +123,22 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $repos;
     }
+
+    /**
+     * Fetch public events
+     *
+     * @return Collection $events
+     */
+    public function events()
+    {
+        /* Fetch public events */
+
+        list($statusCode, $headers, $body) = GithubController::request('events');
+
+        $events = collect($body);
+
+        /* Return public events */
+
+        return $events;
+    }
 }
