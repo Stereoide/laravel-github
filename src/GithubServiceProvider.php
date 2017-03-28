@@ -13,7 +13,9 @@ class GithubServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->publishes([
+            __DIR__ . '/config/github.php' => config_path('github.php'),
+        ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class GithubServiceProvider extends ServiceProvider
     {
         \App::bind('github', function()
         {
-            return new \Stereoide\Github\Github;
+            return new \Stereoide\Github\GithubController;
         });
     }
 }
