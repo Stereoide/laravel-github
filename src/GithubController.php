@@ -50,11 +50,21 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param array $headers
      * @return [$statusCode, $headers, $body]
      */
-    public function request($url, $method = 'GET', $headers = [])
+    public function request($url, $method = 'GET', $headers = [], $paginationOffset = null, $elementsPerPage = null)
     {
         /* Get CURL connection */
 
         $connection = GithubController::getConnection();
+
+        /* Adjust URL to include pagination if necessary */
+
+        if (!is_null($paginationOffset)) {
+            $url .= (false === strpos($url, '?') ? '?' : '&') . 'page=' . $paginationOffset;
+        }
+
+        if (!is_null($elementsPerPage)) {
+            $url .= (false === strpos($url, '?') ? '?' : '&') . 'per_page=' . $elementsPerPage;
+        }
 
         /* Perform request */
 
@@ -129,11 +139,11 @@ class GithubController extends \App\Http\Controllers\Controller
      *
      * @return Collection $events
      */
-    public function events()
+    public function events($paginationOffset = 1)
     {
         /* Fetch public events */
 
-        list($statusCode, $headers, $body) = GithubController::request('events');
+        list($statusCode, $headers, $body) = GithubController::request('events', 'GET', [], $paginationOffset);
 
         $events = collect($body);
 
