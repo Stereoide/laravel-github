@@ -18,6 +18,10 @@ class GithubServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/config/github.php' => config_path('github.php'),
         ]);
+
+        /* Routes */
+
+        include __DIR__ . '/routes/routes.php';
     }
 
     /**
