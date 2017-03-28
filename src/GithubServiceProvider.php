@@ -13,6 +13,8 @@ class GithubServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        /* Config file */
+
         $this->publishes([
             __DIR__ . '/config/github.php' => config_path('github.php'),
         ]);
