@@ -1,6 +1,7 @@
 <?php
 
 return [
+
     /*
     |--------------------------------------------------------------------------
     | oAuth Token
@@ -12,4 +13,17 @@ return [
     */
 
     'oAuthToken' => '',
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Agent
+    |--------------------------------------------------------------------------
+    |
+    | Github requires that all API calls are sent with user-agent header and requests that you use your Github username.
+    | If no userAgent is given, "laravel-github" will be used as a default value which is quite undesirable.
+    |
+    */
+
+    'userAgent' => '',
+
 ];
