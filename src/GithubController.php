@@ -5,8 +5,17 @@ namespace Stereoide\Github;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
+/**
+ * Class GithubController
+ * @package Stereoide\Github
+ */
 class GithubController extends \App\Http\Controllers\Controller
 {
+    /**
+     * Creates and returns a Guzzle HTTP connection object to the Github root API endpoint
+     *
+     * @return Client
+     */
     public function getConnection()
     {
         /* Initialize HTTP connection */
@@ -32,6 +41,15 @@ class GithubController extends \App\Http\Controllers\Controller
         return $client;
     }
 
+    /**
+     * Perform a HTTP request to a specific API endpoint
+     * Returns the status code and the response headers AS-IS but json-ifies the response body
+     *
+     * @param $url
+     * @param string $method
+     * @param array $headers
+     * @return [$statusCode, $headers, $body]
+     */
     public function request($url, $method = 'GET', $headers = [])
     {
         /* Get CURL connection */
@@ -51,6 +69,12 @@ class GithubController extends \App\Http\Controllers\Controller
         return [$statusCode, $headers, $body];
     }
 
+    /**
+     * Placeholder method to be able to call any API method via a Laravel route
+     *
+     * @param $method
+     * @return string
+     */
     public function cmd($method)
     {
         /* Determine whether the desired method exists */
@@ -63,6 +87,9 @@ class GithubController extends \App\Http\Controllers\Controller
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getApiEndpoints()
     {
         list($statusCode, $headers, $body) = GithubController::request('/');
@@ -70,13 +97,20 @@ class GithubController extends \App\Http\Controllers\Controller
         return $body;
     }
 
+    /**
+     * @return mixed
+     */
     public function current_user_url()
     {
-        list($statusCode, $headers, $body) = GithubController::request('user', 'GET');
+        list($statusCode, $headers, $body) = GithubController::request('user');
 
         return $body;
     }
 
+    /**
+     * @param $username
+     * @return mixed
+     */
     public function getUserRepos($username)
     {
         /* Fetch user repos */
