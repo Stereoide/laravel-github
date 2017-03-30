@@ -41,6 +41,40 @@ class GithubController extends \App\Http\Controllers\Controller
         return $client;
     }
 
+    public function getPaginationFromResponseHeaders($headers) {
+        /* Make sure the pagination headers are present */
+
+        if (!isset($headers['Link'])) {
+            return null;
+        }
+
+        /* Determine pagination values */
+
+        $pagination = [];
+
+        $links = collect(explode(', ', $headers['Link'][0]));
+        $links->each(function($link, $key) use (&$pagination) {
+            preg_match('/<(.*page=(.*))>.*rel="(.*)"/i', $link, $matches);
+            list($unused, $link, $page, $rel) = $matches;
+            $pagination[$rel] = [
+                'link' => $link,
+                'page' => $page
+            ];
+        });
+
+        /* Make sure all indizes are at least set */
+
+        foreach (['first', 'prev', 'next', 'last'] as $key) {
+            if (!isset($pagination[$key])) {
+                $pagination[$key] = null;
+            }
+        }
+
+        /* Return */
+
+        return $pagination;
+    }
+
     /**
      * Perform a HTTP request to a specific API endpoint
      * Returns the status code and the response headers AS-IS but json-ifies the response body
@@ -146,6 +180,10 @@ class GithubController extends \App\Http\Controllers\Controller
         list($statusCode, $headers, $body) = GithubController::request('events', 'GET', [], $paginationOffset);
 
         $events = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
 
         /* Return public events */
 
