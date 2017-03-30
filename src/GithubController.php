@@ -41,6 +41,10 @@ class GithubController extends \App\Http\Controllers\Controller
         return $client;
     }
 
+    /**
+     * @param $headers
+     * @return array|null
+     */
     public function getPaginationFromResponseHeaders($headers) {
         /* Make sure the pagination headers are present */
 
