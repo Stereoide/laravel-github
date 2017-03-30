@@ -201,6 +201,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $repository
      * @param int $paginationOffset
      * @return mixed
+     * @see https://developer.github.com/v3/activity/events/#list-repository-events
      */
     public function getRepositoryEvents($owner, $repository, $paginationOffset = 1)
     {
