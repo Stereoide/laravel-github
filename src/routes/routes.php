@@ -5,6 +5,7 @@ Route::get('github/getUserRepos/{username}', '\Stereoide\Github\GithubController
 /* Events */
 
 Route::get('github/events', '\Stereoide\Github\GithubController@getEvents');
+Route::get('github/repositoryEvents/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryEvents');
 
 /* Catch-all */
 

@@ -175,13 +175,37 @@ class GithubController extends \App\Http\Controllers\Controller
     /**
      * Fetch public events
      *
-     * @return Collection $events
+     * @param int $paginationOffset
+     * @return mixed
      */
     public function getEvents($paginationOffset = 1)
     {
         /* Fetch public events */
 
         list($statusCode, $headers, $body) = GithubController::request('events', 'GET', [], $paginationOffset);
+
+        $events = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return public events */
+
+        return $events;
+    }
+
+    /**
+     * @param string $owner
+     * @param string $repository
+     * @param int $paginationOffset
+     * @return mixed
+     */
+    public function getRepositoryEvents($owner, $repository, $paginationOffset = 1)
+    {
+        /* Fetch repository events */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/events', 'GET', [], $paginationOffset);
 
         $events = collect($body);
 
