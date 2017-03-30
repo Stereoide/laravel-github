@@ -173,7 +173,7 @@ class GithubController extends \App\Http\Controllers\Controller
      *
      * @return Collection $events
      */
-    public function events($paginationOffset = 1)
+    public function getEvents($paginationOffset = 1)
     {
         /* Fetch public events */
 
