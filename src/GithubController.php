@@ -177,6 +177,7 @@ class GithubController extends \App\Http\Controllers\Controller
      *
      * @param int $paginationOffset
      * @return mixed
+     * @see https://developer.github.com/v3/activity/events/#list-public-events
      */
     public function getEvents($paginationOffset = 1)
     {
