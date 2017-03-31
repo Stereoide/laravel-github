@@ -642,4 +642,29 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $body;
     }
+
+    /**
+     * Set a Thread Subscription
+     *
+     * This lets you subscribe or unsubscribe from a conversation. Unsubscribing from a conversation mutes all future
+     * notifications (until you comment or get @mentioned once more).
+     *
+     * @param int $id
+     * @param bool $subscribed
+     * @param bool $ignored
+     * @see https://developer.github.com/v3/activity/notifications/#set-a-thread-subscription
+     */
+    public function setNotificationThreadSubscriptionStatus($id, $subscribed, $ignored)
+    {
+        /* Sanitize parameters */
+
+        $subscribed = ((is_bool($subscribed) && true == $subscribed) || (is_string($subscribed) && 'true' == $subscribed));
+        $ignored = ((is_bool($ignored) && true == $ignored) || (is_string($ignored) && 'true' == $ignored));
+
+        /* Set notification thread subscription status */
+
+        $url = 'notifications/threads/'. $id . '/subscription?subscribed=' . ($subscribed ? 'true' : 'false') . '&ignored=' . ($ignored ? 'true' : 'false');
+
+        list($statusCode, $headers, $body) = GithubController::request($url, 'PUT');
+    }
 }
