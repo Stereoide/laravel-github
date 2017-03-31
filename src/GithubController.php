@@ -577,7 +577,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param $owner
      * @param $repository
      * @param null $timestamp
-     * @see https://developer.github.com/v3/activity/notifications/#mark-as-read
+     * @see https://developer.github.com/v3/activity/notifications/#mark-notifications-as-read-in-a-repository
      */
     public function markRepositoryNotificationsAsRead($owner, $repository, $timestamp = null)
     {
