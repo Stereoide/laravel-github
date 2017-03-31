@@ -624,4 +624,22 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('notifications/threads/' . $id, 'PATCH');
     }
+
+    /**
+     * Determine whether th eauthenticated user is subscribed to a notification thread
+     *
+     * @param int $id
+     * @return mixed
+     * @see https://developer.github.com/v3/activity/notifications/#get-a-thread-subscription
+     */
+    public function getNotificationThreadSubscriptionStatus($id)
+    {
+        /* Fetch repository events */
+
+        list($statusCode, $headers, $body) = GithubController::request('notifications/threads/' . $id . '/subscription', 'GET');
+
+        /* Return thread */
+
+        return $body;
+    }
 }
