@@ -355,6 +355,9 @@ class GithubController extends \App\Http\Controllers\Controller
     /**
      * List events performed by a user
      *
+     * If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see
+     * public events.
+     *
      * @param string $username
      * @param int $paginationOffset
      * @return mixed
