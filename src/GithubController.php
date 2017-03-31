@@ -545,4 +545,27 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $notifications;
     }
+
+    /**
+     * Mark notifications as read
+     *
+     * Marking a notification as "read" removes it from the default view on GitHub.
+     *
+     * @param null $timestamp
+     * @see https://developer.github.com/v3/activity/notifications/#mark-as-read
+     */
+    public function markNotificationsAsRead($timestamp = null)
+    {
+        /* Mark notifications as read */
+
+        $url = 'notifications';
+
+        if ($timestamp) {
+            $url .= '&last_read_at=' . Carbon::createFromTimestamp($timestamp)->toIso8601String();
+        }
+
+        $url = str_replace('notifications&', 'notifications?', $url);
+
+        list($statusCode, $headers, $body) = GithubController::request($url, 'PUT');
+    }
 }
