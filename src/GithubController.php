@@ -593,4 +593,22 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request($url, 'PUT');
     }
+
+    /**
+     * View a single thread
+     *
+     * @param int $id
+     * @return mixed
+     * @see https://developer.github.com/v3/activity/notifications/#view-a-single-thread
+     */
+    public function fetchNotificationThread($id)
+    {
+        /* Fetch repository events */
+
+        list($statusCode, $headers, $body) = GithubController::request('notifications/threads/' . $id, 'GET');
+
+        /* Return thread */
+
+        return $body;
+    }
 }

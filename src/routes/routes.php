@@ -27,6 +27,7 @@ Route::get('github/repositoryNotifications/{owner}/{repository}/', '\Stereoide\G
 
 Route::get('github/markNotificationsAsRead', '\Stereoide\Github\GithubController@markNotificationsAsRead');
 Route::get('github/markRepositoryNotificationsAsRead', '\Stereoide\Github\GithubController@markRepositoryNotificationsAsRead');
+Route::get('github/fetchNotificationThread/{id}', '\Stereoide\Github\GithubController@fetchNotificationThread');
 
 /* Catch-all */
 
