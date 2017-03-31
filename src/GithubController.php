@@ -439,7 +439,7 @@ class GithubController extends \App\Http\Controllers\Controller
      *
      * List all notifications for the current user, grouped by repository.
      *
-     * @param bool $showReadNotifictions
+     * @param bool $showAllNotifications
      * @param bool $showOnlyParticipatingNotifications
      * @param null $showOnlyAfterTimestamp
      * @param null $showOnlyBeforeTimestamp
@@ -447,18 +447,18 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/notifications/#list-your-notifications
      */
-    public function getNotifications($showAllNotifictions = false, $showOnlyParticipatingNotifications = false, $showOnlyAfterTimestamp = null, $showOnlyBeforeTimestamp = null, $paginationOffset = 1)
+    public function getNotifications($showAllNotifications = false, $showOnlyParticipatingNotifications = false, $showOnlyAfterTimestamp = null, $showOnlyBeforeTimestamp = null, $paginationOffset = 1)
     {
         /* Sanitize parameters */
 
-        $showAllNotifictions = ((is_bool($showAllNotifictions) && true == $showAllNotifictions) || (is_string($showAllNotifictions) && 'true' == $showAllNotifictions));
+        $showAllNotifications = ((is_bool($showAllNotifications) && true == $showAllNotifications) || (is_string($showAllNotifications) && 'true' == $showAllNotifications));
         $showOnlyParticipatingNotifications = ((is_bool($showOnlyParticipatingNotifications) && true == $showOnlyParticipatingNotifications) || (is_string($showOnlyParticipatingNotifications) && 'true' == $showOnlyParticipatingNotifications));
 
         /* Fetch repository events */
 
         $url = 'notifications';
 
-        if ($showAllNotifictions) {
+        if ($showAllNotifications) {
             $url .= '&all=true';
         }
 
