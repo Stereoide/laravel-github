@@ -326,4 +326,29 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $events;
     }
+
+    /**
+     * List public events that a user has received
+     *
+     * @param string $username
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/activity/events/#list-public-events-that-a-user-has-received
+     */
+    public function getReceivedPublicUserEvents($username, $paginationOffset = 1)
+    {
+        /* Fetch repository events */
+
+        list($statusCode, $headers, $body) = GithubController::request('users/' . $username . '/received_events/public', 'GET', [], $paginationOffset);
+
+        $events = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return public events */
+
+        return $events;
+    }
 }
