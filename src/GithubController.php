@@ -667,4 +667,17 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request($url, 'PUT');
     }
+
+    /**
+     * Delete a Thread Subscription
+     *
+     * @param int $id
+     * @see https://developer.github.com/v3/activity/notifications/#delete-a-thread-subscription
+     */
+    public function deleteNotificationThreadSubscription($id)
+    {
+        /* Delete notification thread subscription */
+
+        list($statusCode, $headers, $body) = GithubController::request('notifications/threads/' . $id . '/subscription', 'DELETE');
+    }
 }
