@@ -488,4 +488,61 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $notifications;
     }
+
+    /**
+     * List your notifications in a repository
+     *
+     * List all notifications for the current user.
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param bool $showAllNotifications
+     * @param bool $showOnlyParticipatingNotifications
+     * @param null $showOnlyAfterTimestamp
+     * @param null $showOnlyBeforeTimestamp
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/activity/notifications/#list-your-notifications-in-a-repository
+     */
+    public function getRepositoryNotifications($owner, $repository, $showAllNotifications = false, $showOnlyParticipatingNotifications = false, $showOnlyAfterTimestamp = null, $showOnlyBeforeTimestamp = null, $paginationOffset = 1)
+    {
+        /* Sanitize parameters */
+
+        $showAllNotifications = ((is_bool($showAllNotifications) && true == $showAllNotifications) || (is_string($showAllNotifications) && 'true' == $showAllNotifications));
+        $showOnlyParticipatingNotifications = ((is_bool($showOnlyParticipatingNotifications) && true == $showOnlyParticipatingNotifications) || (is_string($showOnlyParticipatingNotifications) && 'true' == $showOnlyParticipatingNotifications));
+
+        /* Fetch repository events */
+
+        $url = '/repos/' . $owner . '/' . $repository . '/notifications';
+
+        if ($showAllNotifications) {
+            $url .= '&all=true';
+        }
+
+        if ($showOnlyParticipatingNotifications) {
+            $url .= '&participating=true';
+        }
+
+        if ($showOnlyAfterTimestamp) {
+            $url .= '&since=' . Carbon::createFromTimestamp($showOnlyAfterTimestamp)->toIso8601String();
+        }
+
+        if ($showOnlyBeforeTimestamp) {
+            $url .= '&after=' . Carbon::createFromTimestamp($showOnlyBeforeTimestamp)->toIso8601String();
+        }
+
+        $url = str_replace('notifications&', 'notifications?', $url);
+
+        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], $paginationOffset);
+
+        $notifications = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return public events */
+
+        return $notifications;
+    }
 }

@@ -21,6 +21,10 @@ Route::get('github/notifications/{all}/{participating}', '\Stereoide\Github\Gith
 Route::get('github/notifications/{all}', '\Stereoide\Github\GithubController@getNotifications');
 Route::get('github/notifications', '\Stereoide\Github\GithubController@getNotifications');
 
+Route::get('github/repositoryNotifications/{owner}/{repository}/{all}/{participating}', '\Stereoide\Github\GithubController@getRepositoryNotifications');
+Route::get('github/repositoryNotifications/{owner}/{repository}/{all}', '\Stereoide\Github\GithubController@getRepositoryNotifications');
+Route::get('github/repositoryNotifications/{owner}/{repository}/', '\Stereoide\Github\GithubController@getRepositoryNotifications');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');
