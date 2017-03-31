@@ -432,4 +432,30 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $events;
     }
+
+    /**
+     * List your notifications
+     *
+     * List all notifications for the current user, grouped by repository.
+     *
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/activity/notifications/#list-your-notifications
+     */
+    public function getNotifications($paginationOffset = 1)
+    {
+        /* Fetch repository events */
+
+        list($statusCode, $headers, $body) = GithubController::request('notifications', 'GET', [], $paginationOffset);
+
+        $notifications = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return public events */
+
+        return $notifications;
+    }
 }

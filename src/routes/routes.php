@@ -15,6 +15,10 @@ Route::get('github/performedUserEvents/{username}', '\Stereoide\Github\GithubCon
 Route::get('github/performedPublicUserEvents/{username}', '\Stereoide\Github\GithubController@getPerformedPublicUserEvents');
 Route::get('github/userOrganisationEvents/{username}/{organisation}', '\Stereoide\Github\GithubController@getUserOrganisationEvents');
 
+/* Notifications */
+
+Route::get('github/notifications', '\Stereoide\Github\GithubController@getNotifications');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');
