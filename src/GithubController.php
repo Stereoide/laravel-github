@@ -404,4 +404,32 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $events;
     }
+
+    /**
+     * List events for an organization
+     *
+     * This is the user's organization dashboard. You must be authenticated as the user to view this.
+     *
+     * @param string $username
+     * @param string $organisation
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/activity/events/#list-events-for-an-organization
+     */
+    public function getUserOrganisationEvents($username, $organisation, $paginationOffset = 1)
+    {
+        /* Fetch repository events */
+
+        list($statusCode, $headers, $body) = GithubController::request('users/' . $username . '/events/orgs/' . $organisation, 'GET', [], $paginationOffset);
+
+        $events = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return public events */
+
+        return $events;
+    }
 }
