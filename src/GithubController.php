@@ -611,4 +611,17 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $body;
     }
+
+    /**
+     * Mark a thread as read
+     *
+     * @param int $id
+     * @see https://developer.github.com/v3/activity/notifications/#mark-a-thread-as-read
+     */
+    public function markNotificationThreadAsRead($id)
+    {
+        /* Mark thread as read */
+
+        list($statusCode, $headers, $body) = GithubController::request('notifications/threads/' . $id, 'PATCH');
+    }
 }
