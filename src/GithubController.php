@@ -574,8 +574,8 @@ class GithubController extends \App\Http\Controllers\Controller
      *
      * Marking all notifications in a repository as "read" removes them from the default view on GitHub.
      *
-     * @param $owner
-     * @param $repository
+     * @param string $owner
+     * @param string $repository
      * @param null $timestamp
      * @see https://developer.github.com/v3/activity/notifications/#mark-notifications-as-read-in-a-repository
      */
