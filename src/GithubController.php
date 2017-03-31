@@ -273,4 +273,29 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $events;
     }
+
+    /**
+     * List public events for an organization
+     *
+     * @param string $organisation
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/activity/events/#list-public-events-for-an-organization
+     */
+    public function getOrganisationEvents($organisation, $paginationOffset = 1)
+    {
+        /* Fetch repository events */
+
+        list($statusCode, $headers, $body) = GithubController::request('orgs/' . $organisation . '/events', 'GET', [], $paginationOffset);
+
+        $events = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return public events */
+
+        return $events;
+    }
 }
