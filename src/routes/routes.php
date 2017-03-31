@@ -17,6 +17,8 @@ Route::get('github/userOrganisationEvents/{username}/{organisation}', '\Stereoid
 
 /* Notifications */
 
+Route::get('github/notifications/{all}/{participating}', '\Stereoide\Github\GithubController@getNotifications');
+Route::get('github/notifications/{all}', '\Stereoide\Github\GithubController@getNotifications');
 Route::get('github/notifications', '\Stereoide\Github\GithubController@getNotifications');
 
 /* Catch-all */
