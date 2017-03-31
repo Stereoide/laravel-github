@@ -173,7 +173,7 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
-     * Fetch public events
+     * List public events
      *
      * @param int $paginationOffset
      * @return mixed
@@ -197,6 +197,8 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
+     * List repository events
+     *
      * @param string $owner
      * @param string $repository
      * @param int $paginationOffset
@@ -221,6 +223,8 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
+     * List issue events for a repository
+     *
      * @param string $owner
      * @param string $repository
      * @param int $paginationOffset
