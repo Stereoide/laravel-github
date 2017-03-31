@@ -298,4 +298,32 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $events;
     }
+
+    /**
+     * List events that a user has received
+     *
+     * These are events that you've received by watching repos and following users. If you are authenticated as the
+     * given user, you will see private events. Otherwise, you'll only see public events.
+     *
+     * @param string $username
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/activity/events/#list-events-that-a-user-has-received
+     */
+    public function getReceivedUserEvents($username, $paginationOffset = 1)
+    {
+        /* Fetch repository events */
+
+        list($statusCode, $headers, $body) = GithubController::request('users/' . $username . '/received_events', 'GET', [], $paginationOffset);
+
+        $events = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return public events */
+
+        return $events;
+    }
 }
