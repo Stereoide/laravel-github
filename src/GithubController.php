@@ -692,7 +692,7 @@ class GithubController extends \App\Http\Controllers\Controller
      */
     public function getRepositoryStargazers($owner, $repository, $paginationOffset = 1)
     {
-        /* Fetch repository events */
+        /* Fetch repository stargazers */
 
         list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/stargazers', 'GET', [], $paginationOffset);
 
