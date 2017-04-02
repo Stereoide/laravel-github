@@ -680,4 +680,30 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('notifications/threads/' . $id . '/subscription', 'DELETE');
     }
+
+    /**
+     * List Stargazers
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/activity/starring/#list-stargazers
+     */
+    public function getRepositoryStargazers($owner, $repository, $paginationOffset = 1)
+    {
+        /* Fetch repository events */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/stargazers', 'GET', [], $paginationOffset);
+
+        $stargazers = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return public events */
+
+        return $stargazers;
+    }
 }
