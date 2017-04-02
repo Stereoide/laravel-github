@@ -36,7 +36,8 @@ Route::get('github/deleteNotificationThreadSubscription/{id}', '\Stereoide\Githu
 /* Starring */
 
 Route::get('github/repositoryStargazers/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryStargazers');
-
+Route::get('github/starredRepositories', '\Stereoide\Github\GithubController@getStarredRepositories');
+Route::get('github/starredRepositories/{username}', '\Stereoide\Github\GithubController@getStarredRepositories');
 
 /* Catch-all */
 

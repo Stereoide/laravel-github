@@ -706,4 +706,37 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $stargazers;
     }
+
+    /**
+     * List repositories being starred
+     *
+     * @param string $username
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/activity/starring/#list-repositories-being-starred
+     */
+    public function getStarredRepositories($username = null, $paginationOffset = 1)
+    {
+        /* Determine URL */
+
+        if (empty($username)) {
+            $url = 'user/starred';
+        } else {
+            $url = 'users/' . $username . '/starred';
+        }
+
+        /* Fetch starred repositories */
+
+        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], $paginationOffset);
+
+        $repositories = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return public events */
+
+        return $repositories;
+    }
 }
