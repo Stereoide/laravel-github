@@ -761,4 +761,20 @@ class GithubController extends \App\Http\Controllers\Controller
             return (204 == $exception->getResponse()->getStatusCode());
         }
     }
+
+    /**
+     * Star a repository
+     *
+     * Requires for the user to be authenticated.
+     *
+     * @param string $owner
+     * @param string $repository
+     * @see https://developer.github.com/v3/activity/starring/#star-a-repository
+     */
+    public function starRepository($owner, $repository)
+    {
+        /* Star the repository */
+
+        list($statusCode, $headers, $body) = GithubController::request('user/starred/' . $owner . '/' . $repository, 'PUT', ['Content-Length' => 0]);
+    }
 }
