@@ -665,7 +665,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         $url = 'notifications/threads/'. $id . '/subscription?subscribed=' . ($subscribed ? 'true' : 'false') . '&ignored=' . ($ignored ? 'true' : 'false');
 
-        list($statusCode, $headers, $body) = GithubController::request($url, 'PUT');
+        list($statusCode, $headers, $body) = GithubController::request($url, 'PUT', ['Content-Length' => 0]);
     }
 
     /**
