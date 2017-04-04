@@ -739,4 +739,26 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $repositories;
     }
+
+    /**
+     * Check if you are starring a repository
+     *
+     * Requires for the user to be authenticated.
+     *
+     * @param string $owner
+     * @param string $repository
+     * @return bool
+     * @see https://developer.github.com/v3/activity/starring/#check-if-you-are-starring-a-repository
+     */
+    public function isRepositoryStarred($owner, $repository)
+    {
+        /* Determine whether the repository in question is starred by the authenticated user */
+
+        try {
+            list($statusCode, $headers, $body) = GithubController::request('user/starred/' . $owner . '/' . $repository);
+            return (204 == $statusCode);
+        } catch (\Exception $exception) {
+            return (204 == $exception->getResponse()->getStatusCode());
+        }
+    }
 }

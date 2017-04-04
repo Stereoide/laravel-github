@@ -38,6 +38,7 @@ Route::get('github/deleteNotificationThreadSubscription/{id}', '\Stereoide\Githu
 Route::get('github/repositoryStargazers/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryStargazers');
 Route::get('github/starredRepositories', '\Stereoide\Github\GithubController@getStarredRepositories');
 Route::get('github/starredRepositories/{username}', '\Stereoide\Github\GithubController@getStarredRepositories');
+Route::get('github/isRepositoryStarred/{owner}/{repository}', function($owner, $repository) { dd(Github::isRepositoryStarred($owner, $repository)); });
 
 /* Catch-all */
 
