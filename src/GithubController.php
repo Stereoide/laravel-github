@@ -591,7 +591,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         $url = str_replace('notifications&', 'notifications?', $url);
 
-        list($statusCode, $headers, $body) = GithubController::request($url, 'PUT');
+        list($statusCode, $headers, $body) = GithubController::request($url, 'PUT', ['Content-Length' => 0]);
     }
 
     /**
