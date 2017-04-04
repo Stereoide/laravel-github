@@ -777,4 +777,20 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('user/starred/' . $owner . '/' . $repository, 'PUT', ['Content-Length' => 0]);
     }
+
+    /**
+     * Unstar a repository
+     *
+     * Requires for the user to be authenticated.
+     *
+     * @param string $owner
+     * @param string $repository
+     * @see https://developer.github.com/v3/activity/starring/#unstar-a-repository
+     */
+    public function unstarRepository($owner, $repository)
+    {
+        /* Star the repository */
+
+        list($statusCode, $headers, $body) = GithubController::request('user/starred/' . $owner . '/' . $repository, 'DELETE');
+    }
 }

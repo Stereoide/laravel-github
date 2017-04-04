@@ -40,6 +40,7 @@ Route::get('github/starredRepositories', '\Stereoide\Github\GithubController@get
 Route::get('github/starredRepositories/{username}', '\Stereoide\Github\GithubController@getStarredRepositories');
 Route::get('github/isRepositoryStarred/{owner}/{repository}', function($owner, $repository) { dd(Github::isRepositoryStarred($owner, $repository)); });
 Route::get('github/starRepository/{username}/{repository}', '\Stereoide\Github\GithubController@starRepository');
+Route::get('github/unstarRepository/{username}/{repository}', '\Stereoide\Github\GithubController@unstarRepository');
 
 /* Catch-all */
 
