@@ -45,6 +45,7 @@ Route::get('github/unstarRepository/{username}/{repository}', '\Stereoide\Github
 /* Watching */
 
 Route::get('github/repositoryWatchers/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryWatchers');
+Route::get('github/watchedRepositories', '\Stereoide\Github\GithubController@getWatchedRepositories');
 
 /* Catch-all */
 

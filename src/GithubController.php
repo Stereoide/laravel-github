@@ -819,4 +819,37 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $watchers;
     }
+
+    /**
+     * List repositories being watched
+     *
+     * @param string $username
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/activity/watching/#list-repositories-being-watched
+     */
+    public function getWatchedRepositories($username = null, $paginationOffset = 1)
+    {
+        /* Determine URL */
+
+        if (empty($username)) {
+            $url = 'user/subscriptions';
+        } else {
+            $url = 'users/' . $username . '/subscriptions';
+        }
+
+        /* Fetch watched repositories */
+
+        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], $paginationOffset);
+
+        $repositories = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return public events */
+
+        return $repositories;
+    }
 }
