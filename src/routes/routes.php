@@ -47,6 +47,7 @@ Route::get('github/unstarRepository/{username}/{repository}', '\Stereoide\Github
 Route::get('github/repositoryWatchers/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryWatchers');
 Route::get('github/watchedRepositories', '\Stereoide\Github\GithubController@getWatchedRepositories');
 Route::get('github/watchedRepositories/{username}', '\Stereoide\Github\GithubController@getWatchedRepositories');
+Route::get('github/isRepositorywatched/{owner}/{repository}', function($owner, $repository) { dd(Github::isRepositoryWatched($owner, $repository)); });
 
 /* Catch-all */
 

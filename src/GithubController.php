@@ -852,4 +852,30 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $repositories;
     }
+
+    /**
+     * Get a Repository Subscription
+     *
+     * Requires for the user to be authenticated.
+     *
+     * @param string $owner
+     * @param string $repository
+     * @return [bool $isWatched, array $watchData]
+     * @see https://developer.github.com/v3/activity/watching/#get-a-repository-subscription
+     */
+    public function isRepositoryWatched($owner, $repository)
+    {
+        /* Determine whether the repository in question is starred by the authenticated user */
+
+        try {
+            list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/subscription');
+            if (200 == $statusCode) {
+                return [true, $body];
+            } else {
+                return [false, null];
+            }
+        } catch (\Exception $exception) {
+            return [false, null];
+        }
+    }
 }
