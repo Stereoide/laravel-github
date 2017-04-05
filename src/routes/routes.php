@@ -42,6 +42,10 @@ Route::get('github/isRepositoryStarred/{owner}/{repository}', function($owner, $
 Route::get('github/starRepository/{username}/{repository}', '\Stereoide\Github\GithubController@starRepository');
 Route::get('github/unstarRepository/{username}/{repository}', '\Stereoide\Github\GithubController@unstarRepository');
 
+/* Watching */
+
+Route::get('github/repositoryWatchers/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryWatchers');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');

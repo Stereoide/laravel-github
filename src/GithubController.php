@@ -793,4 +793,30 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('user/starred/' . $owner . '/' . $repository, 'DELETE');
     }
+
+    /**
+     * List watchers
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/activity/watching/#list-watchers
+     */
+    public function getRepositoryWatchers($owner, $repository, $paginationOffset = 1)
+    {
+        /* Fetch repository stargazers */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/subscribers', 'GET', [], $paginationOffset);
+
+        $watchers = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return public events */
+
+        return $watchers;
+    }
 }
