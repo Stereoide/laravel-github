@@ -886,4 +886,29 @@ class GithubController extends \App\Http\Controllers\Controller
             return [false, null];
         }
     }
+
+    /**
+     * Set a Repository Subscription
+     *
+     * Requires for the user to be authenticated.
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param bool $subscribed
+     * @param bool $ignored
+     * @see https://developer.github.com/v3/activity/watching/#set-a-repository-subscription
+     */
+    public function watchRepository($owner, $repository, $subscribed = true, $ignored = false)
+    {
+        /* Assemble payload */
+
+        $data = json_encode([
+            'subscribed' => ((is_bool($subscribed) && $subscribed) || (is_string($subscribed) && 'true' == $subscribed)),
+            'ignored' => ((is_bool($ignored) && $ignored) || (is_string($ignored) && 'true' == $ignored))
+        ]);
+
+        /* Watch the repository */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/subscription', 'PUT', ['Content-Length' => strlen($data)], $data);
+    }
 }
