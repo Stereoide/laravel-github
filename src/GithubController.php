@@ -911,4 +911,18 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/subscription', 'PUT', ['Content-Length' => strlen($data)], $data);
     }
+
+    /**
+     * Delete a Repository Subscription
+     *
+     * @param string $owner
+     * @param string $repository
+     * @see https://developer.github.com/v3/activity/watching/#delete-a-repository-subscription
+     */
+    public function unwatchRepository($owner, $repository)
+    {
+        /* Unwatch the repository */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/subscription', 'DELETE');
+    }
 }
