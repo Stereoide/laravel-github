@@ -58,6 +58,7 @@ Route::get('github/unwatchRepository/{username}/{repository}', '\Stereoide\Githu
 Route::get('github/gists', '\Stereoide\Github\GithubController@getGists');
 Route::get('github/gists/{$username}', '\Stereoide\Github\GithubController@getGists');
 Route::get('github/starredGists', '\Stereoide\Github\GithubController@getStarredGists');
+Route::get('github/gist/{id}', function($id) { dd(Github::getGist($id)); });
 
 /* Catch-all */
 

@@ -990,4 +990,22 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $gists;
     }
+
+    /**
+     * Get a single gist
+     *
+     * @return mixed
+     * @see https://developer.github.com/v3/gists/#get-a-single-gist
+     * @TODO Check for truncated gist
+     */
+    public function getGist($id)
+    {
+        /* Fetch starred gists */
+
+        list($statusCode, $headers, $gist) = GithubController::request('gists/' . $id);
+
+        /* Return gist */
+
+        return $gist;
+    }
 }
