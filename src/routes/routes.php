@@ -60,6 +60,10 @@ Route::get('github/gists/{$username}', '\Stereoide\Github\GithubController@getGi
 Route::get('github/starredGists', '\Stereoide\Github\GithubController@getStarredGists');
 Route::get('github/gist/{id}', function($id) { dd(Github::getGist($id)); });
 Route::get('github/gist/{id}/{sha}', function($id, $sha) { dd(Github::getGistRevision($id, $sha)); });
+Route::get('github/createGist', function() {
+    $filepaths = [];
+    Github::createGist($filepaths, 'Test-Description', false);
+});
 
 /* Catch-all */
 

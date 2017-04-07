@@ -1032,4 +1032,34 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return GithubController::getGist($id, $sha);
     }
+
+    /**
+     * Create a gist
+     *
+     * @param array(string $filepath)
+     * @param string $description
+     * @param bool $public
+     * @see https://developer.github.com/v3/gists/#create-a-gist
+     */
+    public function createGist($filepaths, $description = '', $public = false)
+    {
+        /* Assemble data */
+
+        $data = [
+            'files' => [],
+            'description' => $description,
+            'public' => $public
+        ];
+
+        foreach ($filepaths as $filepath) {
+            $filename = basename($filepath);
+            $data['files'][$filename]['content'] = file_get_contents($filepath);
+        }
+
+        $data = json_encode($data);
+
+        /* Create gist */
+
+        list($statusCode, $headers, $body) = GithubController::request('gists', 'POST', [], $data);
+    }
 }
