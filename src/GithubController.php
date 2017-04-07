@@ -937,6 +937,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/gists/#list-a-users-gists
      * @TODO Pagination
      * @TODO Timestamp of first git
+     * @TODO Check for truncated gists
      */
     public function getGists($username = null, $paginationOffset = 1)
     {
@@ -973,6 +974,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/gists/#list-starred-gists
      * @TODO Pagination
      * @TODO Timestamp of first git
+     * @TODO Check for truncated gists
      */
     public function getStarredGists($paginationOffset = 1)
     {
