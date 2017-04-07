@@ -962,4 +962,32 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $gists;
     }
+
+    /**
+     * List starred gists
+     *
+     * List the authenticated user's starred gists
+     *
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/gists/#list-starred-gists
+     * @TODO Pagination
+     * @TODO Timestamp of first git
+     */
+    public function getStarredGists($paginationOffset = 1)
+    {
+        /* Fetch starred gists */
+
+        list($statusCode, $headers, $body) = GithubController::request('gists/starred', 'GET', [], null, $paginationOffset);
+
+        $gists = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return public events */
+
+        return $gists;
+    }
 }
