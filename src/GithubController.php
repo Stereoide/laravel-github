@@ -1000,14 +1000,36 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/gists/#get-a-single-gist
      * @TODO Check for truncated gist
      */
-    public function getGist($id)
+    public function getGist($id, $sha = null)
     {
-        /* Fetch starred gists */
+        /* Assemble URL */
 
-        list($statusCode, $headers, $gist) = GithubController::request('gists/' . $id);
+        $url = 'gists/' . $id;
+
+        if (!is_null($sha)) {
+            $url .= '/' . $sha;
+        }
+
+        /* Fetch gist */
+
+        list($statusCode, $headers, $gist) = GithubController::request($url);
 
         /* Return gist */
 
         return $gist;
+    }
+
+    /**
+     * Get a specific revision of a gist
+     *
+     * @return mixed
+     * @see https://developer.github.com/v3/gists/#get-a-specific-revision-of-a-gist
+     * @TODO Check for truncated gist
+     */
+    public function getGistRevision($id, $sha)
+    {
+        /* Fetch gist revision */
+
+        return GithubController::getGist($id, $sha);
     }
 }

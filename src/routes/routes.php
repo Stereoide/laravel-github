@@ -59,6 +59,7 @@ Route::get('github/gists', '\Stereoide\Github\GithubController@getGists');
 Route::get('github/gists/{$username}', '\Stereoide\Github\GithubController@getGists');
 Route::get('github/starredGists', '\Stereoide\Github\GithubController@getStarredGists');
 Route::get('github/gist/{id}', function($id) { dd(Github::getGist($id)); });
+Route::get('github/gist/{id}/{sha}', function($id, $sha) { dd(Github::getGistRevision($id, $sha)); });
 
 /* Catch-all */
 
