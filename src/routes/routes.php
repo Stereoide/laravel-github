@@ -53,6 +53,11 @@ Route::get('github/watchRepository/{username}/{repository}/{subscribed}', '\Ster
 Route::get('github/watchRepository/{username}/{repository}/{subscribed}/{ignored}', '\Stereoide\Github\GithubController@watchRepository');
 Route::get('github/unwatchRepository/{username}/{repository}', '\Stereoide\Github\GithubController@unwatchRepository');
 
+/* Gists */
+
+Route::get('github/gists', '\Stereoide\Github\GithubController@getGists');
+Route::get('github/gists/{$username}', '\Stereoide\Github\GithubController@getGists');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');

@@ -925,4 +925,39 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/subscription', 'DELETE');
     }
+
+    /**
+     * List a user's gists
+     *
+     * Beware that this will return ALL public gists if no authenticated user is configured
+     *
+     * @param string $username
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/gists/#list-a-users-gists
+     */
+    public function getGists($username = null, $paginationOffset = 1)
+    {
+        /* Determine URL */
+
+        if (empty($username)) {
+            $url = 'gists';
+        } else {
+            $url = 'users/' . $username . '/subscriptions';
+        }
+
+        /* Fetch public gists */
+
+        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], null, $paginationOffset);
+
+        $gists = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return public events */
+
+        return $gists;
+    }
 }
