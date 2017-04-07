@@ -935,6 +935,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param int $paginationOffset
      * @return mixed
      * @see https://developer.github.com/v3/gists/#list-a-users-gists
+     * @TODO Pagination
+     * @TODO Timestamp of first git
      */
     public function getGists($username = null, $paginationOffset = 1)
     {
