@@ -1256,4 +1256,65 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('gists/' . $id, 'DELETE');
     }
+
+    /**
+     * List issues
+     *
+     * @param null|string $filter
+     * @param null|string $state
+     * @param null|string $labels
+     * @param null|string $sort
+     * @param null|string $direction
+     * @param null|int $since
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/#list-issues
+     * @TODO Better sanitize parameters
+     */
+    public function getIssues($filter = null, $state = null, $labels = null, $sort = null, $direction = null, $since = null, $paginationOffset = 1)
+    {
+        /* Assemble URL */
+
+        $url = 'user/issues';
+
+        if (!is_null($filter)) {
+            $url .= '&filter=' . $filter;
+        }
+
+        if (!is_null($state)) {
+            $url .= '&state=' . $state;
+        }
+
+        if (!is_null($labels)) {
+            $url .= '&labels=' . $labels;
+        }
+
+        if (!is_null($sort)) {
+            $url .= '&sort=' . $sort;
+        }
+
+        if (!is_null($direction)) {
+            $url .= '&direction=' . $direction;
+        }
+
+        if (!is_null($since)) {
+            $url .= '&since=' . $since;
+        }
+
+        $url = str_replace('/issues&', '/issues?', $url);
+
+        /* Fetch issues */
+
+        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], null, $paginationOffset);
+
+        $issues = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return issues */
+
+        return $issues;
+    }
 }

@@ -76,6 +76,16 @@ Route::get('github/forkGist/{id}', function($id) { dd(Github::forkGist($id)); })
 Route::get('github/gistForks/{id}', '\Stereoide\Github\GithubController@getGistForks');
 Route::get('github/deleteGist/{id}', '\Stereoide\Github\GithubController@deleteGist');
 
+/* Issues */
+
+Route::get('github/issues/{filter}/{state}/{labels}/{sort}/{direction}/{since}', '\Stereoide\Github\GithubController@getIssues');
+Route::get('github/issues/{filter}/{state}/{labels}/{sort}/{direction}', '\Stereoide\Github\GithubController@getIssues');
+Route::get('github/issues/{filter}/{state}/{labels}/{sort}', '\Stereoide\Github\GithubController@getIssues');
+Route::get('github/issues/{filter}/{state}/{labels}', '\Stereoide\Github\GithubController@getIssues');
+Route::get('github/issues/{filter}/{state}', '\Stereoide\Github\GithubController@getIssues');
+Route::get('github/issues/{filter}', '\Stereoide\Github\GithubController@getIssues');
+Route::get('github/issues', '\Stereoide\Github\GithubController@getIssues');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');
