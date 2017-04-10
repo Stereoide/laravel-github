@@ -1412,4 +1412,67 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $issue;
     }
+
+    /**
+     * Create an issue
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $title
+     * @param string $body
+     * @param int $milestone
+     * @param array(string $label)
+     * @param array(string $assignee)
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/#create-an-issue
+     * @TODO Better sanitize parameters
+     */
+    public function createIssue($owner, $repository, $title, $body = null, $milestone = null, $labels = null, $assignees = null)
+    {
+        /* Assemble data */
+
+        $data = [
+            'title' => $title,
+        ];
+
+        if (!is_null($body)) {
+            $data['body'] = $body;
+        }
+
+        if (!is_null($milestone)) {
+            $data['milestone'] = $milestone;
+        }
+
+        if (!is_null($labels)) {
+            if (!is_array($labels)) {
+                $labels = explode(',', $labels);
+            }
+
+            $data['labels'] = [];
+            foreach ($labels as $label) {
+                $data['labels'][] = $label;
+            }
+        }
+
+        if (!is_null($assignees)) {
+            if (!is_array($assignees)) {
+                $assignees = explode(',', $assignees);
+            }
+
+            $data['assignees'] = [];
+            foreach ($assignees as $assignee) {
+                $data['assignees'][] = $assignee;
+            }
+        }
+
+        $data = json_encode($data);
+
+        /* Create issue */
+
+        list($statusCode, $headers, $issue) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues', 'POST', [], $data);
+
+        /* Return issue */
+
+        return $issue;
+    }
 }

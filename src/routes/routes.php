@@ -96,6 +96,11 @@ Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}/{state}', '
 Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}', '\Stereoide\Github\GithubController@getRepositoryIssues');
 Route::get('github/repositoryIssues/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryIssues');
 Route::get('github/issue/{owner}/{repository}/{number}', function($owner, $repository, $number) { dd(Github::getIssue($owner, $repository, $number)); });
+Route::get('github/createIssue/{owner}/{repository}/{title}/{body}/{milestone}/{labels}/{assignees}', function($owner, $repository, $title, $body, $milestone, $labels, $assignees) { dd(Github::createIssue($owner, $repository, $title, $body, $milestone, $labels, $assignees)); });
+Route::get('github/createIssue/{owner}/{repository}/{title}/{body}/{milestone}/{labels}', function($owner, $repository, $title, $body, $milestone, $labels) { dd(Github::createIssue($owner, $repository, $title, $body, $milestone, $labels)); });
+Route::get('github/createIssue/{owner}/{repository}/{title}/{body}/{milestone}', function($owner, $repository, $title, $body, $milestone) { dd(Github::createIssue($owner, $repository, $title, $body, $milestone)); });
+Route::get('github/createIssue/{owner}/{repository}/{title}/{body}', function($owner, $repository, $title, $body) { dd(Github::createIssue($owner, $repository, $title, $body)); });
+Route::get('github/createIssue/{owner}/{repository}/{title}', function($owner, $repository, $title) { dd(Github::createIssue($owner, $repository, $title)); });
 
 /* Catch-all */
 
