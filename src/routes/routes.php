@@ -95,6 +95,7 @@ Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}/{state}/{as
 Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}/{state}', '\Stereoide\Github\GithubController@getRepositoryIssues');
 Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}', '\Stereoide\Github\GithubController@getRepositoryIssues');
 Route::get('github/repositoryIssues/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryIssues');
+Route::get('github/issue/{owner}/{repository}/{number}', function($owner, $repository, $number) { dd(Github::getIssue($owner, $repository, $number)); });
 
 /* Catch-all */
 

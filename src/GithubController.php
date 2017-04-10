@@ -1395,4 +1395,21 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $issues;
     }
+
+    /**
+     * Get a single issue
+     *
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/#get-a-single-issue
+     */
+    public function getIssue($owner, $repository, $number)
+    {
+        /* Fetch issue */
+
+        list($statusCode, $headers, $issue) = GithubController::request('repos/'. $owner . '/' . $repository . '/issues/' . $number);
+
+        /* Return issue */
+
+        return $issue;
+    }
 }
