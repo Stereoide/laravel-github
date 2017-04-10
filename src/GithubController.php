@@ -1402,84 +1402,6 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
-     * List issues for a repository
-     *
-     * @param string $owner
-     * @param string $repository
-     * @param null|string $milestone
-     * @param null|string $state
-     * @param null|string $assignee
-     * @param null|string $creator
-     * @param null|string $mentioned
-     * @param null|string $labels
-     * @param null|string $sort
-     * @param null|string $direction
-     * @param null|int $since
-     * @param int $paginationOffset
-     * @return mixed
-     * @see https://developer.github.com/v3/issues/#list-issues-for-a-repository
-     * @TODO Better sanitize parameters
-     */
-    public function getRepositoryIssues($owner, $repository, $milestone = null, $state = null, $assignee = null, $creator = null, $mentioned = null, $labels = null, $sort = null, $direction = null, $since = null, $paginationOffset = 1)
-    {
-        /* Assemble URL */
-
-        $url = 'repos/' . $owner . '/' . $repository . '/issues';
-
-        if (!is_null($milestone)) {
-            $url .= '&milestone=' . $milestone;
-        }
-
-        if (!is_null($state)) {
-            $url .= '&state=' . $state;
-        }
-
-        if (!is_null($assignee)) {
-            $url .= '&assignee=' . $assignee;
-        }
-
-        if (!is_null($creator)) {
-            $url .= '&creator=' . $creator;
-        }
-
-        if (!is_null($mentioned)) {
-            $url .= '&mentioned=' . $mentioned;
-        }
-
-        if (!is_null($labels)) {
-            $url .= '&labels=' . $labels;
-        }
-
-        if (!is_null($sort)) {
-            $url .= '&sort=' . $sort;
-        }
-
-        if (!is_null($direction)) {
-            $url .= '&direction=' . $direction;
-        }
-
-        if (!is_null($since)) {
-            $url .= '&since=' . $since;
-        }
-
-        $url = str_replace('/issues&', '/issues?', $url);
-
-        /* Fetch issues */
-
-        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], null, $paginationOffset);
-
-        $issues = collect($body);
-
-        /* Determine pagination data */
-
-        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
-
-        /* Return issues */
-
-        return $issues;
-    }
-
-    /**
      * Get a single issue
      *
      * @return mixed
@@ -1656,5 +1578,31 @@ class GithubController extends \App\Http\Controllers\Controller
         /* Unlock issue */
 
         list($statusCode, $headers, $issue) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/lock', 'DELETE');
+    }
+
+    /**
+     * List available assignees
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/assignees/#list-assignees
+     */
+    public function getAvailableIssueAssignees($owner, $repository, $paginationOffset = 1)
+    {
+        /* Fetch available assignees */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/assignees', 'GET', [], null, $paginationOffset);
+
+        $availableAssignees = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return available assignees */
+
+        return $availableAssignees;
     }
 }
