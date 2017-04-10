@@ -68,6 +68,7 @@ Route::get('github/editGist/{id}', function() {
     $newFilepaths = $renamedFilenames = $deletedFilenames = [];
     Github::editGist($newFilepaths, $renamedFilenames, $deletedFilenames, 'Test-Description');
 });
+Route::get('github/gistCommits/{id}', '\Stereoide\Github\GithubController@getGistCommits');
 
 /* Catch-all */
 

@@ -1130,4 +1130,28 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('gists', 'POST', [], $data);
     }
+
+    /**
+     * List gist commits
+     *
+     * @param string $id
+     * @return mixed
+     * @see https://developer.github.com/v3/gists/#list-gist-commits
+     */
+    public function getGistCommits($id)
+    {
+        /* Fetch gist commits */
+
+        list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/commits');
+
+        $commits = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return commits */
+
+        return $commits;
+    }
 }
