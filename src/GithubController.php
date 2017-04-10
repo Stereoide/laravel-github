@@ -1301,6 +1301,31 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
+     * Create a gist comment
+     *
+     * @param string $gistId
+     * @param string $comment
+     * @return mixed
+     * @see https://developer.github.com/v3/gists/comments/#create-a-comment
+     */
+    public function createGistComment($gistId, $comment)
+    {
+        /* Assemble data */
+
+        $data = json_encode([
+            'body' => $comment,
+        ]);
+
+        /* Create comment */
+
+        list($statusCode, $headers, $comment) = GithubController::request('gists/' . $gistId . '/comments', 'POST', [], $data);
+
+        /* Return comment */
+
+        return $comment;
+    }
+
+    /**
      * List issues
      *
      * @param null|string $filter

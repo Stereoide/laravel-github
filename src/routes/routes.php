@@ -77,6 +77,7 @@ Route::get('github/gistForks/{id}', '\Stereoide\Github\GithubController@getGistF
 Route::get('github/deleteGist/{id}', '\Stereoide\Github\GithubController@deleteGist');
 Route::get('github/gistComments/{id}', '\Stereoide\Github\GithubController@getGistComments');
 Route::get('github/gistComment/{gistId}/{commentId}', function($gistId, $commentId) { dd(Github::getGistComment($gistId, $commentId)); });
+Route::get('github/createGistComment/{gistId}/{comment}', function($gistId, $comment) { dd(Github::createGistComment($gistId, $comment)); });
 
 /* Issues */
 
