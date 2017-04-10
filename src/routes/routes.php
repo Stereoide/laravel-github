@@ -115,7 +115,8 @@ Route::get('github/lockIssue/{owner}/{repository}/{number}', '\Stereoide\Github\
 Route::get('github/unlockIssue/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@unlockIssue');
 Route::get('github/issueAssignees/{owner}/{repository}', '\Stereoide\Github\GithubController@getAvailableIssueAssignees');
 Route::get('github/isAssignee/{owner}/{repository}/{assignee}', function($owner, $repository, $assignee) { dd(Github::isRepositoryAssignee($owner, $repository, $assignee)); });
-Route::get('github/addIssueAssignees/{owner}/{repository}/{number}/{assignees}', '\Stereoide\Github\GithubController@addIssueAssignees');
+Route::get('github/addIssueAssignees/{owner}/{repository}/{number}/{assignees}', function($owner, $repository, $number, $assignees) { dd(Github::addIssueAssignees($owner, $repository, $number, $assignees)); });
+Route::get('github/removeIssueAssignees/{owner}/{repository}/{number}/{assignees}', function($owner, $repository, $number, $assignees) { dd(Github::removeIssueAssignees($owner, $repository, $number, $assignees)); });
 
 /* Catch-all */
 

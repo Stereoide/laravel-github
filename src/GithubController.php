@@ -1636,6 +1636,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $repository
      * @param int $number
      * @param array(string $assignee)
+     * @return mixed
      * @see https://developer.github.com/v3/issues/assignees/#add-assignees-to-an-issue
      */
     public function addIssueAssignees($owner, $repository, $number, $assignees)
@@ -1653,5 +1654,40 @@ class GithubController extends \App\Http\Controllers\Controller
         /* Add assignees */
 
         list($statusCode, $headers, $issue) = GithubController::request('/repos/' . $owner . '/' . $repository . '/issues/' . $number . '/assignees', 'POST', [], $data);
+
+        /* Return issue */
+
+        return $issue;
+    }
+
+    /**
+     * Remove assignees from an Issue
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param array(string $assignee)
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/assignees/#remove-assignees-from-an-issue
+     */
+    public function removeIssueAssignees($owner, $repository, $number, $assignees)
+    {
+        /* Sanitize parameters */
+
+        if (!is_array($assignees)) {
+            $assignees = explode(',', $assignees);
+        }
+
+        /* Assemble data */
+
+        $data = json_encode(['assignees' => $assignees]);
+
+        /* Remove assignees */
+
+        list($statusCode, $headers, $issue) = GithubController::request('/repos/' . $owner . '/' . $repository . '/issues/' . $number . '/assignees', 'DELETE', [], $data);
+
+        /* Return issue */
+
+        return $issue;
     }
 }
