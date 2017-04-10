@@ -1559,4 +1559,19 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $issue) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/lock', 'PUT', ['Content-Length' => 0]);
     }
+
+    /**
+     * Unlock an issue
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @see https://developer.github.com/v3/issues/#unlock-an-issue
+     */
+    public function unlockIssue($owner, $repository, $number)
+    {
+        /* Lock issue */
+
+        list($statusCode, $headers, $issue) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/lock', 'DELETE');
+    }
 }
