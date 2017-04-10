@@ -1570,7 +1570,7 @@ class GithubController extends \App\Http\Controllers\Controller
      */
     public function unlockIssue($owner, $repository, $number)
     {
-        /* Lock issue */
+        /* Unlock issue */
 
         list($statusCode, $headers, $issue) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/lock', 'DELETE');
     }
