@@ -1855,4 +1855,19 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $comment;
     }
+
+    /**
+     * Edit a comment
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $commentId
+     * @see https://developer.github.com/v3/issues/comments/#delete-a-comment
+     */
+    public function deleteIssueComment($owner, $repository, $commentId)
+    {
+        /* Delete issue comment */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/comments/' . $commentId, 'DELETE');
+    }
 }
