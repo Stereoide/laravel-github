@@ -1154,4 +1154,18 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $commits;
     }
+
+    /**
+     * List gist commits
+     *
+     * @param string $id
+     * @return mixed
+     * @see https://developer.github.com/v3/gists/#star-a-gist
+     */
+    public function starGist($id)
+    {
+        /* Star a gist */
+
+        list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/star', 'PUT', ['Content-Length' => 0]);
+    }
 }
