@@ -64,6 +64,10 @@ Route::get('github/createGist', function() {
     $filepaths = [];
     Github::createGist($filepaths, 'Test-Description', false);
 });
+Route::get('github/editGist/{id}', function() {
+    $newFilepaths = $renamedFilenames = $deletedFilenames = [];
+    Github::editGist($newFilepaths, $renamedFilenames, $deletedFilenames, 'Test-Description');
+});
 
 /* Catch-all */
 

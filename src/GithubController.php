@@ -1062,4 +1062,71 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('gists', 'POST', [], $data);
     }
+
+    /**
+     * Edit a gist
+     *
+     * All files from the previous version of the gist are carried over by default if not included in the object.
+     * Deletes can be performed by including the filename with a null object.
+     *
+     * @param string $id
+     * @param array(string $newFilepaths)
+     * @param array(string $renamedFilenames)
+     * @param array(string $deletedFilenames)
+     * @param string $description
+     * @see https://developer.github.com/v3/gists/#edit-a-gist
+     * @TODO Write better parameter description
+     */
+    public function editGist($id, $newFilepaths = null, $renamedFilenames = null, $deletedFilenames = null, $description = null)
+    {
+        /* Return early if possible */
+
+        if (is_null($newFilepaths) && is_null($renamedFilenames) && is_null($deletedFilenames) && is_null($description)) {
+            return;
+        }
+
+        /* Assemble data */
+
+        $data = [
+            'files' => []
+        ];
+
+        /* Description */
+
+        if (!is_null($description)) {
+            $data['description'] = $description;
+        }
+
+        /* New files */
+
+        if (!is_null($newFilepaths)) {
+            foreach ($newFilepaths as $filepath) {
+                $filename = basename($filepath);
+                $data['files'][$filename]['content'] = file_get_contents($filepath);
+            }
+        }
+
+        /* Renamed files */
+
+        if (!is_null($renamedFilenames)) {
+            foreach ($renamedFilenames as $oldFilename => $newFilepath) {
+                $data['files'][$oldFilename]['filename'] = basename($newFilepath);
+                $data['files'][$oldFilename]['content'] = file_get_contents($filepath);
+            }
+        }
+
+        /* Deleted files */
+
+        if (!is_null($deletedFilenames)) {
+            foreach ($deletedFilenames as $filename) {
+                $data['files'][$filename] = null;
+            }
+        }
+
+        $data = json_encode($data);
+
+        /* Edit gist */
+
+        list($statusCode, $headers, $body) = GithubController::request('gists', 'POST', [], $data);
+    }
 }
