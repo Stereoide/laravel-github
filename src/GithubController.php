@@ -1829,7 +1829,7 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
-     * CEdit a comment
+     * Edit a comment
      *
      * @param string $owner
      * @param string $repository
