@@ -1326,6 +1326,21 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
+     * Delete a gist comment
+     *
+     * @param string $gistId
+     * @param string $commentId
+     * @return mixed
+     * @see https://developer.github.com/v3/gists/comments/#delete-a-comment
+     */
+    public function deleteGistComment($gistId, $commentId)
+    {
+        /* Delete comment */
+
+        list($statusCode, $headers, $comment) = GithubController::request('gists/' . $gistId . '/comments/' . $commentId, 'DELETE');
+    }
+
+    /**
      * List issues
      *
      * @param null|string $filter
