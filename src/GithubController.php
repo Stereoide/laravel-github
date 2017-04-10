@@ -1779,4 +1779,24 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $comments;
     }
+
+    /**
+     * Get a single comment
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $id
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/comments/#get-a-single-comment
+     */
+    public function getIssueComment($owner, $repository, $id)
+    {
+        /* Fetch issue comment */
+
+        list($statusCode, $headers, $comment) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/comments/' . $id);
+
+        /* Return comment */
+
+        return $comment;
+    }
 }
