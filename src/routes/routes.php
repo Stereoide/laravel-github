@@ -70,6 +70,7 @@ Route::get('github/editGist/{id}', function() {
 });
 Route::get('github/gistCommits/{id}', '\Stereoide\Github\GithubController@getGistCommits');
 Route::get('github/starGist/{id}', '\Stereoide\Github\GithubController@starGist');
+Route::get('github/unstarGist/{id}', '\Stereoide\Github\GithubController@unstarGist');
 
 /* Catch-all */
 

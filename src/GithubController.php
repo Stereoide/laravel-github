@@ -1168,4 +1168,18 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/star', 'PUT', ['Content-Length' => 0]);
     }
+
+    /**
+     * Unstar a gist
+     *
+     * @param string $id
+     * @return mixed
+     * https://developer.github.com/v3/gists/#unstar-a-gist
+     */
+    public function unstarGist($id)
+    {
+        /* Unstar a gist */
+
+        list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/star', 'DELETE');
+    }
 }
