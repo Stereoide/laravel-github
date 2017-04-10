@@ -1282,6 +1282,25 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
+     * Get a single comment
+     *
+     * @param string $gistId
+     * @param string $commentId
+     * @return mixed
+     * @see https://developer.github.com/v3/gists/comments/#get-a-single-comment
+     */
+    public function getGistComment($gistId, $commentId)
+    {
+        /* Fetch gist comments */
+
+        list($statusCode, $headers, $comment) = GithubController::request('gists/' . $gistId . '/comments/' . $commentId);
+
+        /* Return comment */
+
+        return $comment;
+    }
+
+    /**
      * List issues
      *
      * @param null|string $filter
