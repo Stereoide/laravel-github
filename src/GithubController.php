@@ -46,7 +46,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param $headers
      * @return array|null
      */
-    public function getPaginationFromResponseHeaders($headers) {
+    public function getPaginationFromResponseHeaders($headers)
+    {
         /* Make sure the pagination headers are present */
 
         if (!isset($headers['Link'])) {
@@ -58,7 +59,7 @@ class GithubController extends \App\Http\Controllers\Controller
         $pagination = [];
 
         $links = collect(explode(', ', $headers['Link'][0]));
-        $links->each(function($link, $key) use (&$pagination) {
+        $links->each(function ($link, $key) use (&$pagination) {
             preg_match('/<(.*page=(.*))>.*rel="(.*)"/i', $link, $matches);
             list($unused, $link, $page, $rel) = $matches;
             $pagination[$rel] = [
@@ -671,7 +672,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Set notification thread subscription status */
 
-        $url = 'notifications/threads/'. $id . '/subscription?subscribed=' . ($subscribed ? 'true' : 'false') . '&ignored=' . ($ignored ? 'true' : 'false');
+        $url = 'notifications/threads/' . $id . '/subscription?subscribed=' . ($subscribed ? 'true' : 'false') . '&ignored=' . ($ignored ? 'true' : 'false');
 
         list($statusCode, $headers, $body) = GithubController::request($url, 'PUT', ['Content-Length' => 0]);
     }
@@ -1036,7 +1037,7 @@ class GithubController extends \App\Http\Controllers\Controller
     /**
      * Create a gist
      *
-     * @param array(string $filepath)
+     * @param array (string $filepath)
      * @param string $description
      * @param bool $public
      * @see https://developer.github.com/v3/gists/#create-a-gist
@@ -1070,9 +1071,9 @@ class GithubController extends \App\Http\Controllers\Controller
      * Deletes can be performed by including the filename with a null object.
      *
      * @param string $id
-     * @param array(string $newFilepaths)
-     * @param array(string $renamedFilenames)
-     * @param array(string $deletedFilenames)
+     * @param array (string $newFilepaths)
+     * @param array (string $renamedFilenames)
+     * @param array (string $deletedFilenames)
      * @param string $description
      * @see https://developer.github.com/v3/gists/#edit-a-gist
      * @TODO Write better parameter description
