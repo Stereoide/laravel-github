@@ -1605,4 +1605,27 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $availableAssignees;
     }
+
+    /**
+     * Check assignee
+     *
+     * Requires for the user to be authenticated.
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $assignee
+     * @return bool
+     * @see https://developer.github.com/v3/issues/assignees/#check-assignee
+     */
+    public function isRepositoryAssignee($owner, $repository, $assignee)
+    {
+        /* Determine whether the assignee is assigned to a repository */
+
+        try {
+            list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/assignees/' . $assignee);
+            return (204 == $statusCode);
+        } catch (\Exception $exception) {
+            return (204 == $exception->getResponse()->getStatusCode());
+        }
+    }
 }

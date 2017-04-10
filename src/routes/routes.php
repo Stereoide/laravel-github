@@ -114,6 +114,7 @@ Route::get('github/editIssue/{owner}/{repository}/{number}/{title}', function($o
 Route::get('github/lockIssue/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@lockIssue');
 Route::get('github/unlockIssue/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@unlockIssue');
 Route::get('github/issueAssignees/{owner}/{repository}', '\Stereoide\Github\GithubController@getAvailableIssueAssignees');
+Route::get('github/isAssignee/{owner}/{repository}/{assignee}', function($owner, $repository, $assignee) { dd(Github::isRepositoryAssignee($owner, $repository, $assignee)); });
 
 /* Catch-all */
 
