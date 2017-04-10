@@ -1156,7 +1156,7 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
-     * List gist commits
+     * Star a gist
      *
      * @param string $id
      * @return mixed
