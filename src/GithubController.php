@@ -1182,4 +1182,23 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/star', 'DELETE');
     }
+
+    /**
+     * Check if a gist is starred
+     *
+     * @param int $id
+     * @return bool $isStarred
+     * @see https://developer.github.com/v3/gists/#check-if-a-gist-is-starred
+     */
+    public function isGistStarred($id)
+    {
+        /* Determine whether the gist in question is starred by the authenticated user */
+
+        try {
+            list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/star');
+            return (204 == $statusCode);
+        } catch (\Exception $exception) {
+            return false;
+        }
+    }
 }
