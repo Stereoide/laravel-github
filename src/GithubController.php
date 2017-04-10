@@ -1243,4 +1243,17 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $forks;
     }
+
+    /**
+     * Delete a gist
+     *
+     * @param string $id
+     * @see https://developer.github.com/v3/gists/#delete-a-gist
+     */
+    public function deleteGist($id)
+    {
+        /* Delete gist */
+
+        list($statusCode, $headers, $body) = GithubController::request('gists/' . $id, 'DELETE');
+    }
 }
