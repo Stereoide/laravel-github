@@ -1696,7 +1696,11 @@ class GithubController extends \App\Http\Controllers\Controller
      *
      * Issue Comments are ordered by ascending ID.
      *
-     * @param string $id
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param string $since
+     * @param int $paginationOffset
      * @return mixed
      * @see https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
      */
