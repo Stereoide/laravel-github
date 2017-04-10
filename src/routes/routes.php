@@ -117,6 +117,8 @@ Route::get('github/issueAssignees/{owner}/{repository}', '\Stereoide\Github\Gith
 Route::get('github/isAssignee/{owner}/{repository}/{assignee}', function($owner, $repository, $assignee) { dd(Github::isRepositoryAssignee($owner, $repository, $assignee)); });
 Route::get('github/addIssueAssignees/{owner}/{repository}/{number}/{assignees}', function($owner, $repository, $number, $assignees) { dd(Github::addIssueAssignees($owner, $repository, $number, $assignees)); });
 Route::get('github/removeIssueAssignees/{owner}/{repository}/{number}/{assignees}', function($owner, $repository, $number, $assignees) { dd(Github::removeIssueAssignees($owner, $repository, $number, $assignees)); });
+Route::get('github/issueComments/{owner}/{repository}/{number}/{since}', '\Stereoide\Github\GithubController@getIssueComments');
+Route::get('github/issueComments/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@getIssueComments');
 
 /* Catch-all */
 

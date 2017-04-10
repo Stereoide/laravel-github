@@ -1690,4 +1690,40 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $issue;
     }
+
+    /**
+     * List comments on an issue
+     *
+     * Issue Comments are ordered by ascending ID.
+     *
+     * @param string $id
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
+     */
+    public function getIssueComments($owner, $repository, $number, $since = null, $paginationOffset = 1)
+    {
+        /* Assemble URL */
+
+        $url = 'repos/' . $owner . '/' . $repository . '/issues/' . $number . '/comments';
+
+        if (!is_null($since)) {
+            $url .= '&since=' . $since;
+        }
+
+        $url = str_replace('/comments&', '/comments?', $url);
+
+        /* Fetch issue comments */
+
+        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], null, $paginationOffset);
+
+        $comments = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return comments */
+
+        return $comments;
+    }
 }
