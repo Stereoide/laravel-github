@@ -124,6 +124,7 @@ Route::get('github/repositoryIssuesComments/{owner}/{repository}/{sort}/{directi
 Route::get('github/repositoryIssuesComments/{owner}/{repository}/{sort}', '\Stereoide\Github\GithubController@getRepositoryIssuesComments');
 Route::get('github/repositoryIssuesComments/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryIssuesComments');
 Route::get('github/repositoryIssueComment/{owner}/{repository}/{id}', function($owner, $repository, $commentId) { dd(Github::getIssueComment($owner, $repository, $commentId)); });
+Route::get('github/createIssueComment/{owner}/{repository}/{number}/{comment}', function($owner, $repository, $issueId, $comment) { dd(Github::createIssueComment($owner, $repository, $issueId, $comment)); });
 
 /* Catch-all */
 

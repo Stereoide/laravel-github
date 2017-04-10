@@ -1799,4 +1799,32 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $comment;
     }
+
+    /**
+     * Create a comment
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param string $comment
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/comments/#create-a-comment
+     * @TODO Better sanitize parameters
+     */
+    public function createIssueComment($owner, $repository, $number, $comment)
+    {
+        /* Assemble data */
+
+        $data = json_encode([
+            'body' => $comment,
+        ]);
+
+        /* Create issue comment */
+
+        list($statusCode, $headers, $comment) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/comments', 'POST', [], $data);
+
+        /* Return comment */
+
+        return $comment;
+    }
 }
