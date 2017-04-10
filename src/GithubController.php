@@ -1201,4 +1201,22 @@ class GithubController extends \App\Http\Controllers\Controller
             return false;
         }
     }
+
+    /**
+     * Fork a gist
+     *
+     * @param string $id
+     * @return mixed
+     * @see https://developer.github.com/v3/gists/#fork-a-gist
+     */
+    public function forkGist($id)
+    {
+        /* Fork gist */
+
+        list($statusCode, $headers, $gist) = GithubController::request('gists/' . $id . '/forks', 'POST');
+
+        /* Return gist */
+
+        return $gist;
+    }
 }
