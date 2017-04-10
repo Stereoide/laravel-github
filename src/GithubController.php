@@ -1827,4 +1827,32 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $comment;
     }
+
+    /**
+     * CEdit a comment
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $commentId
+     * @param string $comment
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/comments/#edit-a-comment
+     * @TODO Better sanitize parameters
+     */
+    public function editIssueComment($owner, $repository, $commentId, $comment)
+    {
+        /* Assemble data */
+
+        $data = json_encode([
+            'body' => $comment,
+        ]);
+
+        /* Create issue comment */
+
+        list($statusCode, $headers, $comment) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/comments/' . $commentId, 'PATCH', [], $data);
+
+        /* Return comment */
+
+        return $comment;
+    }
 }
