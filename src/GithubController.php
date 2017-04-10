@@ -1128,7 +1128,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Edit gist */
 
-        list($statusCode, $headers, $body) = GithubController::request('gists', 'POST', [], $data);
+        list($statusCode, $headers, $body) = GithubController::request('gists', 'PATCH', [], $data);
     }
 
     /**
