@@ -85,6 +85,16 @@ Route::get('github/issues/{filter}/{state}/{labels}', '\Stereoide\Github\GithubC
 Route::get('github/issues/{filter}/{state}', '\Stereoide\Github\GithubController@getIssues');
 Route::get('github/issues/{filter}', '\Stereoide\Github\GithubController@getIssues');
 Route::get('github/issues', '\Stereoide\Github\GithubController@getIssues');
+Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}/{state}/{assignee}/{creator}/{mentioned}/{labels}/{sort}/{direction}/{since}', '\Stereoide\Github\GithubController@getRepositoryIssues');
+Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}/{state}/{assignee}/{creator}/{mentioned}/{labels}/{sort}/{direction}', '\Stereoide\Github\GithubController@getRepositoryIssues');
+Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}/{state}/{assignee}/{creator}/{mentioned}/{labels}/{sort}', '\Stereoide\Github\GithubController@getRepositoryIssues');
+Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}/{state}/{assignee}/{creator}/{mentioned}/{labels}', '\Stereoide\Github\GithubController@getRepositoryIssues');
+Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}/{state}/{assignee}/{creator}/{mentioned}', '\Stereoide\Github\GithubController@getRepositoryIssues');
+Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}/{state}/{assignee}/{creator}', '\Stereoide\Github\GithubController@getRepositoryIssues');
+Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}/{state}/{assignee}', '\Stereoide\Github\GithubController@getRepositoryIssues');
+Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}/{state}', '\Stereoide\Github\GithubController@getRepositoryIssues');
+Route::get('github/repositoryIssues/{owner}/{repository}/{milestone}', '\Stereoide\Github\GithubController@getRepositoryIssues');
+Route::get('github/repositoryIssues/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryIssues');
 
 /* Catch-all */
 
