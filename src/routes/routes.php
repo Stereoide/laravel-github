@@ -107,6 +107,7 @@ Route::get('github/editIssue/{owner}/{repository}/{number}/{title}/{body}/{state
 Route::get('github/editIssue/{owner}/{repository}/{number}/{title}/{body}/{state}', function($owner, $repository, $number, $title, $body, $state) { dd(Github::editIssue($owner, $repository, $number, $title, $body, $state)); });
 Route::get('github/editIssue/{owner}/{repository}/{number}/{title}/{body}', function($owner, $repository, $number, $title, $body) { dd(Github::editIssue($owner, $repository, $number, $title, $body)); });
 Route::get('github/editIssue/{owner}/{repository}/{number}/{title}', function($owner, $repository, $number, $title) { dd(Github::editIssue($owner, $repository, $number, $title)); });
+Route::get('github/lockIssue/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@lockIssue');
 
 /* Catch-all */
 

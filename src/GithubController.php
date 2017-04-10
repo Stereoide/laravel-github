@@ -1544,4 +1544,19 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $issue;
     }
+
+    /**
+     * Lock an issue
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @see https://developer.github.com/v3/issues/#lock-an-issue
+     */
+    public function lockIssue($owner, $repository, $number)
+    {
+        /* Lock issue */
+
+        list($statusCode, $headers, $issue) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/lock', 'PUT', ['Content-Length' => 0]);
+    }
 }
