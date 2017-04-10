@@ -1219,4 +1219,28 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $gist;
     }
+
+    /**
+     * List gist forks
+     *
+     * @param string $id
+     * @return mixed
+     * @see https://developer.github.com/v3/gists/#list-gist-forks
+     */
+    public function getGistForks($id)
+    {
+        /* Fetch gist forks */
+
+        list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/forks');
+
+        $forks = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return commits */
+
+        return $forks;
+    }
 }

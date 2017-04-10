@@ -73,6 +73,7 @@ Route::get('github/starGist/{id}', '\Stereoide\Github\GithubController@starGist'
 Route::get('github/unstarGist/{id}', '\Stereoide\Github\GithubController@unstarGist');
 Route::get('github/isGistStarred/{id}', function($id) { dd(Github::isGistStarred($id)); });
 Route::get('github/forkGist/{id}', function($id) { dd(Github::forkGist($id)); });
+Route::get('github/gistForks/{id}', '\Stereoide\Github\GithubController@getGistForks');
 
 /* Catch-all */
 
