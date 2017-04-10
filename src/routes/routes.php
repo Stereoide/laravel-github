@@ -75,6 +75,7 @@ Route::get('github/isGistStarred/{id}', function($id) { dd(Github::isGistStarred
 Route::get('github/forkGist/{id}', function($id) { dd(Github::forkGist($id)); });
 Route::get('github/gistForks/{id}', '\Stereoide\Github\GithubController@getGistForks');
 Route::get('github/deleteGist/{id}', '\Stereoide\Github\GithubController@deleteGist');
+Route::get('github/gistComments/{id}', '\Stereoide\Github\GithubController@getGistComments');
 
 /* Issues */
 

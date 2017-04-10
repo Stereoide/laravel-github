@@ -1258,6 +1258,30 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
+     * List comments on a gist
+     *
+     * @param string $id
+     * @return mixed
+     * @see https://developer.github.com/v3/gists/comments/#list-comments-on-a-gist
+     */
+    public function getGistComments($id)
+    {
+        /* Fetch gist comments */
+
+        list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/comments');
+
+        $comments = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return comments */
+
+        return $comments;
+    }
+
+    /**
      * List issues
      *
      * @param null|string $filter
