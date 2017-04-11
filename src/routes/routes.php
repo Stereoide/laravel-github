@@ -75,6 +75,9 @@ Route::get('github/isGistStarred/{id}', function($id) { dd(Github::isGistStarred
 Route::get('github/forkGist/{id}', function($id) { dd(Github::forkGist($id)); });
 Route::get('github/gistForks/{id}', '\Stereoide\Github\GithubController@getGistForks');
 Route::get('github/deleteGist/{id}', '\Stereoide\Github\GithubController@deleteGist');
+
+/* Gist comments */
+
 Route::get('github/gistComments/{id}', '\Stereoide\Github\GithubController@getGistComments');
 Route::get('github/gistComment/{gistId}/{commentId}', function($gistId, $commentId) { dd(Github::getGistComment($gistId, $commentId)); });
 Route::get('github/createGistComment/{gistId}/{comment}', function($gistId, $comment) { dd(Github::createGistComment($gistId, $comment)); });
@@ -113,10 +116,16 @@ Route::get('github/editIssue/{owner}/{repository}/{number}/{title}/{body}', func
 Route::get('github/editIssue/{owner}/{repository}/{number}/{title}', function($owner, $repository, $number, $title) { dd(Github::editIssue($owner, $repository, $number, $title)); });
 Route::get('github/lockIssue/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@lockIssue');
 Route::get('github/unlockIssue/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@unlockIssue');
+
+/* Issue assignees */
+
 Route::get('github/issueAssignees/{owner}/{repository}', '\Stereoide\Github\GithubController@getAvailableIssueAssignees');
 Route::get('github/isAssignee/{owner}/{repository}/{assignee}', function($owner, $repository, $assignee) { dd(Github::isRepositoryAssignee($owner, $repository, $assignee)); });
 Route::get('github/addIssueAssignees/{owner}/{repository}/{number}/{assignees}', function($owner, $repository, $number, $assignees) { dd(Github::addIssueAssignees($owner, $repository, $number, $assignees)); });
 Route::get('github/removeIssueAssignees/{owner}/{repository}/{number}/{assignees}', function($owner, $repository, $number, $assignees) { dd(Github::removeIssueAssignees($owner, $repository, $number, $assignees)); });
+
+/* Issue comments */
+
 Route::get('github/issueComments/{owner}/{repository}/{number}/{since}', '\Stereoide\Github\GithubController@getIssueComments');
 Route::get('github/issueComments/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@getIssueComments');
 Route::get('github/repositoryIssuesComments/{owner}/{repository}/{sort}/{direction}/{since}', '\Stereoide\Github\GithubController@getRepositoryIssuesComments');

@@ -12,6 +12,8 @@ use Carbon\Carbon;
  */
 class GithubController extends \App\Http\Controllers\Controller
 {
+    /* Base methods */
+
     /**
      * Creates and returns a Guzzle HTTP connection object to the Github root API endpoint
      *
@@ -181,6 +183,8 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $repos;
     }
+
+    /* Events */
 
     /**
      * List public events
@@ -443,6 +447,8 @@ class GithubController extends \App\Http\Controllers\Controller
         return $events;
     }
 
+    /* Notifications */
+
     /**
      * List your notifications
      *
@@ -690,6 +696,8 @@ class GithubController extends \App\Http\Controllers\Controller
         list($statusCode, $headers, $body) = GithubController::request('notifications/threads/' . $id . '/subscription', 'DELETE');
     }
 
+    /* Starring */
+
     /**
      * List Stargazers
      *
@@ -802,6 +810,8 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('user/starred/' . $owner . '/' . $repository, 'DELETE');
     }
+
+    /* Watching */
 
     /**
      * List watchers
@@ -926,6 +936,8 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/subscription', 'DELETE');
     }
+
+    /* Gists */
 
     /**
      * List a user's gists
@@ -1257,6 +1269,8 @@ class GithubController extends \App\Http\Controllers\Controller
         list($statusCode, $headers, $body) = GithubController::request('gists/' . $id, 'DELETE');
     }
 
+    /* Gist comments */
+
     /**
      * List comments on a gist
      *
@@ -1339,6 +1353,8 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $comment) = GithubController::request('gists/' . $gistId . '/comments/' . $commentId, 'DELETE');
     }
+
+    /* Issues */
 
     /**
      * List issues
@@ -1580,6 +1596,8 @@ class GithubController extends \App\Http\Controllers\Controller
         list($statusCode, $headers, $issue) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/lock', 'DELETE');
     }
 
+    /* Issue assignees */
+
     /**
      * List available assignees
      *
@@ -1690,6 +1708,8 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $issue;
     }
+
+    /* Issue comments */
 
     /**
      * List comments on an issue
