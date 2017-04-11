@@ -185,6 +185,24 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
+     * Convenience method to perform DELETE calls
+     *
+     * @param string $url
+     * @param mixed $body
+     * @param array $headers
+     * @param int $paginationOffset
+     * @param int $elementsPerPage
+     * @return [$statusCode, $headers, $body]
+     * @see GithubController::request()
+     */
+    public function delete($url, $body = null, $headers = [], $paginationOffset = null, $elementsPerPage = null)
+    {
+        /* Call request method */
+
+        return GithubController::request($url, 'DELETE', $headers, $body, $paginationOffset, $elementsPerPage);
+    }
+
+    /**
      * Placeholder method to be able to call any API method via a Laravel route
      *
      * @param $method
@@ -722,7 +740,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Delete notification thread subscription */
 
-        list($statusCode, $headers, $body) = GithubController::request('notifications/threads/' . $id . '/subscription', 'DELETE');
+        list($statusCode, $headers, $body) = GithubController::delete('notifications/threads/' . $id . '/subscription');
     }
 
     /* Starring */
@@ -837,7 +855,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Star the repository */
 
-        list($statusCode, $headers, $body) = GithubController::request('user/starred/' . $owner . '/' . $repository, 'DELETE');
+        list($statusCode, $headers, $body) = GithubController::delete('user/starred/' . $owner . '/' . $repository);
     }
 
     /* Watching */
@@ -963,7 +981,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Unwatch the repository */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/subscription', 'DELETE');
+        list($statusCode, $headers, $body) = GithubController::delete('repos/' . $owner . '/' . $repository . '/subscription');
     }
 
     /* Gists */
@@ -1221,7 +1239,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Unstar a gist */
 
-        list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/star', 'DELETE');
+        list($statusCode, $headers, $body) = GithubController::delete('gists/' . $id . '/star');
     }
 
     /**
@@ -1295,7 +1313,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Delete gist */
 
-        list($statusCode, $headers, $body) = GithubController::request('gists/' . $id, 'DELETE');
+        list($statusCode, $headers, $body) = GithubController::delete('gists/' . $id);
     }
 
     /* Gist comments */
@@ -1380,7 +1398,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Delete comment */
 
-        list($statusCode, $headers, $comment) = GithubController::request('gists/' . $gistId . '/comments/' . $commentId, 'DELETE');
+        list($statusCode, $headers, $comment) = GithubController::delete('gists/' . $gistId . '/comments/' . $commentId);
     }
 
     /* Issues */
@@ -1622,7 +1640,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Unlock issue */
 
-        list($statusCode, $headers, $issue) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/lock', 'DELETE');
+        list($statusCode, $headers, $issue) = GithubController::delete('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/lock');
     }
 
     /* Issue assignees */
@@ -1731,7 +1749,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Remove assignees */
 
-        list($statusCode, $headers, $issue) = GithubController::request('/repos/' . $owner . '/' . $repository . '/issues/' . $number . '/assignees', 'DELETE', [], $data);
+        list($statusCode, $headers, $issue) = GithubController::delete('/repos/' . $owner . '/' . $repository . '/issues/' . $number . '/assignees', $data);
 
         /* Return issue */
 
@@ -1917,7 +1935,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Delete issue comment */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/comments/' . $commentId, 'DELETE');
+        list($statusCode, $headers, $body) = GithubController::delete('repos/' . $owner . '/' . $repository . '/issues/comments/' . $commentId);
     }
 
     /* Issue events */
@@ -2130,7 +2148,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Delete repository label */
 
-        list($statusCode, $headers, $label) = GithubController::request('repos/' . $owner . '/' . $repository . '/labels/' . $label, 'DELETE');
+        list($statusCode, $headers, $label) = GithubController::delete('repos/' . $owner . '/' . $repository . '/labels/' . $label);
     }
 
     /**
@@ -2200,7 +2218,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Remove issue label */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels/' . $label, 'DELETE');
+        list($statusCode, $headers, $body) = GithubController::delete('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels/' . $label);
     }
 
     /**
@@ -2242,7 +2260,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Remove issue label */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels', 'DELETE');
+        list($statusCode, $headers, $body) = GithubController::delete('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels');
     }
 
     /**
