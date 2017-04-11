@@ -170,8 +170,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * Convenience method to perform PATCH calls
      *
      * @param string $url
-     * @param array $headers
      * @param mixed $body
+     * @param array $headers
      * @param int $paginationOffset
      * @param int $elementsPerPage
      * @return [$statusCode, $headers, $body]
