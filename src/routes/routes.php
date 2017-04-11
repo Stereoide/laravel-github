@@ -160,6 +160,10 @@ Route::get('github/milestoneLabels/{owner}/{repository}/{number}', '\Stereoide\G
 
 Route::get('github/milestones/{owner}/{repository}', '\Stereoide\Github\GithubController@getMilestones');
 Route::get('github/milestone/{owner}/{repository}/{number}', function($owner, $repository, $number) { dd(Github::getMilestone($owner, $repository, $number)); });
+Route::get('github/createMilestone/{owner}/{repository}/{title}/{state}/{description}/{dueOn}', function($owner, $repository, $title, $state, $description, $dueOn) { dd(Github::createMilestone($owner, $repository, $title, $state, $description, $dueOn)); });
+Route::get('github/createMilestone/{owner}/{repository}/{title}/{state}/{description}', function($owner, $repository, $title, $state, $description) { dd(Github::createMilestone($owner, $repository, $title, $state, $description)); });
+Route::get('github/createMilestone/{owner}/{repository}/{title}/{state}', function($owner, $repository, $title, $state) { dd(Github::createMilestone($owner, $repository, $title, $state)); });
+Route::get('github/createMilestone/{owner}/{repository}/{title}', function($owner, $repository, $title) { dd(Github::createMilestone($owner, $repository, $title)); });
 
 /* Catch-all */
 

@@ -2377,4 +2377,48 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $milestone;
     }
+
+    /**
+     * Get a single milestone
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $title
+     * @param string $state
+     * @param string $description
+     * @param string $dueOn
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/milestones/#create-a-milestone
+     * @TODO Better sanitize parameters
+     */
+    public function createMilestone($owner, $repository, $title, $state = null, $description = null, $dueOn = null)
+    {
+        /* Assemble data */
+
+        $data = [
+            'title' => $title
+        ];
+
+        if (!is_null($state)) {
+            $data['state'] = $state;
+        }
+
+        if (!is_null($description)) {
+            $data['description'] = $description;
+        }
+
+        if (!is_null($dueOn)) {
+            $data['due_on'] = $dueOn;
+        }
+
+        $data = json_encode($data);
+
+        /* Create milestone */
+
+        list($statusCode, $headers, $milestone) = GithubController::post('repos/' . $owner . '/' . $repository . '/milestones', $data);
+
+        /* Return milestone */
+
+        return $milestone;
+    }
 }
