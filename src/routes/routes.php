@@ -137,6 +137,10 @@ Route::get('github/createIssueComment/{owner}/{repository}/{number}/{comment}', 
 Route::get('github/editIssueComment/{owner}/{repository}/{id}/{comment}', function($owner, $repository, $commentId, $comment) { dd(Github::editIssueComment($owner, $repository, $commentId, $comment)); });
 Route::get('github/deleteIssueComment/{owner}/{repository}/{id}', '\Stereoide\Github\GithubController@deleteIssueComment');
 
+/* Issue events */
+
+Route::get('github/issueEvents/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@getIssueEvents');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');

@@ -1890,4 +1890,34 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/comments/' . $commentId, 'DELETE');
     }
+
+    /* Issue events */
+
+    /**
+     * List events for an issue
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/events/#list-events-for-an-issue
+     */
+    public function getIssueEvents($owner, $repository, $number, $paginationOffset = 1)
+    {
+        /* Fetch issue events */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/events', 'GET', [], null, $paginationOffset);
+
+        $events = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return comments */
+
+        return $events;
+    }
+
 }
