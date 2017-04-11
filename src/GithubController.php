@@ -1988,4 +1988,37 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $label;
     }
+
+    /**
+     * Create a label
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $name
+     * @param string $color
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/labels/#create-a-label
+     * @TODO Better sanitize parameters
+     */
+    public function createRepositoryLabel($owner, $repository, $name, $color)
+    {
+        /* Assemble data */
+
+        if ('#' == substr($color, 0, 1)) {
+            $color = substr($color, 1);
+        }
+
+        $data = json_encode([
+            'name' => $name,
+            'color' => $color,
+        ]);
+
+        /* Create repository label */
+
+        list($statusCode, $headers, $label) = GithubController::request('repos/' . $owner . '/' . $repository . '/labels', 'POST', [], $data);
+
+        /* Return label */
+
+        return $label;
+    }
 }

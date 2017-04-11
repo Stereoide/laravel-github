@@ -146,6 +146,7 @@ Route::get('github/issuesEvent/{owner}/{repository}/{id}', function($owner, $rep
 
 Route::get('github/repositoryLabels/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryLabels');
 Route::get('github/repositoryLabel/{owner}/{repository}/{label}', function($owner, $repository, $label) { dd(Github::getRepositoryLabel($owner, $repository, $label)); });
+Route::get('github/createRepositoryLabel/{owner}/{repository}/{label}/{color}', function($owner, $repository, $label, $color) { dd(Github::createRepositoryLabel($owner, $repository, $label, $color)); });
 
 /* Catch-all */
 
