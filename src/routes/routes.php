@@ -156,6 +156,10 @@ Route::get('github/setIssueLabels/{owner}/{repository}/{number}/{labels}', '\Ste
 Route::get('github/removeAllIssueLabels/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@removeAllIssueLabels');
 Route::get('github/milestoneLabels/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@getMilestoneLabels');
 
+/* Milestones */
+
+Route::get('github/milestones/{owner}/{repository}', '\Stereoide\Github\GithubController@getMilestones');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');

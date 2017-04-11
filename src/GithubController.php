@@ -2307,4 +2307,55 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $labels;
     }
+
+    /* Milestones */
+
+
+    /**
+     * List milestones for a repository
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $state
+     * @param string $sort
+     * @param string $direction
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository
+     * @TODO Better sanitize parameters
+     */
+    public function getMilestones($owner, $repository, $state = null, $sort = null, $direction = null, $paginationOffset = 1)
+    {
+        /* Assemble URL */
+
+        $url = 'repos/' . $owner . '/' . $repository . '/milestones';
+
+        if (!is_null($state)) {
+            $url .= '&state=' . $state;
+        }
+
+        if (!is_null($sort)) {
+            $url .= '&sort=' . $sort;
+        }
+
+        if (!is_null($direction)) {
+            $url .= '&direction=' . $direction;
+        }
+
+        $url = str_replace('/milestones&', '/milestones?', $url);
+
+        /* Fetch milestones */
+
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
+
+        $milestones = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return labels */
+
+        return $milestones;
+    }
 }
