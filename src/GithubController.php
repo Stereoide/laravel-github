@@ -2077,4 +2077,31 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $label) = GithubController::request('repos/' . $owner . '/' . $repository . '/labels/' . $label, 'DELETE');
     }
+
+    /**
+     * List labels on an issue
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/labels/#list-labels-on-an-issue
+     */
+    public function getIssueLabels($owner, $repository, $number, $paginationOffset = 1)
+    {
+        /* Fetch issue labels */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/labels', 'GET', [], null, $paginationOffset);
+
+        $labels = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return labels */
+
+        return $labels;
+    }
 }

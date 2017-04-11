@@ -149,6 +149,7 @@ Route::get('github/repositoryLabel/{owner}/{repository}/{label}', function($owne
 Route::get('github/createRepositoryLabel/{owner}/{repository}/{label}/{color}', function($owner, $repository, $label, $color) { dd(Github::createRepositoryLabel($owner, $repository, $label, $color)); });
 Route::get('github/updateRepositoryLabel/{owner}/{repository}/{label}/{name}/{color}', function($owner, $repository, $label, $name, $color) { dd(Github::updateRepositoryLabel($owner, $repository, $label, $name, $color)); });
 Route::get('github/deleteRepositoryLabel/{owner}/{repository}/{label}', '\Stereoide\Github\GithubController@deleteRepositoryLabel');
+Route::get('github/issueLabels/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@getIssueLabels');
 
 /* Catch-all */
 
