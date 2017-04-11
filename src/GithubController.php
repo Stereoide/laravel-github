@@ -203,6 +203,24 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
+     * Convenience method to perform DELETE calls
+     *
+     * @param string $url
+     * @param array $headers
+     * @param mixed $body
+     * @param int $paginationOffset
+     * @param int $elementsPerPage
+     * @return [$statusCode, $headers, $body]
+     * @see GithubController::request()
+     */
+    public function put($url, $headers = [], $body = null, $paginationOffset = null, $elementsPerPage = null)
+    {
+        /* Call request method */
+
+        return GithubController::request($url, 'PUT', $headers, $body, $paginationOffset, $elementsPerPage);
+    }
+
+    /**
      * Placeholder method to be able to call any API method via a Laravel route
      *
      * @param $method
@@ -628,7 +646,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         $url = str_replace('notifications&', 'notifications?', $url);
 
-        list($statusCode, $headers, $body) = GithubController::request($url, 'PUT', ['Content-Length' => 0]);
+        list($statusCode, $headers, $body) = GithubController::put($url, ['Content-Length' => 0]);
     }
 
     /**
@@ -653,7 +671,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         $url = str_replace('notifications&', 'notifications?', $url);
 
-        list($statusCode, $headers, $body) = GithubController::request($url, 'PUT', ['Content-Length' => 0]);
+        list($statusCode, $headers, $body) = GithubController::put($url, ['Content-Length' => 0]);
     }
 
     /**
@@ -727,7 +745,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         $url = 'notifications/threads/' . $id . '/subscription?subscribed=' . ($subscribed ? 'true' : 'false') . '&ignored=' . ($ignored ? 'true' : 'false');
 
-        list($statusCode, $headers, $body) = GithubController::request($url, 'PUT', ['Content-Length' => 0]);
+        list($statusCode, $headers, $body) = GithubController::put($url, ['Content-Length' => 0]);
     }
 
     /**
@@ -839,7 +857,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Star the repository */
 
-        list($statusCode, $headers, $body) = GithubController::request('user/starred/' . $owner . '/' . $repository, 'PUT', ['Content-Length' => 0]);
+        list($statusCode, $headers, $body) = GithubController::put('user/starred/' . $owner . '/' . $repository, ['Content-Length' => 0]);
     }
 
     /**
@@ -967,7 +985,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Watch the repository */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/subscription', 'PUT', ['Content-Length' => strlen($data)], $data);
+        list($statusCode, $headers, $body) = GithubController::put('repos/' . $owner . '/' . $repository . '/subscription', ['Content-Length' => strlen($data)], $data);
     }
 
     /**
@@ -1225,7 +1243,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Star a gist */
 
-        list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/star', 'PUT', ['Content-Length' => 0]);
+        list($statusCode, $headers, $body) = GithubController::put('gists/' . $id . '/star', ['Content-Length' => 0]);
     }
 
     /**
@@ -1625,7 +1643,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Lock issue */
 
-        list($statusCode, $headers, $issue) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/lock', 'PUT', ['Content-Length' => 0]);
+        list($statusCode, $headers, $issue) = GithubController::put('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/lock', ['Content-Length' => 0]);
     }
 
     /**
@@ -2239,7 +2257,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Replace issue labels */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels', 'PUT', [], $data);
+        list($statusCode, $headers, $body) = GithubController::put('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels', [], $data);
 
         $labels = collect($body);
 
