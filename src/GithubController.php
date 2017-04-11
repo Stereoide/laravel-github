@@ -2353,7 +2353,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         $pagination = GithubController::getPaginationFromResponseHeaders($headers);
 
-        /* Return labels */
+        /* Return milestones */
 
         return $milestones;
     }
