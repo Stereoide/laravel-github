@@ -151,6 +151,7 @@ Route::get('github/updateRepositoryLabel/{owner}/{repository}/{label}/{name}/{co
 Route::get('github/deleteRepositoryLabel/{owner}/{repository}/{label}', '\Stereoide\Github\GithubController@deleteRepositoryLabel');
 Route::get('github/issueLabels/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@getIssueLabels');
 Route::get('github/addIssueLabels/{owner}/{repository}/{number}/{labels}', '\Stereoide\Github\GithubController@addIssueLabels');
+Route::get('github/removeIssueLabel/{owner}/{repository}/{number}/{label}', '\Stereoide\Github\GithubController@removeIssueLabel');
 
 /* Catch-all */
 
