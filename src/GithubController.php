@@ -1968,4 +1968,24 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $labels;
     }
+
+    /**
+     * Get a single label
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $label
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/labels/#get-a-single-label
+     */
+    public function getRepositoryLabel($owner, $repository, $label)
+    {
+        /* Fetch label */
+
+        list($statusCode, $headers, $label) = GithubController::request('repos/' . $owner . '/' . $repository . '/labels/' . $label);
+
+        /* Return label */
+
+        return $label;
+    }
 }
