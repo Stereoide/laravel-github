@@ -2062,4 +2062,19 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $label;
     }
+
+    /**
+     * Delete a label
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $label
+     * @see https://developer.github.com/v3/issues/labels/#delete-a-label
+     */
+    public function deleteRepositoryLabel($owner, $repository, $label)
+    {
+        /* Delete repository label */
+
+        list($statusCode, $headers, $label) = GithubController::request('repos/' . $owner . '/' . $repository . '/labels/' . $label, 'DELETE');
+    }
 }
