@@ -2174,4 +2174,19 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $labels;
     }
+
+    /**
+     * Remove all labels from an issue
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @see https://developer.github.com/v3/issues/labels/#remove-all-labels-from-an-issue
+     */
+    public function removeAllIssueLabels($owner, $repository, $number)
+    {
+        /* Remove issue label */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels', 'DELETE');
+    }
 }
