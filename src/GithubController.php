@@ -1940,4 +1940,32 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $event;
     }
+
+    /* Labels */
+
+    /**
+     * List all labels for this repository
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/labels/#list-all-labels-for-this-repository
+     */
+    public function getRepositoryLabels($owner, $repository, $paginationOffset = 1)
+    {
+        /* Fetch repository labels */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/labels', 'GET', [], null, $paginationOffset);
+
+        $labels = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return labels */
+
+        return $labels;
+    }
 }
