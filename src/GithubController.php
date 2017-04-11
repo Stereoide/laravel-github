@@ -2189,4 +2189,31 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels', 'DELETE');
     }
+
+    /**
+     * Get labels for every issue in a milestone
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/labels/#get-labels-for-every-issue-in-a-milestone
+     */
+    public function getMilestoneLabels($owner, $repository, $number, $paginationOffset = 1)
+    {
+        /* Fetch milestone labels */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/milestones/' . $number . '/labels', 'GET', [], null, $paginationOffset);
+
+        $labels = collect($body);
+
+        /* Determine pagination data */
+
+        $pagination = GithubController::getPaginationFromResponseHeaders($headers);
+
+        /* Return labels */
+
+        return $labels;
+    }
 }
