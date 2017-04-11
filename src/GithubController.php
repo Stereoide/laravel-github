@@ -167,6 +167,24 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
+     * Convenience method to perform PATCH calls
+     *
+     * @param string $url
+     * @param array $headers
+     * @param mixed $body
+     * @param int $paginationOffset
+     * @param int $elementsPerPage
+     * @return [$statusCode, $headers, $body]
+     * @see GithubController::request()
+     */
+    public function patch($url, $body = null, $headers = [], $paginationOffset = null, $elementsPerPage = null)
+    {
+        /* Call request method */
+
+        return GithubController::request($url, 'PATCH', $headers, $body, $paginationOffset, $elementsPerPage);
+    }
+
+    /**
      * Placeholder method to be able to call any API method via a Laravel route
      *
      * @param $method
@@ -648,7 +666,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Mark thread as read */
 
-        list($statusCode, $headers, $body) = GithubController::request('notifications/threads/' . $id, 'PATCH');
+        list($statusCode, $headers, $body) = GithubController::patch('notifications/threads/' . $id);
     }
 
     /**
@@ -1151,7 +1169,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Edit gist */
 
-        list($statusCode, $headers, $body) = GithubController::request('gists', 'PATCH', [], $data);
+        list($statusCode, $headers, $body) = GithubController::patch('gists', $data);
     }
 
     /**
@@ -1570,7 +1588,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Edit issue */
 
-        list($statusCode, $headers, $issue) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number, 'PATCH', [], $data);
+        list($statusCode, $headers, $issue) = GithubController::patch('repos/' . $owner . '/' . $repository . '/issues/' . $number, $data);
 
         /* Return issue */
 
@@ -1880,7 +1898,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Create issue comment */
 
-        list($statusCode, $headers, $comment) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/comments/' . $commentId, 'PATCH', [], $data);
+        list($statusCode, $headers, $comment) = GithubController::patch('repos/' . $owner . '/' . $repository . '/issues/comments/' . $commentId, $data);
 
         /* Return comment */
 
@@ -2093,7 +2111,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Update repository label */
 
-        list($statusCode, $headers, $label) = GithubController::request('repos/' . $owner . '/' . $repository . '/labels/' . $label, 'PATCH', [], $data);
+        list($statusCode, $headers, $label) = GithubController::patch('repos/' . $owner . '/' . $repository . '/labels/' . $label, $data);
 
         /* Return label */
 
