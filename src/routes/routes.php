@@ -159,6 +159,7 @@ Route::get('github/milestoneLabels/{owner}/{repository}/{number}', '\Stereoide\G
 /* Milestones */
 
 Route::get('github/milestones/{owner}/{repository}', '\Stereoide\Github\GithubController@getMilestones');
+Route::get('github/milestone/{owner}/{repository}/{number}', function($owner, $repository, $number) { dd(Github::getMilestone($owner, $repository, $number)); });
 
 /* Catch-all */
 

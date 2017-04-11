@@ -2310,7 +2310,6 @@ class GithubController extends \App\Http\Controllers\Controller
 
     /* Milestones */
 
-
     /**
      * List milestones for a repository
      *
@@ -2357,5 +2356,25 @@ class GithubController extends \App\Http\Controllers\Controller
         /* Return labels */
 
         return $milestones;
+    }
+
+    /**
+     * Get a single milestone
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/milestones/#get-a-single-milestone
+     */
+    public function getMilestone($owner, $repository, $number)
+    {
+        /* Fetch milestone */
+
+        list($statusCode, $headers, $milestone) = GithubController::get('repos/' . $owner . '/' . $repository . '/milestones/' . $number);
+
+        /* Return milestone */
+
+        return $milestone;
     }
 }
