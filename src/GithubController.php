@@ -1919,4 +1919,25 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $events;
     }
+
+    /**
+     * Get a single event
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $eventId
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/events/#get-a-single-event
+     * @TODO Clarify response
+     */
+    public function getIssueEvent($owner, $repository, $eventId)
+    {
+        /* Fetch issue event */
+
+        list($statusCode, $headers, $event) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/events/' . $eventId);
+
+        /* Return event */
+
+        return $event;
+    }
 }

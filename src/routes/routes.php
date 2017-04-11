@@ -140,6 +140,7 @@ Route::get('github/deleteIssueComment/{owner}/{repository}/{id}', '\Stereoide\Gi
 
 Route::get('github/issueEvents/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@getIssueEvents');
 Route::get('github/repositoryIssuesEvents/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryIssuesEvents');
+Route::get('github/issuesEvent/{owner}/{repository}/{id}', function($owner, $repository, $eventId) { dd(Github::getIssueEvent($owner, $repository, $eventId)); });
 
 /* Catch-all */
 
