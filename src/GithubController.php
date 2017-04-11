@@ -90,6 +90,9 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param $url
      * @param string $method
      * @param array $headers
+     * @param mixed $body
+     * @param int $paginationOffset
+     * @param int $elementsPerPage
      * @return [$statusCode, $headers, $body]
      */
     public function request($url, $method = 'GET', $headers = [], $body = null, $paginationOffset = null, $elementsPerPage = null)
@@ -143,6 +146,24 @@ class GithubController extends \App\Http\Controllers\Controller
         /* Call request method */
 
         return GithubController::request($url, 'GET', [], null, $paginationOffset, $elementsPerPage);
+    }
+
+    /**
+     * Convenience method to perform POST calls
+     *
+     * @param string $url
+     * @param array $headers
+     * @param mixed $body
+     * @param int $paginationOffset
+     * @param int $elementsPerPage
+     * @return [$statusCode, $headers, $body]
+     * @see GithubController::request()
+     */
+    public function post($url, $body = null, $headers = [], $paginationOffset = null, $elementsPerPage = null)
+    {
+        /* Call request method */
+
+        return GithubController::request($url, 'POST', $headers, $body, $paginationOffset, $elementsPerPage);
     }
 
     /**
@@ -1063,7 +1084,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Create gist */
 
-        list($statusCode, $headers, $body) = GithubController::request('gists', 'POST', [], $data);
+        list($statusCode, $headers, $body) = GithubController::post('gists', $data);
     }
 
     /**
@@ -1215,7 +1236,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fork gist */
 
-        list($statusCode, $headers, $gist) = GithubController::request('gists/' . $id . '/forks', 'POST');
+        list($statusCode, $headers, $gist) = GithubController::post('gists/' . $id . '/forks');
 
         /* Return gist */
 
@@ -1322,7 +1343,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Create comment */
 
-        list($statusCode, $headers, $comment) = GithubController::request('gists/' . $gistId . '/comments', 'POST', [], $data);
+        list($statusCode, $headers, $comment) = GithubController::post('gists/' . $gistId . '/comments', $data);
 
         /* Return comment */
 
@@ -1480,7 +1501,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Create issue */
 
-        list($statusCode, $headers, $issue) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues', 'POST', [], $data);
+        list($statusCode, $headers, $issue) = GithubController::post('repos/' . $owner . '/' . $repository . '/issues', $data);
 
         /* Return issue */
 
@@ -1661,7 +1682,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Add assignees */
 
-        list($statusCode, $headers, $issue) = GithubController::request('/repos/' . $owner . '/' . $repository . '/issues/' . $number . '/assignees', 'POST', [], $data);
+        list($statusCode, $headers, $issue) = GithubController::post('/repos/' . $owner . '/' . $repository . '/issues/' . $number . '/assignees', $data);
 
         /* Return issue */
 
@@ -1831,7 +1852,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Create issue comment */
 
-        list($statusCode, $headers, $comment) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/comments', 'POST', [], $data);
+        list($statusCode, $headers, $comment) = GithubController::post('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/comments', $data);
 
         /* Return comment */
 
@@ -2031,7 +2052,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Create repository label */
 
-        list($statusCode, $headers, $label) = GithubController::request('repos/' . $owner . '/' . $repository . '/labels', 'POST', [], $data);
+        list($statusCode, $headers, $label) = GithubController::post('repos/' . $owner . '/' . $repository . '/labels', $data);
 
         /* Return label */
 
@@ -2139,7 +2160,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Add issue labels */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels', 'POST', [], $data);
+        list($statusCode, $headers, $body) = GithubController::post('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels', $data);
 
         $labels = collect($body);
 
