@@ -2147,4 +2147,31 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels/' . $label, 'DELETE');
     }
+
+    /**
+     * Replace all labels for an issue
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param array(string $labels)
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/labels/#replace-all-labels-for-an-issue
+     */
+    public function setIssueLabels($owner, $repository, $number, $labels = [])
+    {
+        /* Assemble data */
+
+        $data = json_encode((is_array($labels) ? $labels : explode(',', $labels)));
+
+        /* Replace issue labels */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels', 'PUT', [], $data);
+
+        $labels = collect($body);
+
+        /* Return labels */
+
+        return $labels;
+    }
 }
