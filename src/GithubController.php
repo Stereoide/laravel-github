@@ -130,6 +130,22 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
+     * Convenience method to perform GET calls
+     *
+     * @param string $url
+     * @param int $paginationOffset
+     * @param int $elementsPerPage
+     * @return [$statusCode, $headers, $body]
+     * @see GithubController::request()
+     */
+    public function get($url, $paginationOffset = null, $elementsPerPage = null)
+    {
+        /* Call request method */
+
+        return GithubController::request($url, 'GET', [], null, $paginationOffset, $elementsPerPage);
+    }
+
+    /**
      * Placeholder method to be able to call any API method via a Laravel route
      *
      * @param $method
@@ -152,7 +168,7 @@ class GithubController extends \App\Http\Controllers\Controller
      */
     public function getApiEndpoints()
     {
-        list($statusCode, $headers, $body) = GithubController::request('/');
+        list($statusCode, $headers, $body) = GithubController::get('/');
 
         return $body;
     }
@@ -162,7 +178,7 @@ class GithubController extends \App\Http\Controllers\Controller
      */
     public function current_user_url()
     {
-        list($statusCode, $headers, $body) = GithubController::request('user');
+        list($statusCode, $headers, $body) = GithubController::get('user');
 
         return $body;
     }
@@ -175,7 +191,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch user repos */
 
-        list($statusCode, $headers, $body) = GithubController::request('users/' . $username . '/repos');
+        list($statusCode, $headers, $body) = GithubController::get('users/' . $username . '/repos');
 
         $repos = collect($body);
 
@@ -197,7 +213,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch public events */
 
-        list($statusCode, $headers, $body) = GithubController::request('events', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('events', $paginationOffset);
 
         $events = collect($body);
 
@@ -223,7 +239,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository events */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/events', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/events', $paginationOffset);
 
         $events = collect($body);
 
@@ -249,7 +265,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository events */
 
-        list($statusCode, $headers, $body) = GithubController::request('networks/' . $owner . '/' . $repository . '/events', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('networks/' . $owner . '/' . $repository . '/events', $paginationOffset);
 
         $events = collect($body);
 
@@ -274,7 +290,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository events */
 
-        list($statusCode, $headers, $body) = GithubController::request('orgs/' . $organisation . '/events', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('orgs/' . $organisation . '/events', $paginationOffset);
 
         $events = collect($body);
 
@@ -302,7 +318,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository events */
 
-        list($statusCode, $headers, $body) = GithubController::request('users/' . $username . '/received_events', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('users/' . $username . '/received_events', $paginationOffset);
 
         $events = collect($body);
 
@@ -327,7 +343,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository events */
 
-        list($statusCode, $headers, $body) = GithubController::request('users/' . $username . '/received_events/public', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('users/' . $username . '/received_events/public', $paginationOffset);
 
         $events = collect($body);
 
@@ -355,7 +371,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository events */
 
-        list($statusCode, $headers, $body) = GithubController::request('users/' . $username . '/events', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('users/' . $username . '/events', $paginationOffset);
 
         $events = collect($body);
 
@@ -380,7 +396,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository events */
 
-        list($statusCode, $headers, $body) = GithubController::request('users/' . $username . '/events/public', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('users/' . $username . '/events/public', $paginationOffset);
 
         $events = collect($body);
 
@@ -408,7 +424,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository events */
 
-        list($statusCode, $headers, $body) = GithubController::request('users/' . $username . '/events/orgs/' . $organisation, 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('users/' . $username . '/events/orgs/' . $organisation, $paginationOffset);
 
         $events = collect($body);
 
@@ -465,7 +481,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         $url = str_replace('notifications&', 'notifications?', $url);
 
-        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
 
         $notifications = collect($body);
 
@@ -522,7 +538,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         $url = str_replace('notifications&', 'notifications?', $url);
 
-        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
 
         $notifications = collect($body);
 
@@ -594,7 +610,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository events */
 
-        list($statusCode, $headers, $body) = GithubController::request('notifications/threads/' . $id, 'GET');
+        list($statusCode, $headers, $body) = GithubController::get('notifications/threads/' . $id);
 
         /* Return thread */
 
@@ -625,7 +641,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository events */
 
-        list($statusCode, $headers, $body) = GithubController::request('notifications/threads/' . $id . '/subscription', 'GET');
+        list($statusCode, $headers, $body) = GithubController::get('notifications/threads/' . $id . '/subscription');
 
         /* Return thread */
 
@@ -685,7 +701,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository stargazers */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/stargazers', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/stargazers', $paginationOffset);
 
         $stargazers = collect($body);
 
@@ -718,7 +734,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Fetch starred repositories */
 
-        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
 
         $repositories = collect($body);
 
@@ -746,7 +762,7 @@ class GithubController extends \App\Http\Controllers\Controller
         /* Determine whether the repository in question is starred by the authenticated user */
 
         try {
-            list($statusCode, $headers, $body) = GithubController::request('user/starred/' . $owner . '/' . $repository);
+            list($statusCode, $headers, $body) = GithubController::get('user/starred/' . $owner . '/' . $repository);
             return (204 == $statusCode);
         } catch (\Exception $exception) {
             return (204 == $exception->getResponse()->getStatusCode());
@@ -800,7 +816,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository stargazers */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/subscribers', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/subscribers', $paginationOffset);
 
         $watchers = collect($body);
 
@@ -833,7 +849,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Fetch watched repositories */
 
-        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
 
         $repositories = collect($body);
 
@@ -861,7 +877,7 @@ class GithubController extends \App\Http\Controllers\Controller
         /* Determine whether the repository in question is starred by the authenticated user */
 
         try {
-            list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/subscription');
+            list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/subscription');
             if (200 == $statusCode) {
                 return [true, $body];
             } else {
@@ -938,7 +954,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Fetch public gists */
 
-        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
 
         $gists = collect($body);
 
@@ -967,7 +983,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch starred gists */
 
-        list($statusCode, $headers, $body) = GithubController::request('gists/starred', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('gists/starred', $paginationOffset);
 
         $gists = collect($body);
 
@@ -999,7 +1015,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Fetch gist */
 
-        list($statusCode, $headers, $gist) = GithubController::request($url);
+        list($statusCode, $headers, $gist) = GithubController::get($url);
 
         /* Return gist */
 
@@ -1128,7 +1144,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch gist commits */
 
-        list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/commits');
+        list($statusCode, $headers, $body) = GithubController::get('gists/' . $id . '/commits');
 
         $commits = collect($body);
 
@@ -1181,7 +1197,7 @@ class GithubController extends \App\Http\Controllers\Controller
         /* Determine whether the gist in question is starred by the authenticated user */
 
         try {
-            list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/star');
+            list($statusCode, $headers, $body) = GithubController::get('gists/' . $id . '/star');
             return (204 == $statusCode);
         } catch (\Exception $exception) {
             return false;
@@ -1217,7 +1233,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch gist forks */
 
-        list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/forks');
+        list($statusCode, $headers, $body) = GithubController::get('gists/' . $id . '/forks');
 
         $forks = collect($body);
 
@@ -1256,7 +1272,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch gist comments */
 
-        list($statusCode, $headers, $body) = GithubController::request('gists/' . $id . '/comments');
+        list($statusCode, $headers, $body) = GithubController::get('gists/' . $id . '/comments');
 
         $comments = collect($body);
 
@@ -1281,7 +1297,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch gist comments */
 
-        list($statusCode, $headers, $comment) = GithubController::request('gists/' . $gistId . '/comments/' . $commentId);
+        list($statusCode, $headers, $comment) = GithubController::get('gists/' . $gistId . '/comments/' . $commentId);
 
         /* Return comment */
 
@@ -1378,7 +1394,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Fetch issues */
 
-        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
 
         $issues = collect($body);
 
@@ -1401,7 +1417,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch issue */
 
-        list($statusCode, $headers, $issue) = GithubController::request('repos/'. $owner . '/' . $repository . '/issues/' . $number);
+        list($statusCode, $headers, $issue) = GithubController::get('repos/'. $owner . '/' . $repository . '/issues/' . $number);
 
         /* Return issue */
 
@@ -1585,7 +1601,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch available assignees */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/assignees', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/assignees', $paginationOffset);
 
         $availableAssignees = collect($body);
 
@@ -1614,7 +1630,7 @@ class GithubController extends \App\Http\Controllers\Controller
         /* Determine whether the assignee is assigned to a repository */
 
         try {
-            list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/assignees/' . $assignee);
+            list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/assignees/' . $assignee);
             return (204 == $statusCode);
         } catch (\Exception $exception) {
             return (204 == $exception->getResponse()->getStatusCode());
@@ -1712,7 +1728,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Fetch issue comments */
 
-        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
 
         $comments = collect($body);
 
@@ -1761,7 +1777,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Fetch issue comments */
 
-        list($statusCode, $headers, $body) = GithubController::request($url, 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
 
         $comments = collect($body);
 
@@ -1787,7 +1803,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch issue comment */
 
-        list($statusCode, $headers, $comment) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/comments/' . $id);
+        list($statusCode, $headers, $comment) = GithubController::get('repos/' . $owner . '/' . $repository . '/issues/comments/' . $id);
 
         /* Return comment */
 
@@ -1881,7 +1897,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch issue events */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/events', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/events', $paginationOffset);
 
         $events = collect($body);
 
@@ -1907,7 +1923,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository events */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/events', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/issues/events', $paginationOffset);
 
         $events = collect($body);
 
@@ -1934,7 +1950,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch issue event */
 
-        list($statusCode, $headers, $event) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/events/' . $eventId);
+        list($statusCode, $headers, $event) = GithubController::get('repos/' . $owner . '/' . $repository . '/issues/events/' . $eventId);
 
         /* Return event */
 
@@ -1956,7 +1972,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch repository labels */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/labels', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/labels', $paginationOffset);
 
         $labels = collect($body);
 
@@ -1982,7 +1998,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch label */
 
-        list($statusCode, $headers, $label) = GithubController::request('repos/' . $owner . '/' . $repository . '/labels/' . $label);
+        list($statusCode, $headers, $label) = GithubController::get('repos/' . $owner . '/' . $repository . '/labels/' . $label);
 
         /* Return label */
 
@@ -2092,7 +2108,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch issue labels */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/labels', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/labels', $paginationOffset);
 
         $labels = collect($body);
 
@@ -2204,7 +2220,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch milestone labels */
 
-        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/milestones/' . $number . '/labels', 'GET', [], null, $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/milestones/' . $number . '/labels', $paginationOffset);
 
         $labels = collect($body);
 
