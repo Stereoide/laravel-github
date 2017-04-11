@@ -2104,4 +2104,31 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $labels;
     }
+
+    /**
+     * Add labels to an issue
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param array(string $labels)
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/labels/#add-labels-to-an-issue
+     */
+    public function addIssueLabels($owner, $repository, $number, $labels)
+    {
+        /* Assemble data */
+
+        $data = json_encode((is_array($labels) ? $labels : explode(',', $labels)));
+
+        /* Add issue labels */
+
+        list($statusCode, $headers, $body) = GithubController::request('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels', 'POST', [], $data);
+
+        $labels = collect($body);
+
+        /* Return labels */
+
+        return $labels;
+    }
 }
