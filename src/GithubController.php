@@ -2021,4 +2021,45 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $label;
     }
+
+    /**
+     * Update a label
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $label
+     * @param string $name
+     * @param string $color
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/labels/#update-a-label
+     * @TODO Better sanitize parameters
+     */
+    public function updateRepositoryLabel($owner, $repository, $label, $name = null, $color = null)
+    {
+        /* Assemble data */
+
+        $data = [];
+
+        if (!is_null($name)) {
+            $data['name'] = $name;
+        }
+
+        if (!is_null($color)) {
+            if ('#' == substr($color, 0, 1)) {
+                $color = substr($color, 1);
+            }
+
+            $data['color'] = $color;
+        }
+
+        $data = json_encode($data);
+
+        /* Update repository label */
+
+        list($statusCode, $headers, $label) = GithubController::request('repos/' . $owner . '/' . $repository . '/labels/' . $label, 'PATCH', [], $data);
+
+        /* Return label */
+
+        return $label;
+    }
 }
