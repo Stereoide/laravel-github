@@ -186,6 +186,7 @@ Route::get('github/pullRequests/{owner}/{repository}', '\Stereoide\Github\Github
 Route::get('github/pullRequest/{owner}/{repository}/{number}', function($owner, $repository, $number) { dd(Github::getPullRequest($owner, $repository, $number)); });
 Route::get('github/createPullRequest/{owner}/{repository}/{title}/{head}/{base}/{body}', function($owner, $repository, $title, $head, $base, $body) { dd(Github::createPullRequest($owner, $repository, $title, $head, $base, $body)); });
 Route::get('github/createPullRequest/{owner}/{repository}/{number}/{head}/{base}', function($owner, $repository, $number, $head, $base) { dd(Github::createPullRequestFromIssue($owner, $repository, $number, $head, $base)); });
+Route::get('github/updatePullRequest/{owner}/{repository}/{number}/{title}/{head}/{base}/{body}', function($owner, $repository, $number, $title, $head, $base, $body) { dd(Github::updatePullRequestFromIssue($owner, $repository, $number, $title, $head, $base, $body)); });
 
 /* Catch-all */
 

@@ -2693,4 +2693,54 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $pullRequest;
     }
+
+    /**
+     * Update a pull request
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param string $title
+     * @param string $head
+     * @param string $base
+     * @param string $body
+     * @param bool $maintainerCanModify
+     * @return mixed
+     * @see https://developer.github.com/v3/pulls/#update-a-pull-request
+     */
+    public function updatePullRequest($owner, $repository, $number, $title = null, $head = null, $base = null, $body = null, $maintainerCanModify = null) {
+        /* Assemble data */
+
+        $data = [];
+
+        if (!is_null($title)) {
+            $data['title'] = $title;
+        }
+
+        if (!is_null($head)) {
+            $data['head'] = $head;
+        }
+
+        if (!is_null($base)) {
+            $data['base'] = $base;
+        }
+
+        if (!is_null($body)) {
+            $data['body'] = $body;
+        }
+
+        if (!is_null($maintainerCanModify)) {
+            $data['maintainer_can_modify'] = $maintainerCanModify;
+        }
+
+        $data = json_encode($data);
+
+        /* Update pull request */
+
+        list($statusCode, $headers, $pullRequest) = GithubController::patch('repos/' . $owner . '/' . $repository . '/pulls/' . $number, $data);
+
+        /* Return pull request */
+
+        return $pullRequest;
+    }
 }
