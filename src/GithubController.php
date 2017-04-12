@@ -2875,7 +2875,7 @@ class GithubController extends \App\Http\Controllers\Controller
     /* Repositories */
 
     /**
-     * List repositories
+     * List user repositories
      *
      * @param string $owner
      * @param string $visibility
@@ -2889,7 +2889,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
-    public function getRepositories($owner = null, $visibility = null, $affiliation = null, $type = null, $sort = null, $direction = null, $paginationOffset = 1)
+    public function getUserRepositories($owner = null, $visibility = null, $affiliation = null, $type = null, $sort = null, $direction = null, $paginationOffset = 1)
     {
         /* Assemble URL */
 

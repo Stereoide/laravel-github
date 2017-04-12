@@ -198,8 +198,8 @@ Route::get('github/mergePullRequest/{owner}/{repository}/{number}', function($ow
 
 /* Repositories */
 
-Route::get('github/repositories/{owner}', '\Stereoide\Github\GithubController@getRepositories');
-Route::get('github/repositories', '\Stereoide\Github\GithubController@getRepositories');
+Route::get('github/userRepositories/{owner}', '\Stereoide\Github\GithubController@getUserRepositories');
+Route::get('github/userRepositories', '\Stereoide\Github\GithubController@getUserRepositories');
 Route::get('github/organizationRepositories/{organization}/{type}', '\Stereoide\Github\GithubController@getOrganizationRepositories');
 Route::get('github/organizationRepositories/{organization}', '\Stereoide\Github\GithubController@getOrganizationRepositories');
 
