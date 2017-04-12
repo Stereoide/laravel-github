@@ -183,6 +183,7 @@ Route::get('github/gitignoreTemplate/{template}', function($template) { dd(Githu
 /* Pull requests */
 
 Route::get('github/pullRequests/{owner}/{repository}', '\Stereoide\Github\GithubController@getPullRequests');
+Route::get('github/pullRequest/{owner}/{repository}/{number}', function($owner, $repository, $number) { dd(Github::getPullRequest($owner, $repository, $number)); });
 
 /* Catch-all */
 

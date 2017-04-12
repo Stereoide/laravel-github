@@ -2595,4 +2595,25 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $pullRequests;
     }
+
+    /**
+     * Get a single pull request
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @return mixed
+     * @see https://developer.github.com/v3/pulls/#get-a-single-pull-request
+     * @TODO Support diff format
+     * @TODO Support patch format
+     */
+    public function getPullRequest($owner, $repository, $number) {
+        /* Fetch pull request */
+
+        list($statusCode, $headers, $pullRequest) = GithubController::get('repos/' . $owner . '/' . $repository . '/pulls/' . $number);
+
+        /* Return pull request */
+
+        return $pullRequest;
+    }
 }
