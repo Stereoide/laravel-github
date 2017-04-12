@@ -171,6 +171,10 @@ Route::get('github/updateMilestone/{owner}/{repository}/{number}/{title}', funct
 Route::get('github/updateMilestone/{owner}/{repository}/{number}', function($owner, $repository, $number) { dd(Github::updateMilestone($owner, $repository, $number)); });
 Route::get('github/deleteMilestone/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@deleteMilestone');
 
+/* Emojis */
+
+Route::get('github/emojis', '\Stereoide\Github\GithubController@getAvailableEmojis');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');

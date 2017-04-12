@@ -2483,4 +2483,24 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $milestone) = GithubController::delete('repos/' . $owner . '/' . $repository . '/milestones/' . $number);
     }
+
+    /* Emojis */
+
+    /**
+     * Lists all the emojis available to use on GitHub
+     *
+     * @return mixed
+     * @see https://developer.github.com/v3/emojis/#emojis
+     */
+    public function getAvailableEmojis() {
+        /* Fetch available emojis */
+
+        list($statusCode, $headers, $body) = GithubController::get('emojis');
+
+        $emojis = collect($body);
+
+        /* Return emojis */
+
+        return $emojis;
+    }
 }
