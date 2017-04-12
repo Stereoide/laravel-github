@@ -2616,4 +2616,43 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $pullRequest;
     }
+
+    /**
+     * Create a pull request
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $title
+     * @param string $head
+     * @param string $base
+     * @param string $body
+     * @param bool $maintainerCanModify
+     * @return mixed
+     * @see https://developer.github.com/v3/pulls/#create-a-pull-request
+     */
+    public function createPullRequest($owner, $repository, $title, $head, $base, $body, $maintainerCanModify = true) {
+        /* Assemble data */
+
+        $data = [
+            'title' => $title,
+            'head' => $head,
+            'base' => $base,
+        ];
+
+        if (!is_null($body)) {
+            $data['body'] = $body;
+        }
+
+        if (!is_null($maintainerCanModify)) {
+            $data['maintainer_can_modify'] = $maintainerCanModify;
+        }
+
+        /* Create pull request */
+
+        list($statusCode, $headers, $pullRequest) = GithubController::post('repos/' . $owner . '/' . $repository . '/pulls', $data);
+
+        /* Return pull request */
+
+        return $pullRequest;
+    }
 }
