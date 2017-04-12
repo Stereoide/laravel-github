@@ -2745,7 +2745,7 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
-     * Create a pull request
+     * List commits on a pull request
      *
      * @param string $owner
      * @param string $repository
