@@ -2743,4 +2743,26 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $pullRequest;
     }
+
+    /**
+     * Create a pull request
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/pulls/#create-a-pull-request
+     */
+    public function getPullRequestCommits($owner, $repository, $number, $paginationOffset = 1) {
+        /* Fetch pull request commits */
+
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/pulls/' . $number . '/commits', $paginationOffset);
+
+        $commits = collect($body);
+
+        /* Return commits */
+
+        return $commits;
+    }
 }
