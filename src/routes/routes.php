@@ -180,6 +180,10 @@ Route::get('github/emojis', '\Stereoide\Github\GithubController@getAvailableEmoj
 Route::get('github/gitignoreTemplates', '\Stereoide\Github\GithubController@getAvailableGitIgnoreTemplates');
 Route::get('github/gitignoreTemplate/{template}', function($template) { dd(Github::getGitIgnoreTemplate($template)); });
 
+/* Pull requests */
+
+Route::get('github/pullRequests/{owner}/{repository}', '\Stereoide\Github\GithubController@getPullRequests');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');

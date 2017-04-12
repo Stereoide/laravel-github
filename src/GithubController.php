@@ -2541,4 +2541,58 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $template;
     }
+
+    /* Pull requests */
+
+    /**
+     * List pull requests
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $state
+     * @param string $head
+     * @param string $base
+     * @param string $sort
+     * @param string $direction
+     * @return mixed
+     * @see https://developer.github.com/v3/pulls/#list-pull-requests
+     * @TODO Better sanitize parameters
+     */
+    public function getPullRequests($owner, $repository, $state = null, $head = null, $base = null, $sort = null, $direction = null) {
+        /* Assemble URL */
+
+        $url = 'repos/' . $owner . '/' . $repository . '/pulls';
+
+        if (!is_null($state)) {
+            $url .= '&state=' . $state;
+        }
+
+        if (!is_null($head)) {
+            $url .= '&head=' . $head;
+        }
+
+        if (!is_null($base)) {
+            $url .= '&base=' . $base;
+        }
+
+        if (!is_null($sort)) {
+            $url .= '&sort=' . $sort;
+        }
+
+        if (!is_null($direction)) {
+            $url .= '&direction=' . $direction;
+        }
+
+        $url = str_replace('/pulls&', '/pulls?', $url);
+
+        /* Fetch pull requests */
+
+        list($statusCode, $headers, $body) = GithubController::get($url);
+
+        $pullRequests = collect($body);
+
+        /* Return pull requests */
+
+        return $pullRequests;
+    }
 }
