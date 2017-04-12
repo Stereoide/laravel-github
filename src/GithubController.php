@@ -2927,4 +2927,38 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $repositories;
     }
+
+    /**
+     * List organization repositories
+     *
+     * @param string $organization
+     * @param string $type
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/#list-organization-repositories
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     */
+    public function getOrganizationRepositories($organization, $type = null, $paginationOffset = 1)
+    {
+        /* Assemble URL */
+
+        $url = 'orgs/' . $organization . '/repos';
+
+        if (!is_null($type)) {
+            $url .= '&type=' . $type;
+        }
+
+        $url = str_replace('/repos&', '/repos?', $url);
+
+        /* Fetch repositories */
+
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
+
+        $repositories = collect($body);
+
+        /* Return repositories */
+
+        return $repositories;
+    }
 }
