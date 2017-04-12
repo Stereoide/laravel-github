@@ -202,6 +202,8 @@ Route::get('github/userRepositories/{owner}', '\Stereoide\Github\GithubControlle
 Route::get('github/userRepositories', '\Stereoide\Github\GithubController@getUserRepositories');
 Route::get('github/organizationRepositories/{organization}/{type}', '\Stereoide\Github\GithubController@getOrganizationRepositories');
 Route::get('github/organizationRepositories/{organization}', '\Stereoide\Github\GithubController@getOrganizationRepositories');
+Route::get('github/repositories/{since}', '\Stereoide\Github\GithubController@getPublicRepositories');
+Route::get('github/repositories', '\Stereoide\Github\GithubController@getPublicRepositories');
 
 /* Catch-all */
 

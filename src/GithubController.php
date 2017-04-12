@@ -2961,4 +2961,36 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $repositories;
     }
+
+    /**
+     * List all public repositories
+     *
+     * @param int $since
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/#list-all-public-repositories
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     */
+    public function getPublicRepositories($since = null)
+    {
+        /* Assemble URL */
+
+        $url = 'repositories';
+
+        if (!is_null($since)) {
+            $url .= '&since=' . $since;
+        }
+
+        $url = str_replace('repositories&', 'repositories?', $url);
+
+        /* Fetch repositories */
+
+        list($statusCode, $headers, $body) = GithubController::get($url);
+
+        $repositories = collect($body);
+
+        /* Return repositories */
+
+        return $repositories;
+    }
 }
