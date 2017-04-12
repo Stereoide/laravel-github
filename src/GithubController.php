@@ -2787,4 +2787,25 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $files;
     }
+
+    /**
+     * Get if a pull request has been merged
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @return bool
+     * @see https://developer.github.com/v3/pulls/#get-if-a-pull-request-has-been-merged
+     */
+    public function isPullRequestMerged($owner, $repository, $number)
+    {
+        /* Determine whether the pull request in question has been merged */
+
+        try {
+            list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/pulls/' . $number . '/merge');
+            return (204 == $statusCode);
+        } catch (\Exception $exception) {
+            return (204 == $exception->getResponse()->getStatusCode());
+        }
+    }
 }
