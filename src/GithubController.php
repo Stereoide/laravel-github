@@ -2808,4 +2808,57 @@ class GithubController extends \App\Http\Controllers\Controller
             return (204 == $exception->getResponse()->getStatusCode());
         }
     }
+
+    /**
+     * Merge a pull request
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param string $commitTitle
+     * @param string $commitMessage
+     * @param string $sha
+     * @param string $mergeMethod
+     * @return bool
+     * @see https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button
+     * @TODO Handle unsuccessful merges
+     */
+    public function mergePullRequest($owner, $repository, $number, $commitTitle = null, $commitMessage = null, $sha = null, $mergeMethod = 'merge')
+    {
+        /* Assemble data */
+
+        $data = [];
+
+        if (!is_null($commitTitle)) {
+            $data['commit_title'] = $commitTitle;
+        }
+
+        if (!is_null($commitMessage)) {
+            $data['commit_message'] = $commitMessage;
+        }
+
+        if (!is_null($sha)) {
+            $data['sha'] = $sha;
+        }
+
+        if (!is_null($mergeMethod)) {
+            $data['merge_method'] = $mergeMethod;
+        }
+
+        $data = json_encode($data);
+
+        /* Try to merge the pull request */
+
+        try {
+            list($statusCode, $headers, $body) = GithubController::put('repos/' . $owner . '/' . $repository . '/pulls/' . $number . '/merge', [], $data);
+
+            /* Return body */
+
+            return $body;
+        } catch (\Exception $exception) {
+            /* Return body */
+
+            return $exception->getResponse()->getBody();
+        }
+    }
 }

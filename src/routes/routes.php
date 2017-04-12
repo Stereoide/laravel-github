@@ -190,6 +190,11 @@ Route::get('github/updatePullRequest/{owner}/{repository}/{number}/{title}/{head
 Route::get('github/pullRequestCommits/{owner}/{repository}/{number}','\Stereoide\Github\GithubController@getPullRequestCommits');
 Route::get('github/pullRequestFiles/{owner}/{repository}/{number}','\Stereoide\Github\GithubController@getPullRequestFiles');
 Route::get('github/isPullRequestMerged/{owner}/{repository}/{number}', function($owner, $repository, $number) { dd(Github::isPullRequestMerged($owner, $repository, $number)); });
+Route::get('github/mergePullRequest/{owner}/{repository}/{number}/{title}/{message}/{sha}/{method}', function($owner, $repository, $number, $commitTitle, $commitMessage, $sha, $mergeMethod) { dd(Github::mergePullRequest($owner, $repository, $number, $commitTitle, $commitMessage, $sha, $mergeMethod)); });
+Route::get('github/mergePullRequest/{owner}/{repository}/{number}/{title}/{message}/{sha}', function($owner, $repository, $number, $commitTitle, $commitMessage, $sha) { dd(Github::mergePullRequest($owner, $repository, $number, $commitTitle, $commitMessage, $sha)); });
+Route::get('github/mergePullRequest/{owner}/{repository}/{number}/{title}/{message}', function($owner, $repository, $number, $commitTitle, $commitMessage) { dd(Github::mergePullRequest($owner, $repository, $number, $commitTitle, $commitMessage)); });
+Route::get('github/mergePullRequest/{owner}/{repository}/{number}/{title}', function($owner, $repository, $number, $commitTitle) { dd(Github::mergePullRequest($owner, $repository, $number, $commitTitle)); });
+Route::get('github/mergePullRequest/{owner}/{repository}/{number}', function($owner, $repository, $number) { dd(Github::mergePullRequest($owner, $repository, $number)); });
 
 /* Catch-all */
 
