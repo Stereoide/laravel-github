@@ -2558,7 +2558,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/pulls/#list-pull-requests
      * @TODO Better sanitize parameters
      */
-    public function getPullRequests($owner, $repository, $state = null, $head = null, $base = null, $sort = null, $direction = null) {
+    public function getPullRequests($owner, $repository, $state = null, $head = null, $base = null, $sort = null, $direction = null, $paginationOffset = 1) {
         /* Assemble URL */
 
         $url = 'repos/' . $owner . '/' . $repository . '/pulls';
@@ -2587,7 +2587,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Fetch pull requests */
 
-        list($statusCode, $headers, $body) = GithubController::get($url);
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
 
         $pullRequests = collect($body);
 
