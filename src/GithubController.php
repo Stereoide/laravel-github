@@ -3085,4 +3085,24 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $repository;
     }
+
+    /**
+     * Get a single repository
+     *
+     * @param string $owner
+     * @param string $repository
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/#get
+     * @TODO Better sanitize parameters
+     */
+    public function getRepository($owner, $repository)
+    {
+        /* Get repository */
+
+        list($statusCode, $headers, $repository) = GithubController::get('repos/' . $owner . '/' . $repository);
+
+        /* Return repository */
+
+        return $repository;
+    }
 }
