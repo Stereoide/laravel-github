@@ -2871,4 +2871,60 @@ class GithubController extends \App\Http\Controllers\Controller
             return $exception->getResponse()->getBody();
         }
     }
+
+    /* Repositories */
+
+    /**
+     * List repositories
+     *
+     * @param string $owner
+     * @param string $visibility
+     * @param string $affiliation
+     * @param string $type
+     * @param string $sort
+     * @param string $direction
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/pulls/#list-pull-requests-files
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     */
+    public function getRepositories($owner = null, $visibility = null, $affiliation = null, $type = null, $sort = null, $direction = null, $paginationOffset = 1)
+    {
+        /* Assemble URL */
+
+        $url = (is_null($owner) ? 'user/repos' : 'users/' . $owner . '/repos');
+
+        if (!is_null($visibility)) {
+            $url .= '&visibility=' . $visibility;
+        }
+
+        if (!is_null($affiliation)) {
+            $url .= '&affiliation=' . $affiliation;
+        }
+
+        if (!is_null($type)) {
+            $url .= '&type=' . $type;
+        }
+
+        if (!is_null($sort)) {
+            $url .= '&sort=' . $sort;
+        }
+
+        if (!is_null($direction)) {
+            $url .= '$direction=' . $direction;
+        }
+
+        $url = str_replace('/repos&', '/repos?', $url);
+
+        /* Fetch repositories */
+
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
+
+        $repositories = collect($body);
+
+        /* Return repositories */
+
+        return $repositories;
+    }
 }

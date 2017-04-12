@@ -196,6 +196,11 @@ Route::get('github/mergePullRequest/{owner}/{repository}/{number}/{title}/{messa
 Route::get('github/mergePullRequest/{owner}/{repository}/{number}/{title}', function($owner, $repository, $number, $commitTitle) { dd(Github::mergePullRequest($owner, $repository, $number, $commitTitle)); });
 Route::get('github/mergePullRequest/{owner}/{repository}/{number}', function($owner, $repository, $number) { dd(Github::mergePullRequest($owner, $repository, $number)); });
 
+/* Repositories */
+
+Route::get('github/repositories/{owner}', '\Stereoide\Github\GithubController@getRepositories');
+Route::get('github/repositories', '\Stereoide\Github\GithubController@getRepositories');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');
