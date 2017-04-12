@@ -164,6 +164,11 @@ Route::get('github/createMilestone/{owner}/{repository}/{title}/{state}/{descrip
 Route::get('github/createMilestone/{owner}/{repository}/{title}/{state}/{description}', function($owner, $repository, $title, $state, $description) { dd(Github::createMilestone($owner, $repository, $title, $state, $description)); });
 Route::get('github/createMilestone/{owner}/{repository}/{title}/{state}', function($owner, $repository, $title, $state) { dd(Github::createMilestone($owner, $repository, $title, $state)); });
 Route::get('github/createMilestone/{owner}/{repository}/{title}', function($owner, $repository, $title) { dd(Github::createMilestone($owner, $repository, $title)); });
+Route::get('github/updateMilestone/{owner}/{repository}/{number}/{title}/{state}/{description}/{dueOn}', function($owner, $repository, $number, $title, $state, $description, $dueOn) { dd(Github::updateMilestone($owner, $repository, $number, $title, $state, $description, $dueOn)); });
+Route::get('github/updateMilestone/{owner}/{repository}/{number}/{title}/{state}/{description}', function($owner, $repository, $number, $title, $state, $description) { dd(Github::updateMilestone($owner, $repository, $number, $title, $state, $description)); });
+Route::get('github/updateMilestone/{owner}/{repository}/{number}/{title}/{state}', function($owner, $repository, $number, $title, $state) { dd(Github::updateMilestone($owner, $repository, $number, $title, $state)); });
+Route::get('github/updateMilestone/{owner}/{repository}/{number}/{title}', function($owner, $repository, $number, $title) { dd(Github::updateMilestone($owner, $repository, $number, $title)); });
+Route::get('github/updateMilestone/{owner}/{repository}/{number}', function($owner, $repository, $number) { dd(Github::updateMilestone($owner, $repository, $number)); });
 
 /* Catch-all */
 

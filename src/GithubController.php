@@ -2421,4 +2421,51 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $milestone;
     }
+
+    /**
+     * Update a milestone
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param string $title
+     * @param string $state
+     * @param string $description
+     * @param string $dueOn
+     * @return mixed
+     * @see https://developer.github.com/v3/issues/milestones/#update-a-milestone
+     * @TODO Better sanitize parameters
+     */
+    public function updateMilestone($owner, $repository, $number, $title = null, $state = null, $description = null, $dueOn = null)
+    {
+        /* Assemble data */
+
+        $data = [];
+
+        if (!is_null($title)) {
+            $data['title'] = $title;
+        }
+
+        if (!is_null($state)) {
+            $data['state'] = $state;
+        }
+
+        if (!is_null($description)) {
+            $data['description'] = $description;
+        }
+
+        if (!is_null($dueOn)) {
+            $data['due_on'] = $dueOn;
+        }
+
+        $data = json_encode($data);
+
+        /* Update milestone */
+
+        list($statusCode, $headers, $milestone) = GithubController::patch('repos/' . $owner . '/' . $repository . '/milestones/' . $number, $data);
+
+        /* Return milestone */
+
+        return $milestone;
+    }
 }
