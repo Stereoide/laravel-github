@@ -175,6 +175,10 @@ Route::get('github/deleteMilestone/{owner}/{repository}/{number}', '\Stereoide\G
 
 Route::get('github/emojis', '\Stereoide\Github\GithubController@getAvailableEmojis');
 
+/* Gitignore */
+
+Route::get('github/gitignoreTemplates', '\Stereoide\Github\GithubController@getAvailableGitIgnoreTemplates');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');

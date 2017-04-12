@@ -2503,4 +2503,24 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $emojis;
     }
+
+    /* Gitignore */
+
+    /**
+     * Listing available templates
+     *
+     * @return mixed
+     * @see https://developer.github.com/v3/gitignore/#listing-available-templates
+     */
+    public function getAvailableGitIgnoreTemplates() {
+        /* Fetch available .gitignore templates */
+
+        list($statusCode, $headers, $body) = GithubController::get('gitignore/templates');
+
+        $templates = collect($body);
+
+        /* Return templates */
+
+        return $templates;
+    }
 }
