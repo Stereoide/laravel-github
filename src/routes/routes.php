@@ -169,6 +169,7 @@ Route::get('github/updateMilestone/{owner}/{repository}/{number}/{title}/{state}
 Route::get('github/updateMilestone/{owner}/{repository}/{number}/{title}/{state}', function($owner, $repository, $number, $title, $state) { dd(Github::updateMilestone($owner, $repository, $number, $title, $state)); });
 Route::get('github/updateMilestone/{owner}/{repository}/{number}/{title}', function($owner, $repository, $number, $title) { dd(Github::updateMilestone($owner, $repository, $number, $title)); });
 Route::get('github/updateMilestone/{owner}/{repository}/{number}', function($owner, $repository, $number) { dd(Github::updateMilestone($owner, $repository, $number)); });
+Route::get('github/deleteMilestone/{owner}/{repository}/{number}', '\Stereoide\Github\GithubController@deleteMilestone');
 
 /* Catch-all */
 

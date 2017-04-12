@@ -2468,4 +2468,19 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $milestone;
     }
+
+    /**
+     * Delete a milestone
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @see https://developer.github.com/v3/issues/milestones/#delete-a-milestone
+     */
+    public function deleteMilestone($owner, $repository, $number)
+    {
+        /* Delete milestone */
+
+        list($statusCode, $headers, $milestone) = GithubController::delete('repos/' . $owner . '/' . $repository . '/milestones/' . $number);
+    }
 }
