@@ -206,6 +206,7 @@ Route::get('github/repositories/{since}', '\Stereoide\Github\GithubController@ge
 Route::get('github/repositories', '\Stereoide\Github\GithubController@getPublicRepositories');
 Route::get('github/createRepository/{name}/{description}/{homepage}', function($name, $description, $homepage) { dd(Github::createRepository($name, $description, $homepage)); });
 Route::get('github/createRepository/{name}/{description}', function($name, $description) { dd(Github::createRepository($name, $description)); });
+Route::get('github/createRepository/{name}', function($name) { dd(Github::createRepository($name)); });
 
 /* Catch-all */
 
