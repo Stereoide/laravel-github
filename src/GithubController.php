@@ -2647,6 +2647,8 @@ class GithubController extends \App\Http\Controllers\Controller
             $data['maintainer_can_modify'] = $maintainerCanModify;
         }
 
+        $data = json_encode($data);
+
         /* Create pull request */
 
         list($statusCode, $headers, $pullRequest) = GithubController::post('repos/' . $owner . '/' . $repository . '/pulls', $data);
@@ -2680,6 +2682,8 @@ class GithubController extends \App\Http\Controllers\Controller
         if (!is_null($maintainerCanModify)) {
             $data['maintainer_can_modify'] = $maintainerCanModify;
         }
+
+        $data = json_encode($data);
 
         /* Create pull request */
 
