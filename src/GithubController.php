@@ -2765,4 +2765,26 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $commits;
     }
+
+    /**
+     * List pull requests files
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/pulls/#list-pull-requests-files
+     */
+    public function getPullRequestFiles($owner, $repository, $number, $paginationOffset = 1) {
+        /* Fetch pull request files */
+
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/pulls/' . $number . '/files', $paginationOffset);
+
+        $files = collect($body);
+
+        /* Return commits */
+
+        return $files;
+    }
 }
