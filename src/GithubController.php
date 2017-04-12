@@ -1492,7 +1492,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Fetch issue */
 
-        list($statusCode, $headers, $issue) = GithubController::get('repos/'. $owner . '/' . $repository . '/issues/' . $number);
+        list($statusCode, $headers, $issue) = GithubController::get('repos/' . $owner . '/' . $repository . '/issues/' . $number);
 
         /* Return issue */
 
@@ -1507,8 +1507,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $title
      * @param string $body
      * @param int $milestone
-     * @param array(string $label)
-     * @param array(string $assignee)
+     * @param array (string $label)
+     * @param array (string $assignee)
      * @return mixed
      * @see https://developer.github.com/v3/issues/#create-an-issue
      * @TODO Better sanitize parameters
@@ -1572,8 +1572,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $body
      * @param string $state
      * @param int $milestone
-     * @param array(string $label)
-     * @param array(string $assignee)
+     * @param array (string $label)
+     * @param array (string $assignee)
      * @return mixed
      * @see https://developer.github.com/v3/issues/#edit-an-issue
      * @TODO Better sanitize parameters
@@ -1718,7 +1718,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $owner
      * @param string $repository
      * @param int $number
-     * @param array(string $assignee)
+     * @param array (string $assignee)
      * @return mixed
      * @see https://developer.github.com/v3/issues/assignees/#add-assignees-to-an-issue
      */
@@ -1749,7 +1749,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $owner
      * @param string $repository
      * @param int $number
-     * @param array(string $assignee)
+     * @param array (string $assignee)
      * @return mixed
      * @see https://developer.github.com/v3/issues/assignees/#remove-assignees-from-an-issue
      */
@@ -2202,7 +2202,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $owner
      * @param string $repository
      * @param int $number
-     * @param array(string $labels)
+     * @param array (string $labels)
      * @return mixed
      * @see https://developer.github.com/v3/issues/labels/#add-labels-to-an-issue
      */
@@ -2214,7 +2214,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Add issue labels */
 
-        list($statusCode, $headers, $body) = GithubController::post('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels', $data);
+        list($statusCode, $headers, $body) = GithubController::post('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/labels', $data);
 
         $labels = collect($body);
 
@@ -2236,7 +2236,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Remove issue label */
 
-        list($statusCode, $headers, $body) = GithubController::delete('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels/' . $label);
+        list($statusCode, $headers, $body) = GithubController::delete('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/labels/' . $label);
     }
 
     /**
@@ -2245,7 +2245,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $owner
      * @param string $repository
      * @param int $number
-     * @param array(string $labels)
+     * @param array (string $labels)
      * @return mixed
      * @see https://developer.github.com/v3/issues/labels/#replace-all-labels-for-an-issue
      */
@@ -2257,7 +2257,7 @@ class GithubController extends \App\Http\Controllers\Controller
 
         /* Replace issue labels */
 
-        list($statusCode, $headers, $body) = GithubController::put('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels', [], $data);
+        list($statusCode, $headers, $body) = GithubController::put('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/labels', [], $data);
 
         $labels = collect($body);
 
@@ -2278,7 +2278,7 @@ class GithubController extends \App\Http\Controllers\Controller
     {
         /* Remove issue label */
 
-        list($statusCode, $headers, $body) = GithubController::delete('repos/' . $owner . '/' . $repository . '/issues/'. $number . '/labels');
+        list($statusCode, $headers, $body) = GithubController::delete('repos/' . $owner . '/' . $repository . '/issues/' . $number . '/labels');
     }
 
     /**
@@ -2492,7 +2492,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/emojis/#emojis
      */
-    public function getAvailableEmojis() {
+    public function getAvailableEmojis()
+    {
         /* Fetch available emojis */
 
         list($statusCode, $headers, $body) = GithubController::get('emojis');
@@ -2512,7 +2513,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/gitignore/#listing-available-templates
      */
-    public function getAvailableGitIgnoreTemplates() {
+    public function getAvailableGitIgnoreTemplates()
+    {
         /* Fetch available .gitignore templates */
 
         list($statusCode, $headers, $body) = GithubController::get('gitignore/templates');
@@ -2532,7 +2534,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/gitignore/#get-a-single-template
      * @TODO Available fetching the raw template contents
      */
-    public function getGitIgnoreTemplate($template) {
+    public function getGitIgnoreTemplate($template)
+    {
         /* Fetch .gitignore template */
 
         list($statusCode, $headers, $template) = GithubController::get('gitignore/templates/' . $template);
@@ -2558,7 +2561,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/pulls/#list-pull-requests
      * @TODO Better sanitize parameters
      */
-    public function getPullRequests($owner, $repository, $state = null, $head = null, $base = null, $sort = null, $direction = null, $paginationOffset = 1) {
+    public function getPullRequests($owner, $repository, $state = null, $head = null, $base = null, $sort = null, $direction = null, $paginationOffset = 1)
+    {
         /* Assemble URL */
 
         $url = 'repos/' . $owner . '/' . $repository . '/pulls';
@@ -2607,7 +2611,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Support diff format
      * @TODO Support patch format
      */
-    public function getPullRequest($owner, $repository, $number) {
+    public function getPullRequest($owner, $repository, $number)
+    {
         /* Fetch pull request */
 
         list($statusCode, $headers, $pullRequest) = GithubController::get('repos/' . $owner . '/' . $repository . '/pulls/' . $number);
@@ -2630,7 +2635,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/pulls/#create-a-pull-request
      */
-    public function createPullRequest($owner, $repository, $title, $head, $base, $body, $maintainerCanModify = true) {
+    public function createPullRequest($owner, $repository, $title, $head, $base, $body, $maintainerCanModify = true)
+    {
         /* Assemble data */
 
         $data = [
@@ -2670,7 +2676,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/pulls/#create-a-pull-request
      */
-    public function createPullRequestFromIssue($owner, $repository, $number, $head, $base, $maintainerCanModify = true) {
+    public function createPullRequestFromIssue($owner, $repository, $number, $head, $base, $maintainerCanModify = true)
+    {
         /* Assemble data */
 
         $data = [
@@ -2708,7 +2715,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/pulls/#update-a-pull-request
      */
-    public function updatePullRequest($owner, $repository, $number, $title = null, $head = null, $base = null, $body = null, $maintainerCanModify = null) {
+    public function updatePullRequest($owner, $repository, $number, $title = null, $head = null, $base = null, $body = null, $maintainerCanModify = null)
+    {
         /* Assemble data */
 
         $data = [];
@@ -2754,7 +2762,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/pulls/#create-a-pull-request
      */
-    public function getPullRequestCommits($owner, $repository, $number, $paginationOffset = 1) {
+    public function getPullRequestCommits($owner, $repository, $number, $paginationOffset = 1)
+    {
         /* Fetch pull request commits */
 
         list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/pulls/' . $number . '/commits', $paginationOffset);
@@ -2776,7 +2785,8 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/pulls/#list-pull-requests-files
      */
-    public function getPullRequestFiles($owner, $repository, $number, $paginationOffset = 1) {
+    public function getPullRequestFiles($owner, $repository, $number, $paginationOffset = 1)
+    {
         /* Fetch pull request files */
 
         list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/pulls/' . $number . '/files', $paginationOffset);
