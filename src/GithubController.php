@@ -2655,4 +2655,38 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $pullRequest;
     }
+
+    /**
+     * Create a pull request from an issue
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $number
+     * @param string $head
+     * @param string $base
+     * @param bool $maintainerCanModify
+     * @return mixed
+     * @see https://developer.github.com/v3/pulls/#create-a-pull-request
+     */
+    public function createPullRequestFromIssue($owner, $repository, $number, $head, $base, $maintainerCanModify = true) {
+        /* Assemble data */
+
+        $data = [
+            'issue' => $number,
+            'head' => $head,
+            'base' => $base,
+        ];
+
+        if (!is_null($maintainerCanModify)) {
+            $data['maintainer_can_modify'] = $maintainerCanModify;
+        }
+
+        /* Create pull request */
+
+        list($statusCode, $headers, $pullRequest) = GithubController::post('repos/' . $owner . '/' . $repository . '/pulls', $data);
+
+        /* Return pull request */
+
+        return $pullRequest;
+    }
 }
