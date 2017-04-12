@@ -2993,4 +2993,96 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $repositories;
     }
+
+    /**
+     * Create repository
+     *
+     * @param string $name
+     * @param string $description
+     * @param string $homepage
+     * @param bool $private
+     * @param bool $hasIssues
+     * @param bool $hasProjects
+     * @param bool $hasWiki
+     * @param int $teamId
+     * @param bool $autoInit
+     * @param string $gitIgnoreTemplate
+     * @param string $licenseTemplate
+     * @param bool $allowSquashMerge
+     * @param bool $allowMergeCommit
+     * @param bool $allowRebaseMerge
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/#create
+     * @TODO Support creating repositories for organizations
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     */
+    public function createRepository($name, $description = null, $homepage = null, $private = null, $hasIssues = null, $hasProjects = null, $hasWiki = null, $teamId = null, $autoInit = null, $gitIgnoreTemplate = null, $licenseTemplate = null, $allowSquashMerge = null, $allowMergeCommit = null, $allowRebaseMerge = null)
+    {
+        /* Assemble data */
+
+        $data = ['name' => $name];
+
+        if (!is_null($description)) {
+            $data['description'] = $description;
+        }
+
+        if (!is_null($homepage)) {
+            $data['homepage'] = $homepage;
+        }
+
+        if (!is_null($private)) {
+            $data['private'] = $private;
+        }
+
+        if (!is_null($hasIssues)) {
+            $data['hasIssues'] = $hasIssues;
+        }
+
+        if (!is_null($hasProjects)) {
+            $data['hasProjects'] = $hasProjects;
+        }
+
+        if (!is_null($hasWiki)) {
+            $data['hasWiki'] = $hasWiki;
+        }
+
+        if (!is_null($teamId)) {
+            $data['teamId'] = $teamId;
+        }
+
+        if (!is_null($autoInit)) {
+            $data['autoInit'] = $autoInit;
+        }
+
+        if (!is_null($gitIgnoreTemplate)) {
+            $data['gitIgnoreTemplate'] = $gitIgnoreTemplate;
+        }
+
+        if (!is_null($licenseTemplate)) {
+            $data['licenseTemplate'] = $licenseTemplate;
+        }
+
+        if (!is_null($allowSquashMerge)) {
+            $data['allowSquashMerge'] = $allowSquashMerge;
+        }
+
+        if (!is_null($allowMergeCommit)) {
+            $data['allowMergeCommit'] = $allowMergeCommit;
+        }
+
+        if (!is_null($allowRebaseMerge)) {
+            $data['allowRebaseMerge'] = $allowRebaseMerge;
+        }
+
+        $data = json_encode($data);
+
+        /* Create repository */
+
+        list($statusCode, $headers, $repository) = GithubController::post('user/repos', $data);
+
+        /* Return repository */
+
+        return $repository;
+    }
 }

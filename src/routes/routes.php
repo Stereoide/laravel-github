@@ -204,6 +204,8 @@ Route::get('github/organizationRepositories/{organization}/{type}', '\Stereoide\
 Route::get('github/organizationRepositories/{organization}', '\Stereoide\Github\GithubController@getOrganizationRepositories');
 Route::get('github/repositories/{since}', '\Stereoide\Github\GithubController@getPublicRepositories');
 Route::get('github/repositories', '\Stereoide\Github\GithubController@getPublicRepositories');
+Route::get('github/createRepository/{name}/{description}/{homepage}', function($name, $description, $homepage) { dd(Github::createRepository($name, $description, $homepage)); });
+Route::get('github/createRepository/{name}/{description}', function($name, $description) { dd(Github::createRepository($name, $description)); });
 
 /* Catch-all */
 
