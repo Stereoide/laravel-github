@@ -208,6 +208,10 @@ Route::get('github/createRepository/{name}/{description}/{homepage}', function($
 Route::get('github/createRepository/{name}/{description}', function($name, $description) { dd(Github::createRepository($name, $description)); });
 Route::get('github/createRepository/{name}', function($name) { dd(Github::createRepository($name)); });
 Route::get('github/repository/{owner}/{repository}', function($owner, $repository) { dd(Github::getRepository($owner, $repository)); });
+Route::get('github/editRepository/{owner}/{repository}/{name}/{description}/{homepage}', function($owner, $repository, $name, $description, $homepage) { dd(Github::editRepository($owner, $repository, $name, $description, $homepage)); });
+Route::get('github/editRepository/{owner}/{repository}/{name}/{description}', function($owner, $repository, $name, $description) { dd(Github::editRepository($owner, $repository, $name, $description)); });
+Route::get('github/editRepository/{owner}/{repository}/{name}', function($owner, $repository, $name) { dd(Github::editRepository($owner, $repository, $name)); });
+Route::get('github/editRepository/{owner}/{repository}', function($owner, $repository) { dd(Github::editRepository($owner, $repository)); });
 
 /* Catch-all */
 
