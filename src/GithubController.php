@@ -2523,4 +2523,22 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $templates;
     }
+
+    /**
+     * Get a single template
+     *
+     * @param string $template
+     * @return mixed
+     * @see https://developer.github.com/v3/gitignore/#get-a-single-template
+     * @TODO Available fetching the raw template contents
+     */
+    public function getGitIgnoreTemplate($template) {
+        /* Fetch .gitignore template */
+
+        list($statusCode, $headers, $template) = GithubController::get('gitignore/templates/' . $template);
+
+        /* Return template */
+
+        return $template;
+    }
 }

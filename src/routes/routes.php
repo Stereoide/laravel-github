@@ -178,6 +178,7 @@ Route::get('github/emojis', '\Stereoide\Github\GithubController@getAvailableEmoj
 /* Gitignore */
 
 Route::get('github/gitignoreTemplates', '\Stereoide\Github\GithubController@getAvailableGitIgnoreTemplates');
+Route::get('github/gitignoreTemplate/{template}', function($template) { dd(Github::getGitIgnoreTemplate($template)); });
 
 /* Catch-all */
 
