@@ -3586,7 +3586,7 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
-     * Create a commit comment
+     * Get a single commit comment
      *
      * @param string $owner
      * @param string $repository
