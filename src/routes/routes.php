@@ -231,6 +231,10 @@ Route::get('github/addRepositoryCollaborator/{owner}/{repository}/{username}', '
 Route::get('github/addRepositoryCollaborator/{owner}/{repository}/{username}/{permission}', '\Stereoide\Github\GithubController@addRepositoryCollaborator');
 Route::get('github/removeRepositoryCollaborator/{owner}/{repository}/{username}', '\Stereoide\Github\GithubController@removeRepositoryCollaborator');
 
+/* Commit comments */
+
+Route::get('github/repositoryCommitComments/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryCommitComments');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');

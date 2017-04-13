@@ -3494,4 +3494,30 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::delete('repos/' . $owner . '/' . $repository . '/collaborators/' . $username);
     }
+
+    /* Commit comments */
+
+    /**
+     * List collaborators
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/comments/#list-commit-comments-for-a-repository
+     * @TODO Support custom media types
+     * @TODO Write better documentation
+     */
+    public function getRepositoryCommitComments($owner, $repository, $paginationOffset = 1)
+    {
+        /* Fetch commit comments */
+
+        list($statusCode, $headers, $body) = GithubController::get('/repos/' . $owner . '/' . $repository . '/comments', $paginationOffset);
+
+        $comments = collect($body);
+
+        /* Return comments */
+
+        return $comments;
+    }
 }
