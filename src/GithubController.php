@@ -3325,7 +3325,7 @@ class GithubController extends \App\Http\Controllers\Controller
     /* Branches */
 
     /**
-     * List Tags
+     * List Branches
      *
      * @param string $owner
      * @param string $repository
