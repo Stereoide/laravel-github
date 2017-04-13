@@ -218,6 +218,10 @@ Route::get('github/repositoryTeams/{owner}/{repository}', '\Stereoide\Github\Git
 Route::get('github/repositoryTags/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryTags');
 Route::get('github/deleteRepository/{owner}/{repository}', '\Stereoide\Github\GithubController@deleteRepository');
 
+/* Branches */
+
+Route::get('github/repositoryBranches/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryBranches');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');

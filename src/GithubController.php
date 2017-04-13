@@ -3321,4 +3321,30 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::delete('repos/' . $owner . '/' . $repository);
     }
+
+    /* Branches */
+
+    /**
+     * List Tags
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/branches/#list-branches
+     * @TODO Write better documentation
+     * @TODO Support protected branches
+     */
+    public function getRepositoryBranches($owner, $repository, $paginationOffset = 1)
+    {
+        /* Fetch branches */
+
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/branches', $paginationOffset);
+
+        $branches = collect($body);
+
+        /* Return branches */
+
+        return $branches;
+    }
 }
