@@ -3584,4 +3584,25 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $comment;
     }
+
+    /**
+     * Create a commit comment
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $id
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/comments/#get-a-single-commit-comment
+     * @TODO Write better documentation
+     */
+    public function getCommitComment($owner, $repository, $id)
+    {
+        /* Fetch commit comment */
+
+        list($statusCode, $headers, $comment) = GithubController::get('/repos/' . $owner . '/' . $repository . '/comments/' . $id);
+
+        /* Return comment */
+
+        return $comment;
+    }
 }

@@ -236,6 +236,7 @@ Route::get('github/removeRepositoryCollaborator/{owner}/{repository}/{username}'
 Route::get('github/repositoryCommitComments/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryCommitComments');
 Route::get('github/commitComments/{owner}/{repository}/{ref}', '\Stereoide\Github\GithubController@getCommitComments');
 Route::get('github/createCommitComments/{owner}/{repository}/{ref}/{body}', function($owner, $repository, $commitId, $body) { dd(Github::createCommitComment($owner, $repository, $commitId, $body)); });
+Route::get('github/commitComment/{owner}/{repository}/{id}', function($owner, $repository, $id) { dd(Github::getCommitComment($owner, $repository, $id)); });
 
 /* Catch-all */
 
