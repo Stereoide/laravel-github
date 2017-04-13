@@ -3260,4 +3260,27 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $languages;
     }
+
+    /**
+     * List Teams
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/#list-teams
+     * @TODO Write better documentation
+     */
+    public function getRepositoryTeams($owner, $repository, $paginationOffset = 1)
+    {
+        /* Fetch teams */
+
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/teams', $paginationOffset);
+
+        $teams = collect($body);
+
+        /* Return teams */
+
+        return $teams;
+    }
 }
