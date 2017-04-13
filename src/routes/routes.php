@@ -213,6 +213,7 @@ Route::get('github/editRepository/{owner}/{repository}/{name}/{description}', fu
 Route::get('github/editRepository/{owner}/{repository}/{name}', function($owner, $repository, $name) { dd(Github::editRepository($owner, $repository, $name)); });
 Route::get('github/editRepository/{owner}/{repository}', function($owner, $repository) { dd(Github::editRepository($owner, $repository)); });
 Route::get('github/repositoryContributors/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryContributors');
+Route::get('github/repositoryLanguages/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryLanguages');
 
 /* Catch-all */
 

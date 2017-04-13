@@ -3237,4 +3237,27 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $contributors;
     }
+
+    /**
+     * ist languages
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/#list-languages
+     * @TODO Write better documentation
+     */
+    public function getRepositoryLanguages($owner, $repository, $paginationOffset = 1)
+    {
+        /* Fetch languages */
+
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/languages', $paginationOffset);
+
+        $languages = collect($body);
+
+        /* Return languages */
+
+        return $languages;
+    }
 }
