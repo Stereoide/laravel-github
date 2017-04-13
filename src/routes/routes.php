@@ -234,6 +234,7 @@ Route::get('github/removeRepositoryCollaborator/{owner}/{repository}/{username}'
 /* Commit comments */
 
 Route::get('github/repositoryCommitComments/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryCommitComments');
+Route::get('github/commitComments/{owner}/{repository}/{ref}', '\Stereoide\Github\GithubController@getCommitComments');
 
 /* Catch-all */
 

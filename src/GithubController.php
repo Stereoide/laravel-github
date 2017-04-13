@@ -3520,4 +3520,29 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $comments;
     }
+
+    /**
+     * List collaborators
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $commitId
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/comments/#list-comments-for-a-single-commit
+     * @TODO Support custom media types
+     * @TODO Write better documentation
+     */
+    public function getCommitComments($owner, $repository, $commitId, $paginationOffset = 1)
+    {
+        /* Fetch commit comments */
+
+        list($statusCode, $headers, $body) = GithubController::get('/repos/' . $owner . '/' . $repository . '/commits/' . $commitId . '/comments', $paginationOffset);
+
+        $comments = collect($body);
+
+        /* Return comments */
+
+        return $comments;
+    }
 }
