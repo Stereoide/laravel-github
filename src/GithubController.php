@@ -3239,7 +3239,7 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
-     * ist languages
+     * List languages
      *
      * @param string $owner
      * @param string $repository
