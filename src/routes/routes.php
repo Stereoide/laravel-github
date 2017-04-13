@@ -229,6 +229,7 @@ Route::get('github/repositoryCollaborators/{owner}/{repository}', '\Stereoide\Gi
 Route::get('github/repositoryCollaboratorPermissionLevel/{owner}/{repository}/{username}', function($owner, $repository, $username) { dd(Github::getRepositoryCollaboratorPermissionLevel($owner, $repository, $username)); });
 Route::get('github/addRepositoryCollaborator/{owner}/{repository}/{username}', '\Stereoide\Github\GithubController@addRepositoryCollaborator');
 Route::get('github/addRepositoryCollaborator/{owner}/{repository}/{username}/{permission}', '\Stereoide\Github\GithubController@addRepositoryCollaborator');
+Route::get('github/removeRepositoryCollaborator/{owner}/{repository}/{username}', '\Stereoide\Github\GithubController@removeRepositoryCollaborator');
 
 /* Catch-all */
 

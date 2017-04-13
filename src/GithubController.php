@@ -3479,4 +3479,19 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $body) = GithubController::put('repos/' . $owner . '/' . $repository . '/collaborators/' . $username, $headers, $data);
     }
+
+    /**
+     * Remove user as a collaborator
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $username
+     * @see https://developer.github.com/v3/repos/collaborators/#remove-user-as-a-collaborator
+     */
+    public function removeRepositoryCollaborator($owner, $repository, $username)
+    {
+        /* Remove collaborator */
+
+        list($statusCode, $headers, $body) = GithubController::delete('repos/' . $owner . '/' . $repository . '/collaborators/' . $username);
+    }
 }
