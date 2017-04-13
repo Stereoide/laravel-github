@@ -3347,4 +3347,25 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $branches;
     }
+
+    /**
+     * Get Branch
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $branch
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/branches/#get-branch
+     * @TODO Write better documentation
+     */
+    public function getRepositoryBranch($owner, $repository, $branch)
+    {
+        /* Fetch branch */
+
+        list($statusCode, $headers, $branch) = GithubController::get('repos/' . $owner . '/' . $repository . '/branches/' . $branch);
+
+        /* Return branch */
+
+        return $branch;
+    }
 }
