@@ -3632,4 +3632,21 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $comment;
     }
+
+    /**
+     * Delete a commit comment
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $id
+     * @see https://developer.github.com/v3/repos/comments/#delete-a-commit-comment
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     */
+    public function deleteCommitComment($owner, $repository, $id)
+    {
+        /* Delete commit comment */
+
+        list($statusCode, $headers, $comment) = GithubController::delete('/repos/' . $owner . '/' . $repository . '/comments/' . $id);
+    }
 }
