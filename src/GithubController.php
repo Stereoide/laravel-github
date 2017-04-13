@@ -3498,7 +3498,7 @@ class GithubController extends \App\Http\Controllers\Controller
     /* Commit comments */
 
     /**
-     * List collaborators
+     * List commit comments for a repository
      *
      * @param string $owner
      * @param string $repository
@@ -3522,7 +3522,7 @@ class GithubController extends \App\Http\Controllers\Controller
     }
 
     /**
-     * List collaborators
+     * List comments for a single commit
      *
      * @param string $owner
      * @param string $repository
