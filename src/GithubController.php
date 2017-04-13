@@ -3545,4 +3545,43 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $comments;
     }
+
+    /**
+     * Create a commit comment
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $commitId
+     * @param string $body
+     * @param string $path
+     * @param int $position
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/comments/#create-a-commit-comment
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     */
+    public function createCommitComment($owner, $repository, $commitId, $body, $path = null, $position = null)
+    {
+        /* Assemble data */
+
+        $data = ['body' => $body];
+
+        if (!is_null($path)) {
+            $data['path'] = $path;
+        }
+
+        if (!is_null($position)) {
+            $data['position'] = $position;
+        }
+
+        $data = json_encode($data);
+
+        /* Create commit comment */
+
+        list($statusCode, $headers, $comment) = GithubController::post('/repos/' . $owner . '/' . $repository . '/commits/' . $commitId . '/comments', $data);
+
+        /* Return comment */
+
+        return $comment;
+    }
 }
