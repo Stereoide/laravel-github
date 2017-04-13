@@ -3222,8 +3222,10 @@ class GithubController extends \App\Http\Controllers\Controller
         $url = 'repos/' . $owner . '/' . $repository . '/contributors';
 
         if (!is_null($anon)) {
-            $data['anon'] = $anon;
+            $url .= '&anon=' . $anon;
         }
+
+        $url = str_replace('/contributors&', '/contributors?', $url);
 
         /* Fetch contributors */
 
