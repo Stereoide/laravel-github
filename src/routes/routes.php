@@ -237,6 +237,7 @@ Route::get('github/repositoryCommitComments/{owner}/{repository}', '\Stereoide\G
 Route::get('github/commitComments/{owner}/{repository}/{ref}', '\Stereoide\Github\GithubController@getCommitComments');
 Route::get('github/createCommitComments/{owner}/{repository}/{ref}/{body}', function($owner, $repository, $commitId, $body) { dd(Github::createCommitComment($owner, $repository, $commitId, $body)); });
 Route::get('github/commitComment/{owner}/{repository}/{id}', function($owner, $repository, $id) { dd(Github::getCommitComment($owner, $repository, $id)); });
+Route::get('github/updateCommitComment/{owner}/{repository}/{id}/{body}', function($owner, $repository, $id, $body) { dd(Github::updateCommitComment($owner, $repository, $id, $body)); });
 
 /* Catch-all */
 

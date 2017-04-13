@@ -3605,4 +3605,31 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $comment;
     }
+
+    /**
+     * Update a commit comment
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $id
+     * @param string $body
+     * @return mixed
+     * @see Update a commit comment
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     */
+    public function updateCommitComment($owner, $repository, $id, $body)
+        {
+        /* Assemble data */
+
+        $data = json_encode(['body' => $body]);
+
+        /* Update commit comment */
+
+        list($statusCode, $headers, $comment) = GithubController::patch('/repos/' . $owner . '/' . $repository . '/comments/' . $id, $data);
+
+        /* Return comment */
+
+        return $comment;
+    }
 }
