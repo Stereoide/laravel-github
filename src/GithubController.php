@@ -3614,7 +3614,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param int $id
      * @param string $body
      * @return mixed
-     * @see Update a commit comment
+     * @see https://developer.github.com/v3/repos/comments/#update-a-commit-comment
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
