@@ -216,6 +216,7 @@ Route::get('github/repositoryContributors/{owner}/{repository}', '\Stereoide\Git
 Route::get('github/repositoryLanguages/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryLanguages');
 Route::get('github/repositoryTeams/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryTeams');
 Route::get('github/repositoryTags/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryTags');
+Route::get('github/deleteRepository/{owner}/{repository}', '\Stereoide\Github\GithubController@deleteRepository');
 
 /* Catch-all */
 

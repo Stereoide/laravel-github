@@ -3306,4 +3306,19 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $tags;
     }
+
+    /**
+     * Delete a Repository
+     *
+     * @param string $owner
+     * @param string $repository
+     * @see https://developer.github.com/v3/repos/#delete-a-repository
+     * @TODO Write better documentation
+     */
+    public function deleteRepository($owner, $repository)
+    {
+        /* Delete repository */
+
+        list($statusCode, $headers, $body) = GithubController::delete('repos/' . $owner . '/' . $repository);
+    }
 }
