@@ -215,6 +215,7 @@ Route::get('github/editRepository/{owner}/{repository}', function($owner, $repos
 Route::get('github/repositoryContributors/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryContributors');
 Route::get('github/repositoryLanguages/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryLanguages');
 Route::get('github/repositoryTeams/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryTeams');
+Route::get('github/repositoryTags/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryTags');
 
 /* Catch-all */
 

@@ -3283,4 +3283,27 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $teams;
     }
+
+    /**
+     * List Tags
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/#list-tags
+     * @TODO Write better documentation
+     */
+    public function getRepositoryTags($owner, $repository, $paginationOffset = 1)
+    {
+        /* Fetch tags */
+
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/tags', $paginationOffset);
+
+        $tags = collect($body);
+
+        /* Return tags */
+
+        return $tags;
+    }
 }
