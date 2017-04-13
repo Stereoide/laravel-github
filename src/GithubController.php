@@ -3368,4 +3368,41 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $branch;
     }
+
+    /* Collaborators */
+
+    /**
+     * List collaborators
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $affiliation
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/collaborators/#list-collaborators
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     */
+    public function getRepositoryCollaborators($owner, $repository, $affiliation = null, $paginationOffset = 1)
+    {
+        /* Assemble URL */
+
+        $url = 'repos/' . $owner . '/' . $repository . '/collaborators';
+
+        if (!is_null($affiliation)) {
+            $url .= '&affiliation=' . $affiliation;
+        }
+
+        $url = str_replace('/collaborators&', '/collaborators?', $url);
+
+        /* Fetch collaborators */
+
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
+
+        $collaborators = collect($body);
+
+        /* Return collaborators */
+
+        return $collaborators;
+    }
 }

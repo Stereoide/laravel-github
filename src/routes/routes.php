@@ -223,6 +223,10 @@ Route::get('github/deleteRepository/{owner}/{repository}', '\Stereoide\Github\Gi
 Route::get('github/repositoryBranches/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryBranches');
 Route::get('github/repositoryBranch/{owner}/{repository}/{branch}', function($owner, $repository, $branch) { dd(Github::getRepositoryBranch($owner, $repository, $branch)); });
 
+/* Collaborators */
+
+Route::get('github/repositoryCollaborators/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryCollaborators');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');
