@@ -3426,4 +3426,25 @@ class GithubController extends \App\Http\Controllers\Controller
             return (204 == $exception->getResponse()->getStatusCode());
         }
     }
+
+    /**
+     * List collaborators
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $username
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/collaborators/#review-a-users-permission-level
+     * @TODO Better sanitize parameters
+     */
+    public function getRepositoryCollaboratorPermissionLevel($owner, $repository, $username)
+    {
+        /* Fetch permission level */
+
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/collaborators/' . $username . '/permission');
+
+        /* Return permission level */
+
+        return $body;
+    }
 }
