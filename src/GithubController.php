@@ -3405,4 +3405,25 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $collaborators;
     }
+
+    /**
+     * Check if a user is a collaborator
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $username
+     * @return bool
+     * @see https://developer.github.com/v3/repos/collaborators/#check-if-a-user-is-a-collaborator
+     */
+    public function isRepositoryCollaborator($owner, $repository, $username)
+    {
+        /* Check if a user is a collaborator */
+
+        try {
+            list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/collaborators/' . $username);
+            return (204 == $statusCode);
+        } catch (\Exception $exception) {
+            return (204 == $exception->getResponse()->getStatusCode());
+        }
+    }
 }

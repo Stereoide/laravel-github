@@ -226,6 +226,7 @@ Route::get('github/repositoryBranch/{owner}/{repository}/{branch}', function($ow
 /* Collaborators */
 
 Route::get('github/repositoryCollaborators/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryCollaborators');
+Route::get('github/isRepositoryCollaborator/{owner}/{repository}/{username}', function($owner, $repository, $username) { dd(Github::isRepositoryCollaborator($owner, $repository, $username)); });
 
 /* Catch-all */
 
