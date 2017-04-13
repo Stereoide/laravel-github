@@ -3447,4 +3447,36 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $body;
     }
+
+    /**
+     * Add user as a collaborator
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $username
+     * @param string $permission
+     * @see https://developer.github.com/v3/repos/collaborators/#add-user-as-a-collaborator
+     * @TODO Support preview/invitation instead of directly adding a user as a collaborator
+     */
+    public function addRepositoryCollaborator($owner, $repository, $username, $permission = null)
+    {
+        /* Assemble data */
+
+        $headers = $data = [];
+
+        if (!is_null($permission)) {
+            $data['permission'] = $permission;
+        }
+
+        if (empty($data)) {
+            $data = null;
+            $headers['Content-Length'] = 0;
+        } else {
+            $data = json_encode($data);
+        }
+
+        /* Add collaborator */
+
+        list($statusCode, $headers, $body) = GithubController::put('repos/' . $owner . '/' . $repository . '/collaborators/' . $username, $headers, $data);
+    }
 }
