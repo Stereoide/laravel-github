@@ -3202,4 +3202,37 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $repository;
     }
+
+    /**
+     * List contributors
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $anon
+     * @param int $paginationOffset
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/#list-contributors
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     */
+    public function getRepositoryContributors($owner, $repository, $anon = null, $paginationOffset = 1)
+    {
+        /* Assemble URL */
+
+        $url = 'repos/' . $owner . '/' . $repository . '/contributors';
+
+        if (!is_null($anon)) {
+            $data['anon'] = $anon;
+        }
+
+        /* Fetch contributors */
+
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
+
+        $contributors = collect($body);
+
+        /* Return contributors */
+
+        return $contributors;
+    }
 }
