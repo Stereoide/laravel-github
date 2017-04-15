@@ -3706,4 +3706,26 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $commits;
     }
+
+    /**
+     * Get a single commit
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $sha
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/commits/#get-a-single-commit
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     */
+    public function getRepositoryCommit($owner, $repository, $sha)
+    {
+        /* Fetch commit */
+
+        list($statusCode, $headers, $commit) = GithubController::get('repos/' . $owner . '/' . $repository . '/commits/' . $sha);
+
+        /* Return commit */
+
+        return $commit;
+    }
 }
