@@ -19,7 +19,7 @@ class GithubController extends \App\Http\Controllers\Controller
      *
      * @return Client
      */
-    public function getConnection()
+    function getConnection()
     {
         /* Initialize HTTP connection */
 
@@ -48,7 +48,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param $headers
      * @return array|null
      */
-    public function getPaginationFromResponseHeaders($headers)
+    function getPaginationFromResponseHeaders($headers)
     {
         /* Make sure the pagination headers are present */
 
@@ -95,7 +95,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param int $elementsPerPage
      * @return [$statusCode, $headers, $body]
      */
-    public function request($url, $method = 'GET', $headers = [], $body = null, $paginationOffset = null, $elementsPerPage = null)
+    function request($url, $method = 'GET', $headers = [], $body = null, $paginationOffset = null, $elementsPerPage = null)
     {
         /* Get CURL connection */
 
@@ -141,7 +141,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return [$statusCode, $headers, $body]
      * @see GithubController::request()
      */
-    public function get($url, $paginationOffset = null, $elementsPerPage = null)
+    function get($url, $paginationOffset = null, $elementsPerPage = null)
     {
         /* Call request method */
 
@@ -159,7 +159,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return [$statusCode, $headers, $body]
      * @see GithubController::request()
      */
-    public function post($url, $body = null, $headers = [], $paginationOffset = null, $elementsPerPage = null)
+    function post($url, $body = null, $headers = [], $paginationOffset = null, $elementsPerPage = null)
     {
         /* Call request method */
 
@@ -177,7 +177,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return [$statusCode, $headers, $body]
      * @see GithubController::request()
      */
-    public function patch($url, $body = null, $headers = [], $paginationOffset = null, $elementsPerPage = null)
+    function patch($url, $body = null, $headers = [], $paginationOffset = null, $elementsPerPage = null)
     {
         /* Call request method */
 
@@ -195,7 +195,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return [$statusCode, $headers, $body]
      * @see GithubController::request()
      */
-    public function delete($url, $body = null, $headers = [], $paginationOffset = null, $elementsPerPage = null)
+    function delete($url, $body = null, $headers = [], $paginationOffset = null, $elementsPerPage = null)
     {
         /* Call request method */
 
@@ -213,7 +213,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return [$statusCode, $headers, $body]
      * @see GithubController::request()
      */
-    public function put($url, $headers = [], $body = null, $paginationOffset = null, $elementsPerPage = null)
+    function put($url, $headers = [], $body = null, $paginationOffset = null, $elementsPerPage = null)
     {
         /* Call request method */
 
@@ -226,7 +226,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param $method
      * @return string
      */
-    public function cmd($method)
+    function cmd($method)
     {
         /* Determine whether the desired method exists */
 
@@ -241,7 +241,7 @@ class GithubController extends \App\Http\Controllers\Controller
     /**
      * @return mixed
      */
-    public function getApiEndpoints()
+    function getApiEndpoints()
     {
         list($statusCode, $headers, $body) = GithubController::get('/');
 
@@ -251,7 +251,7 @@ class GithubController extends \App\Http\Controllers\Controller
     /**
      * @return mixed
      */
-    public function current_user_url()
+    function current_user_url()
     {
         list($statusCode, $headers, $body) = GithubController::get('user');
 
@@ -262,7 +262,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param $username
      * @return mixed
      */
-    public function getUserRepos($username)
+    function getUserRepos($username)
     {
         /* Fetch user repos */
 
@@ -284,7 +284,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/events/#list-public-events
      */
-    public function getEvents($paginationOffset = 1)
+    function getEvents($paginationOffset = 1)
     {
         /* Fetch public events */
 
@@ -310,7 +310,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/events/#list-repository-events
      */
-    public function getRepositoryEvents($owner, $repository, $paginationOffset = 1)
+    function getRepositoryEvents($owner, $repository, $paginationOffset = 1)
     {
         /* Fetch repository events */
 
@@ -336,7 +336,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/events/#list-public-events-for-a-network-of-repositories
      */
-    public function getNetworkRepositoryEvents($owner, $repository, $paginationOffset = 1)
+    function getNetworkRepositoryEvents($owner, $repository, $paginationOffset = 1)
     {
         /* Fetch repository events */
 
@@ -361,7 +361,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/events/#list-public-events-for-an-organization
      */
-    public function getOrganisationEvents($organisation, $paginationOffset = 1)
+    function getOrganisationEvents($organisation, $paginationOffset = 1)
     {
         /* Fetch repository events */
 
@@ -389,7 +389,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/events/#list-events-that-a-user-has-received
      */
-    public function getReceivedUserEvents($username, $paginationOffset = 1)
+    function getReceivedUserEvents($username, $paginationOffset = 1)
     {
         /* Fetch repository events */
 
@@ -414,7 +414,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/events/#list-public-events-that-a-user-has-received
      */
-    public function getReceivedPublicUserEvents($username, $paginationOffset = 1)
+    function getReceivedPublicUserEvents($username, $paginationOffset = 1)
     {
         /* Fetch repository events */
 
@@ -442,7 +442,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/events/#list-events-performed-by-a-user
      */
-    public function getPerformedUserEvents($username, $paginationOffset = 1)
+    function getPerformedUserEvents($username, $paginationOffset = 1)
     {
         /* Fetch repository events */
 
@@ -467,7 +467,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user
      */
-    public function getPerformedPublicUserEvents($username, $paginationOffset = 1)
+    function getPerformedPublicUserEvents($username, $paginationOffset = 1)
     {
         /* Fetch repository events */
 
@@ -495,7 +495,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/events/#list-events-for-an-organization
      */
-    public function getUserOrganisationEvents($username, $organisation, $paginationOffset = 1)
+    function getUserOrganisationEvents($username, $organisation, $paginationOffset = 1)
     {
         /* Fetch repository events */
 
@@ -527,7 +527,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/notifications/#list-your-notifications
      */
-    public function getNotifications($showAllNotifications = false, $showOnlyParticipatingNotifications = false, $showOnlyAfterTimestamp = null, $showOnlyBeforeTimestamp = null, $paginationOffset = 1)
+    function getNotifications($showAllNotifications = false, $showOnlyParticipatingNotifications = false, $showOnlyAfterTimestamp = null, $showOnlyBeforeTimestamp = null, $paginationOffset = 1)
     {
         /* Sanitize parameters */
 
@@ -584,7 +584,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/notifications/#list-your-notifications-in-a-repository
      */
-    public function getRepositoryNotifications($owner, $repository, $showAllNotifications = false, $showOnlyParticipatingNotifications = false, $showOnlyAfterTimestamp = null, $showOnlyBeforeTimestamp = null, $paginationOffset = 1)
+    function getRepositoryNotifications($owner, $repository, $showAllNotifications = false, $showOnlyParticipatingNotifications = false, $showOnlyAfterTimestamp = null, $showOnlyBeforeTimestamp = null, $paginationOffset = 1)
     {
         /* Sanitize parameters */
 
@@ -634,7 +634,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param null $timestamp
      * @see https://developer.github.com/v3/activity/notifications/#mark-as-read
      */
-    public function markNotificationsAsRead($timestamp = null)
+    function markNotificationsAsRead($timestamp = null)
     {
         /* Mark notifications as read */
 
@@ -659,7 +659,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param null $timestamp
      * @see https://developer.github.com/v3/activity/notifications/#mark-notifications-as-read-in-a-repository
      */
-    public function markRepositoryNotificationsAsRead($owner, $repository, $timestamp = null)
+    function markRepositoryNotificationsAsRead($owner, $repository, $timestamp = null)
     {
         /* Mark notifications as read */
 
@@ -681,7 +681,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/notifications/#view-a-single-thread
      */
-    public function fetchNotificationThread($id)
+    function fetchNotificationThread($id)
     {
         /* Fetch repository events */
 
@@ -698,7 +698,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param int $id
      * @see https://developer.github.com/v3/activity/notifications/#mark-a-thread-as-read
      */
-    public function markNotificationThreadAsRead($id)
+    function markNotificationThreadAsRead($id)
     {
         /* Mark thread as read */
 
@@ -712,7 +712,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/notifications/#get-a-thread-subscription
      */
-    public function getNotificationThreadSubscriptionStatus($id)
+    function getNotificationThreadSubscriptionStatus($id)
     {
         /* Fetch repository events */
 
@@ -734,7 +734,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param bool $ignored
      * @see https://developer.github.com/v3/activity/notifications/#set-a-thread-subscription
      */
-    public function setNotificationThreadSubscriptionStatus($id, $subscribed, $ignored)
+    function setNotificationThreadSubscriptionStatus($id, $subscribed, $ignored)
     {
         /* Sanitize parameters */
 
@@ -754,7 +754,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param int $id
      * @see https://developer.github.com/v3/activity/notifications/#delete-a-thread-subscription
      */
-    public function deleteNotificationThreadSubscription($id)
+    function deleteNotificationThreadSubscription($id)
     {
         /* Delete notification thread subscription */
 
@@ -772,7 +772,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/starring/#list-stargazers
      */
-    public function getRepositoryStargazers($owner, $repository, $paginationOffset = 1)
+    function getRepositoryStargazers($owner, $repository, $paginationOffset = 1)
     {
         /* Fetch repository stargazers */
 
@@ -797,7 +797,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/starring/#list-repositories-being-starred
      */
-    public function getStarredRepositories($username = null, $paginationOffset = 1)
+    function getStarredRepositories($username = null, $paginationOffset = 1)
     {
         /* Determine URL */
 
@@ -832,7 +832,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return bool
      * @see https://developer.github.com/v3/activity/starring/#check-if-you-are-starring-a-repository
      */
-    public function isRepositoryStarred($owner, $repository)
+    function isRepositoryStarred($owner, $repository)
     {
         /* Determine whether the repository in question is starred by the authenticated user */
 
@@ -853,7 +853,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $repository
      * @see https://developer.github.com/v3/activity/starring/#star-a-repository
      */
-    public function starRepository($owner, $repository)
+    function starRepository($owner, $repository)
     {
         /* Star the repository */
 
@@ -869,7 +869,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $repository
      * @see https://developer.github.com/v3/activity/starring/#unstar-a-repository
      */
-    public function unstarRepository($owner, $repository)
+    function unstarRepository($owner, $repository)
     {
         /* Star the repository */
 
@@ -887,7 +887,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/watching/#list-watchers
      */
-    public function getRepositoryWatchers($owner, $repository, $paginationOffset = 1)
+    function getRepositoryWatchers($owner, $repository, $paginationOffset = 1)
     {
         /* Fetch repository stargazers */
 
@@ -912,7 +912,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/watching/#list-repositories-being-watched
      */
-    public function getWatchedRepositories($username = null, $paginationOffset = 1)
+    function getWatchedRepositories($username = null, $paginationOffset = 1)
     {
         /* Determine URL */
 
@@ -947,7 +947,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return [bool $isWatched, array $watchData]
      * @see https://developer.github.com/v3/activity/watching/#get-a-repository-subscription
      */
-    public function isRepositoryWatched($owner, $repository)
+    function isRepositoryWatched($owner, $repository)
     {
         /* Determine whether the repository in question is starred by the authenticated user */
 
@@ -974,7 +974,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param bool $ignored
      * @see https://developer.github.com/v3/activity/watching/#set-a-repository-subscription
      */
-    public function watchRepository($owner, $repository, $subscribed = true, $ignored = false)
+    function watchRepository($owner, $repository, $subscribed = true, $ignored = false)
     {
         /* Assemble payload */
 
@@ -995,7 +995,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $repository
      * @see https://developer.github.com/v3/activity/watching/#delete-a-repository-subscription
      */
-    public function unwatchRepository($owner, $repository)
+    function unwatchRepository($owner, $repository)
     {
         /* Unwatch the repository */
 
@@ -1017,7 +1017,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Timestamp of first git
      * @TODO Check for truncated gists
      */
-    public function getGists($username = null, $paginationOffset = 1)
+    function getGists($username = null, $paginationOffset = 1)
     {
         /* Determine URL */
 
@@ -1054,7 +1054,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Timestamp of first git
      * @TODO Check for truncated gists
      */
-    public function getStarredGists($paginationOffset = 1)
+    function getStarredGists($paginationOffset = 1)
     {
         /* Fetch starred gists */
 
@@ -1078,7 +1078,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/gists/#get-a-single-gist
      * @TODO Check for truncated gist
      */
-    public function getGist($id, $sha = null)
+    function getGist($id, $sha = null)
     {
         /* Assemble URL */
 
@@ -1104,7 +1104,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/gists/#get-a-specific-revision-of-a-gist
      * @TODO Check for truncated gist
      */
-    public function getGistRevision($id, $sha)
+    function getGistRevision($id, $sha)
     {
         /* Fetch gist revision */
 
@@ -1119,7 +1119,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param bool $public
      * @see https://developer.github.com/v3/gists/#create-a-gist
      */
-    public function createGist($filepaths, $description = '', $public = false)
+    function createGist($filepaths, $description = '', $public = false)
     {
         /* Assemble data */
 
@@ -1155,7 +1155,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/gists/#edit-a-gist
      * @TODO Write better parameter description
      */
-    public function editGist($id, $newFilepaths = null, $renamedFilenames = null, $deletedFilenames = null, $description = null)
+    function editGist($id, $newFilepaths = null, $renamedFilenames = null, $deletedFilenames = null, $description = null)
     {
         /* Return early if possible */
 
@@ -1215,7 +1215,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/gists/#list-gist-commits
      */
-    public function getGistCommits($id)
+    function getGistCommits($id)
     {
         /* Fetch gist commits */
 
@@ -1239,7 +1239,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/gists/#star-a-gist
      */
-    public function starGist($id)
+    function starGist($id)
     {
         /* Star a gist */
 
@@ -1253,7 +1253,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * https://developer.github.com/v3/gists/#unstar-a-gist
      */
-    public function unstarGist($id)
+    function unstarGist($id)
     {
         /* Unstar a gist */
 
@@ -1267,7 +1267,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return bool $isStarred
      * @see https://developer.github.com/v3/gists/#check-if-a-gist-is-starred
      */
-    public function isGistStarred($id)
+    function isGistStarred($id)
     {
         /* Determine whether the gist in question is starred by the authenticated user */
 
@@ -1286,7 +1286,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/gists/#fork-a-gist
      */
-    public function forkGist($id)
+    function forkGist($id)
     {
         /* Fork gist */
 
@@ -1304,7 +1304,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/gists/#list-gist-forks
      */
-    public function getGistForks($id)
+    function getGistForks($id)
     {
         /* Fetch gist forks */
 
@@ -1327,7 +1327,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $id
      * @see https://developer.github.com/v3/gists/#delete-a-gist
      */
-    public function deleteGist($id)
+    function deleteGist($id)
     {
         /* Delete gist */
 
@@ -1343,7 +1343,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/gists/comments/#list-comments-on-a-gist
      */
-    public function getGistComments($id)
+    function getGistComments($id)
     {
         /* Fetch gist comments */
 
@@ -1368,7 +1368,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/gists/comments/#get-a-single-comment
      */
-    public function getGistComment($gistId, $commentId)
+    function getGistComment($gistId, $commentId)
     {
         /* Fetch gist comments */
 
@@ -1387,7 +1387,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/gists/comments/#create-a-comment
      */
-    public function createGistComment($gistId, $comment)
+    function createGistComment($gistId, $comment)
     {
         /* Assemble data */
 
@@ -1412,7 +1412,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/gists/comments/#delete-a-comment
      */
-    public function deleteGistComment($gistId, $commentId)
+    function deleteGistComment($gistId, $commentId)
     {
         /* Delete comment */
 
@@ -1435,7 +1435,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/issues/#list-issues
      * @TODO Better sanitize parameters
      */
-    public function getIssues($filter = null, $state = null, $labels = null, $sort = null, $direction = null, $since = null, $paginationOffset = 1)
+    function getIssues($filter = null, $state = null, $labels = null, $sort = null, $direction = null, $since = null, $paginationOffset = 1)
     {
         /* Assemble URL */
 
@@ -1488,7 +1488,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/#get-a-single-issue
      */
-    public function getIssue($owner, $repository, $number)
+    function getIssue($owner, $repository, $number)
     {
         /* Fetch issue */
 
@@ -1513,7 +1513,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/issues/#create-an-issue
      * @TODO Better sanitize parameters
      */
-    public function createIssue($owner, $repository, $title, $body = null, $milestone = null, $labels = null, $assignees = null)
+    function createIssue($owner, $repository, $title, $body = null, $milestone = null, $labels = null, $assignees = null)
     {
         /* Assemble data */
 
@@ -1578,7 +1578,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/issues/#edit-an-issue
      * @TODO Better sanitize parameters
      */
-    public function editIssue($owner, $repository, $number, $title, $body = null, $state = null, $milestone = null, $labels = null, $assignees = null)
+    function editIssue($owner, $repository, $number, $title, $body = null, $state = null, $milestone = null, $labels = null, $assignees = null)
     {
         /* Assemble data */
 
@@ -1639,7 +1639,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param int $number
      * @see https://developer.github.com/v3/issues/#lock-an-issue
      */
-    public function lockIssue($owner, $repository, $number)
+    function lockIssue($owner, $repository, $number)
     {
         /* Lock issue */
 
@@ -1654,7 +1654,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param int $number
      * @see https://developer.github.com/v3/issues/#unlock-an-issue
      */
-    public function unlockIssue($owner, $repository, $number)
+    function unlockIssue($owner, $repository, $number)
     {
         /* Unlock issue */
 
@@ -1672,7 +1672,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/assignees/#list-assignees
      */
-    public function getAvailableIssueAssignees($owner, $repository, $paginationOffset = 1)
+    function getAvailableIssueAssignees($owner, $repository, $paginationOffset = 1)
     {
         /* Fetch available assignees */
 
@@ -1700,7 +1700,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return bool
      * @see https://developer.github.com/v3/issues/assignees/#check-assignee
      */
-    public function isRepositoryAssignee($owner, $repository, $assignee)
+    function isRepositoryAssignee($owner, $repository, $assignee)
     {
         /* Determine whether the assignee is assigned to a repository */
 
@@ -1722,7 +1722,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/assignees/#add-assignees-to-an-issue
      */
-    public function addIssueAssignees($owner, $repository, $number, $assignees)
+    function addIssueAssignees($owner, $repository, $number, $assignees)
     {
         /* Sanitize parameters */
 
@@ -1753,7 +1753,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/assignees/#remove-assignees-from-an-issue
      */
-    public function removeIssueAssignees($owner, $repository, $number, $assignees)
+    function removeIssueAssignees($owner, $repository, $number, $assignees)
     {
         /* Sanitize parameters */
 
@@ -1789,7 +1789,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
      */
-    public function getIssueComments($owner, $repository, $number, $since = null, $paginationOffset = 1)
+    function getIssueComments($owner, $repository, $number, $since = null, $paginationOffset = 1)
     {
         /* Assemble URL */
 
@@ -1830,7 +1830,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/comments/#list-comments-in-a-repository
      */
-    public function getRepositoryIssuesComments($owner, $repository, $sort = null, $direction = null, $since = null, $paginationOffset = 1)
+    function getRepositoryIssuesComments($owner, $repository, $sort = null, $direction = null, $since = null, $paginationOffset = 1)
     {
         /* Assemble URL */
 
@@ -1874,7 +1874,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/comments/#get-a-single-comment
      */
-    public function getIssueComment($owner, $repository, $id)
+    function getIssueComment($owner, $repository, $id)
     {
         /* Fetch issue comment */
 
@@ -1896,7 +1896,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/issues/comments/#create-a-comment
      * @TODO Better sanitize parameters
      */
-    public function createIssueComment($owner, $repository, $number, $comment)
+    function createIssueComment($owner, $repository, $number, $comment)
     {
         /* Assemble data */
 
@@ -1924,7 +1924,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/issues/comments/#edit-a-comment
      * @TODO Better sanitize parameters
      */
-    public function editIssueComment($owner, $repository, $commentId, $comment)
+    function editIssueComment($owner, $repository, $commentId, $comment)
     {
         /* Assemble data */
 
@@ -1949,7 +1949,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $commentId
      * @see https://developer.github.com/v3/issues/comments/#delete-a-comment
      */
-    public function deleteIssueComment($owner, $repository, $commentId)
+    function deleteIssueComment($owner, $repository, $commentId)
     {
         /* Delete issue comment */
 
@@ -1968,7 +1968,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/events/#list-events-for-an-issue
      */
-    public function getIssueEvents($owner, $repository, $number, $paginationOffset = 1)
+    function getIssueEvents($owner, $repository, $number, $paginationOffset = 1)
     {
         /* Fetch issue events */
 
@@ -1994,7 +1994,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/activity/events/#list-issue-events-for-a-repository
      */
-    public function getRepositoryIssuesEvents($owner, $repository, $paginationOffset = 1)
+    function getRepositoryIssuesEvents($owner, $repository, $paginationOffset = 1)
     {
         /* Fetch repository events */
 
@@ -2021,7 +2021,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/issues/events/#get-a-single-event
      * @TODO Clarify response
      */
-    public function getIssueEvent($owner, $repository, $eventId)
+    function getIssueEvent($owner, $repository, $eventId)
     {
         /* Fetch issue event */
 
@@ -2043,7 +2043,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/labels/#list-all-labels-for-this-repository
      */
-    public function getRepositoryLabels($owner, $repository, $paginationOffset = 1)
+    function getRepositoryLabels($owner, $repository, $paginationOffset = 1)
     {
         /* Fetch repository labels */
 
@@ -2069,7 +2069,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/labels/#get-a-single-label
      */
-    public function getRepositoryLabel($owner, $repository, $label)
+    function getRepositoryLabel($owner, $repository, $label)
     {
         /* Fetch label */
 
@@ -2091,7 +2091,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/issues/labels/#create-a-label
      * @TODO Better sanitize parameters
      */
-    public function createRepositoryLabel($owner, $repository, $name, $color)
+    function createRepositoryLabel($owner, $repository, $name, $color)
     {
         /* Assemble data */
 
@@ -2125,7 +2125,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/issues/labels/#update-a-label
      * @TODO Better sanitize parameters
      */
-    public function updateRepositoryLabel($owner, $repository, $label, $name = null, $color = null)
+    function updateRepositoryLabel($owner, $repository, $label, $name = null, $color = null)
     {
         /* Assemble data */
 
@@ -2162,7 +2162,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $label
      * @see https://developer.github.com/v3/issues/labels/#delete-a-label
      */
-    public function deleteRepositoryLabel($owner, $repository, $label)
+    function deleteRepositoryLabel($owner, $repository, $label)
     {
         /* Delete repository label */
 
@@ -2179,7 +2179,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/labels/#list-labels-on-an-issue
      */
-    public function getIssueLabels($owner, $repository, $number, $paginationOffset = 1)
+    function getIssueLabels($owner, $repository, $number, $paginationOffset = 1)
     {
         /* Fetch issue labels */
 
@@ -2206,7 +2206,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/labels/#add-labels-to-an-issue
      */
-    public function addIssueLabels($owner, $repository, $number, $labels)
+    function addIssueLabels($owner, $repository, $number, $labels)
     {
         /* Assemble data */
 
@@ -2232,7 +2232,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $label
      * @see https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue
      */
-    public function removeIssueLabel($owner, $repository, $number, $label)
+    function removeIssueLabel($owner, $repository, $number, $label)
     {
         /* Remove issue label */
 
@@ -2249,7 +2249,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/labels/#replace-all-labels-for-an-issue
      */
-    public function setIssueLabels($owner, $repository, $number, $labels = [])
+    function setIssueLabels($owner, $repository, $number, $labels = [])
     {
         /* Assemble data */
 
@@ -2274,7 +2274,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param int $number
      * @see https://developer.github.com/v3/issues/labels/#remove-all-labels-from-an-issue
      */
-    public function removeAllIssueLabels($owner, $repository, $number)
+    function removeAllIssueLabels($owner, $repository, $number)
     {
         /* Remove issue label */
 
@@ -2291,7 +2291,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/labels/#get-labels-for-every-issue-in-a-milestone
      */
-    public function getMilestoneLabels($owner, $repository, $number, $paginationOffset = 1)
+    function getMilestoneLabels($owner, $repository, $number, $paginationOffset = 1)
     {
         /* Fetch milestone labels */
 
@@ -2323,7 +2323,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository
      * @TODO Better sanitize parameters
      */
-    public function getMilestones($owner, $repository, $state = null, $sort = null, $direction = null, $paginationOffset = 1)
+    function getMilestones($owner, $repository, $state = null, $sort = null, $direction = null, $paginationOffset = 1)
     {
         /* Assemble URL */
 
@@ -2367,7 +2367,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/issues/milestones/#get-a-single-milestone
      */
-    public function getMilestone($owner, $repository, $number)
+    function getMilestone($owner, $repository, $number)
     {
         /* Fetch milestone */
 
@@ -2391,7 +2391,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/issues/milestones/#create-a-milestone
      * @TODO Better sanitize parameters
      */
-    public function createMilestone($owner, $repository, $title, $state = null, $description = null, $dueOn = null)
+    function createMilestone($owner, $repository, $title, $state = null, $description = null, $dueOn = null)
     {
         /* Assemble data */
 
@@ -2436,7 +2436,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/issues/milestones/#update-a-milestone
      * @TODO Better sanitize parameters
      */
-    public function updateMilestone($owner, $repository, $number, $title = null, $state = null, $description = null, $dueOn = null)
+    function updateMilestone($owner, $repository, $number, $title = null, $state = null, $description = null, $dueOn = null)
     {
         /* Assemble data */
 
@@ -2477,7 +2477,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param int $number
      * @see https://developer.github.com/v3/issues/milestones/#delete-a-milestone
      */
-    public function deleteMilestone($owner, $repository, $number)
+    function deleteMilestone($owner, $repository, $number)
     {
         /* Delete milestone */
 
@@ -2492,7 +2492,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/emojis/#emojis
      */
-    public function getAvailableEmojis()
+    function getAvailableEmojis()
     {
         /* Fetch available emojis */
 
@@ -2513,7 +2513,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/gitignore/#listing-available-templates
      */
-    public function getAvailableGitIgnoreTemplates()
+    function getAvailableGitIgnoreTemplates()
     {
         /* Fetch available .gitignore templates */
 
@@ -2534,7 +2534,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/gitignore/#get-a-single-template
      * @TODO Available fetching the raw template contents
      */
-    public function getGitIgnoreTemplate($template)
+    function getGitIgnoreTemplate($template)
     {
         /* Fetch .gitignore template */
 
@@ -2561,7 +2561,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/pulls/#list-pull-requests
      * @TODO Better sanitize parameters
      */
-    public function getPullRequests($owner, $repository, $state = null, $head = null, $base = null, $sort = null, $direction = null, $paginationOffset = 1)
+    function getPullRequests($owner, $repository, $state = null, $head = null, $base = null, $sort = null, $direction = null, $paginationOffset = 1)
     {
         /* Assemble URL */
 
@@ -2611,7 +2611,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Support diff format
      * @TODO Support patch format
      */
-    public function getPullRequest($owner, $repository, $number)
+    function getPullRequest($owner, $repository, $number)
     {
         /* Fetch pull request */
 
@@ -2635,7 +2635,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/pulls/#create-a-pull-request
      */
-    public function createPullRequest($owner, $repository, $title, $head, $base, $body, $maintainerCanModify = true)
+    function createPullRequest($owner, $repository, $title, $head, $base, $body, $maintainerCanModify = true)
     {
         /* Assemble data */
 
@@ -2676,7 +2676,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/pulls/#create-a-pull-request
      */
-    public function createPullRequestFromIssue($owner, $repository, $number, $head, $base, $maintainerCanModify = true)
+    function createPullRequestFromIssue($owner, $repository, $number, $head, $base, $maintainerCanModify = true)
     {
         /* Assemble data */
 
@@ -2715,7 +2715,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/pulls/#update-a-pull-request
      */
-    public function updatePullRequest($owner, $repository, $number, $title = null, $head = null, $base = null, $body = null, $maintainerCanModify = null)
+    function updatePullRequest($owner, $repository, $number, $title = null, $head = null, $base = null, $body = null, $maintainerCanModify = null)
     {
         /* Assemble data */
 
@@ -2762,7 +2762,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/pulls/#create-a-pull-request
      */
-    public function getPullRequestCommits($owner, $repository, $number, $paginationOffset = 1)
+    function getPullRequestCommits($owner, $repository, $number, $paginationOffset = 1)
     {
         /* Fetch pull request commits */
 
@@ -2785,7 +2785,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return mixed
      * @see https://developer.github.com/v3/pulls/#list-pull-requests-files
      */
-    public function getPullRequestFiles($owner, $repository, $number, $paginationOffset = 1)
+    function getPullRequestFiles($owner, $repository, $number, $paginationOffset = 1)
     {
         /* Fetch pull request files */
 
@@ -2807,7 +2807,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return bool
      * @see https://developer.github.com/v3/pulls/#get-if-a-pull-request-has-been-merged
      */
-    public function isPullRequestMerged($owner, $repository, $number)
+    function isPullRequestMerged($owner, $repository, $number)
     {
         /* Determine whether the pull request in question has been merged */
 
@@ -2833,7 +2833,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button
      * @TODO Handle unsuccessful merges
      */
-    public function mergePullRequest($owner, $repository, $number, $commitTitle = null, $commitMessage = null, $sha = null, $mergeMethod = 'merge')
+    function mergePullRequest($owner, $repository, $number, $commitTitle = null, $commitMessage = null, $sha = null, $mergeMethod = 'merge')
     {
         /* Assemble data */
 
@@ -2889,7 +2889,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
-    public function getUserRepositories($owner = null, $visibility = null, $affiliation = null, $type = null, $sort = null, $direction = null, $paginationOffset = 1)
+    function getUserRepositories($owner = null, $visibility = null, $affiliation = null, $type = null, $sort = null, $direction = null, $paginationOffset = 1)
     {
         /* Assemble URL */
 
@@ -2939,7 +2939,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
-    public function getOrganizationRepositories($organization, $type = null, $paginationOffset = 1)
+    function getOrganizationRepositories($organization, $type = null, $paginationOffset = 1)
     {
         /* Assemble URL */
 
@@ -2971,7 +2971,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
-    public function getPublicRepositories($since = null)
+    function getPublicRepositories($since = null)
     {
         /* Assemble URL */
 
@@ -3017,7 +3017,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
-    public function createRepository($name, $description = null, $homepage = null, $private = null, $hasIssues = null, $hasProjects = null, $hasWiki = null, $teamId = null, $autoInit = null, $gitIgnoreTemplate = null, $licenseTemplate = null, $allowSquashMerge = null, $allowMergeCommit = null, $allowRebaseMerge = null)
+    function createRepository($name, $description = null, $homepage = null, $private = null, $hasIssues = null, $hasProjects = null, $hasWiki = null, $teamId = null, $autoInit = null, $gitIgnoreTemplate = null, $licenseTemplate = null, $allowSquashMerge = null, $allowMergeCommit = null, $allowRebaseMerge = null)
     {
         /* Assemble data */
 
@@ -3095,7 +3095,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/repos/#get
      * @TODO Better sanitize parameters
      */
-    public function getRepository($owner, $repository)
+    function getRepository($owner, $repository)
     {
         /* Get repository */
 
@@ -3130,7 +3130,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
-    public function editRepository($owner, $repository, $name = null, $description = null, $homepage = null, $private = null, $hasIssues = null, $hasProjects = null, $hasWiki = null, $teamId = null, $autoInit = null, $gitIgnoreTemplate = null, $licenseTemplate = null, $allowSquashMerge = null, $allowMergeCommit = null, $allowRebaseMerge = null)
+    function editRepository($owner, $repository, $name = null, $description = null, $homepage = null, $private = null, $hasIssues = null, $hasProjects = null, $hasWiki = null, $teamId = null, $autoInit = null, $gitIgnoreTemplate = null, $licenseTemplate = null, $allowSquashMerge = null, $allowMergeCommit = null, $allowRebaseMerge = null)
     {
         /* Assemble data */
 
@@ -3215,7 +3215,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
-    public function getRepositoryContributors($owner, $repository, $anon = null, $paginationOffset = 1)
+    function getRepositoryContributors($owner, $repository, $anon = null, $paginationOffset = 1)
     {
         /* Assemble URL */
 
@@ -3248,7 +3248,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/repos/#list-languages
      * @TODO Write better documentation
      */
-    public function getRepositoryLanguages($owner, $repository, $paginationOffset = 1)
+    function getRepositoryLanguages($owner, $repository, $paginationOffset = 1)
     {
         /* Fetch languages */
 
@@ -3271,7 +3271,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/repos/#list-teams
      * @TODO Write better documentation
      */
-    public function getRepositoryTeams($owner, $repository, $paginationOffset = 1)
+    function getRepositoryTeams($owner, $repository, $paginationOffset = 1)
     {
         /* Fetch teams */
 
@@ -3294,7 +3294,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/repos/#list-tags
      * @TODO Write better documentation
      */
-    public function getRepositoryTags($owner, $repository, $paginationOffset = 1)
+    function getRepositoryTags($owner, $repository, $paginationOffset = 1)
     {
         /* Fetch tags */
 
@@ -3315,7 +3315,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/repos/#delete-a-repository
      * @TODO Write better documentation
      */
-    public function deleteRepository($owner, $repository)
+    function deleteRepository($owner, $repository)
     {
         /* Delete repository */
 
@@ -3335,7 +3335,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Write better documentation
      * @TODO Support protected branches
      */
-    public function getRepositoryBranches($owner, $repository, $paginationOffset = 1)
+    function getRepositoryBranches($owner, $repository, $paginationOffset = 1)
     {
         /* Fetch branches */
 
@@ -3358,7 +3358,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/repos/branches/#get-branch
      * @TODO Write better documentation
      */
-    public function getRepositoryBranch($owner, $repository, $branch)
+    function getRepositoryBranch($owner, $repository, $branch)
     {
         /* Fetch branch */
 
@@ -3383,7 +3383,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
-    public function getRepositoryCollaborators($owner, $repository, $affiliation = null, $paginationOffset = 1)
+    function getRepositoryCollaborators($owner, $repository, $affiliation = null, $paginationOffset = 1)
     {
         /* Assemble URL */
 
@@ -3415,7 +3415,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @return bool
      * @see https://developer.github.com/v3/repos/collaborators/#check-if-a-user-is-a-collaborator
      */
-    public function isRepositoryCollaborator($owner, $repository, $username)
+    function isRepositoryCollaborator($owner, $repository, $username)
     {
         /* Check if a user is a collaborator */
 
@@ -3437,7 +3437,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/repos/collaborators/#review-a-users-permission-level
      * @TODO Better sanitize parameters
      */
-    public function getRepositoryCollaboratorPermissionLevel($owner, $repository, $username)
+    function getRepositoryCollaboratorPermissionLevel($owner, $repository, $username)
     {
         /* Fetch permission level */
 
@@ -3458,7 +3458,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/repos/collaborators/#add-user-as-a-collaborator
      * @TODO Support preview/invitation instead of directly adding a user as a collaborator
      */
-    public function addRepositoryCollaborator($owner, $repository, $username, $permission = null)
+    function addRepositoryCollaborator($owner, $repository, $username, $permission = null)
     {
         /* Assemble data */
 
@@ -3488,7 +3488,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $username
      * @see https://developer.github.com/v3/repos/collaborators/#remove-user-as-a-collaborator
      */
-    public function removeRepositoryCollaborator($owner, $repository, $username)
+    function removeRepositoryCollaborator($owner, $repository, $username)
     {
         /* Remove collaborator */
 
@@ -3508,7 +3508,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Support custom media types
      * @TODO Write better documentation
      */
-    public function getRepositoryCommitComments($owner, $repository, $paginationOffset = 1)
+    function getRepositoryCommitComments($owner, $repository, $paginationOffset = 1)
     {
         /* Fetch commit comments */
 
@@ -3533,7 +3533,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Support custom media types
      * @TODO Write better documentation
      */
-    public function getCommitComments($owner, $repository, $commitId, $paginationOffset = 1)
+    function getCommitComments($owner, $repository, $commitId, $paginationOffset = 1)
     {
         /* Fetch commit comments */
 
@@ -3560,7 +3560,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
-    public function createCommitComment($owner, $repository, $commitId, $body, $path = null, $position = null)
+    function createCommitComment($owner, $repository, $commitId, $body, $path = null, $position = null)
     {
         /* Assemble data */
 
@@ -3595,7 +3595,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/repos/comments/#get-a-single-commit-comment
      * @TODO Write better documentation
      */
-    public function getCommitComment($owner, $repository, $id)
+    function getCommitComment($owner, $repository, $id)
     {
         /* Fetch commit comment */
 
@@ -3618,7 +3618,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
-    public function updateCommitComment($owner, $repository, $id, $body)
+    function updateCommitComment($owner, $repository, $id, $body)
         {
         /* Assemble data */
 
@@ -3643,7 +3643,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
-    public function deleteCommitComment($owner, $repository, $id)
+    function deleteCommitComment($owner, $repository, $id)
     {
         /* Delete commit comment */
 
@@ -3668,7 +3668,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
-    public function getRepositoryCommits($owner, $repository, $sha = null, $path = null, $author = null, $since = null, $until = null, $paginationOffset = 1)
+    function getRepositoryCommits($owner, $repository, $sha = null, $path = null, $author = null, $since = null, $until = null, $paginationOffset = 1)
     {
         /* Assemble URL */
 
@@ -3719,7 +3719,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Write better documentation
      * @TODO Support additional media types to fetch diff and patch formats
      */
-    public function getRepositoryCommit($owner, $repository, $sha)
+    function getRepositoryCommit($owner, $repository, $sha)
     {
         /* Fetch commit */
 
@@ -3745,7 +3745,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @TODO Write better documentation
      * @TODO Support additional media types to fetch diff and patch formats
      */
-    public function compareCommits($owner, $repository, $base, $head)
+    function compareCommits($owner, $repository, $base, $head)
     {
         /* Compare commits */
 
