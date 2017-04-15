@@ -3663,6 +3663,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @param string $since
      * @param string $until
      * @param int $paginationOffset
+     * @return mixed
      * @see https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
