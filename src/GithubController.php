@@ -3756,4 +3756,29 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $comparison;
     }
+
+    /* Contents */
+
+    /**
+     * Get the README
+     *
+     * This method returns the preferred README for a repository
+     *
+     * @param $owner
+     * @param $repository
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/contents/#get-the-readme
+     * @TODO Better sanitize parameters
+     * @TODO Support additional media types
+     */
+    function getRepositoryReadme($owner, $repository)
+    {
+        /* Fetch README */
+
+        list($statusCode, $headers, $readme) = GithubController::get('repos/' . $owner . '/' . $repository . '/readme');
+
+        /* Return README */
+
+        return $readme;
+    }
 }

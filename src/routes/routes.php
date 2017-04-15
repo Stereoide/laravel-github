@@ -246,6 +246,10 @@ Route::get('github/repositoryCommits/{owner}/{repository}', '\Stereoide\Github\G
 Route::get('github/repositoryCommit/{owner}/{repository}/{sha}', function($owner, $repository, $sha) { dd(Github::getRepositoryCommit($owner, $repository, $sha)); });
 Route::get('github/compareCommits/{owner}/{repository}/{base}/{head}', function($owner, $repository, $base, $head) { dd(Github::compareCommits($owner, $repository, $base, $head)); });
 
+/* Contents */
+
+Route::get('github/repositoryReadme/{owner}/{repository}', function($owner, $repository) { dd(Github::getRepositoryReadme($owner, $repository)); });
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');
