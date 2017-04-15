@@ -3657,16 +3657,47 @@ class GithubController extends \App\Http\Controllers\Controller
      *
      * @param string $owner
      * @param string $repository
+     * @param string $sha
+     * @param string $path
+     * @param string $author
+     * @param string $since
+     * @param string $until
      * @param int $paginationOffset
      * @see https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
      */
-    public function getRepositoryCommits($owner, $repository, $paginationOffset = 1)
+    public function getRepositoryCommits($owner, $repository, $sha = null, $path = null, $author = null, $since = null, $until = null, $paginationOffset = 1)
     {
+        /* Assemble URL */
+
+        $url = 'repos/' . $owner . '/' . $repository . '/commits';
+
+        if (!is_null($sha)) {
+            $url .= '&$sha=' . $sha;
+        }
+
+        if (!is_null($path)) {
+            $url .= '&$path=' . $path;
+        }
+
+        if (!is_null($author)) {
+            $url .= '&$author=' . $author;
+        }
+
+        if (!is_null($since)) {
+            $url .= '&$since=' . $since;
+        }
+
+        if (!is_null($until)) {
+            $url .= '&$until=' . $until;
+        }
+
+        $url = str_replace('/commits&', '/commits?', $url);
+
         /* Fetch commits */
 
-        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/commits', $paginationOffset);
+        list($statusCode, $headers, $body) = GithubController::get($url, $paginationOffset);
 
         $commits = collect($body);
 
