@@ -3675,23 +3675,23 @@ class GithubController extends \App\Http\Controllers\Controller
         $url = 'repos/' . $owner . '/' . $repository . '/commits';
 
         if (!is_null($sha)) {
-            $url .= '&$sha=' . $sha;
+            $url .= '&sha=' . $sha;
         }
 
         if (!is_null($path)) {
-            $url .= '&$path=' . $path;
+            $url .= '&path=' . $path;
         }
 
         if (!is_null($author)) {
-            $url .= '&$author=' . $author;
+            $url .= '&author=' . $author;
         }
 
         if (!is_null($since)) {
-            $url .= '&$since=' . $since;
+            $url .= '&since=' . $since;
         }
 
         if (!is_null($until)) {
-            $url .= '&$until=' . $until;
+            $url .= '&until=' . $until;
         }
 
         $url = str_replace('/commits&', '/commits?', $url);
