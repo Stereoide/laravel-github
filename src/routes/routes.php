@@ -252,6 +252,7 @@ Route::get('github/repositoryReadme/{owner}/{repository}', function($owner, $rep
 Route::get('github/repositoryContents/{owner}/{repository}/{path}/{ref}', function($owner, $repository, $path, $ref) { dd(Github::getRepositoryContents($owner, $repository, $path, $ref)); });
 Route::get('github/repositoryContents/{owner}/{repository}/{path}', function($owner, $repository, $path) { dd(Github::getRepositoryContents($owner, $repository, $path)); });
 Route::get('github/createFile/{owner}/{repository}/{path}/{message}/{sourceFilePath}', function($owner, $repository, $path, $message, $sourceFilePath) { dd(Github::createFile($owner, $repository, $path, $message, $sourceFilePath)); });
+Route::get('github/updateFile/{owner}/{repository}/{sha}/{path}/{message}/{sourceFilePath}', function($owner, $repository, $sha, $path, $message, $sourceFilePath) { dd(Github::updateFile($owner, $repository, $sha, $path, $message, $sourceFilePath)); });
 
 /* Catch-all */
 
