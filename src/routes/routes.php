@@ -240,6 +240,10 @@ Route::get('github/commitComment/{owner}/{repository}/{id}', function($owner, $r
 Route::get('github/updateCommitComment/{owner}/{repository}/{id}/{body}', function($owner, $repository, $id, $body) { dd(Github::updateCommitComment($owner, $repository, $id, $body)); });
 Route::get('github/deleteCommitComment/{owner}/{repository}/{id}', '\Stereoide\Github\GithubController@deleteCommitComment');
 
+/* Commits */
+
+Route::get('github/repositoryCommits/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryCommits');
+
 /* Catch-all */
 
 Route::get('github/{cmd}', '\Stereoide\Github\GithubController@cmd');

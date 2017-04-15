@@ -3649,4 +3649,29 @@ class GithubController extends \App\Http\Controllers\Controller
 
         list($statusCode, $headers, $comment) = GithubController::delete('/repos/' . $owner . '/' . $repository . '/comments/' . $id);
     }
+
+    /* Commits */
+
+    /**
+     * List commits on a repository
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param int $paginationOffset
+     * @see https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     */
+    public function getRepositoryCommits($owner, $repository, $paginationOffset = 1)
+    {
+        /* Fetch commits */
+
+        list($statusCode, $headers, $body) = GithubController::get('repos/' . $owner . '/' . $repository . '/commits', $paginationOffset);
+
+        $commits = collect($body);
+
+        /* Return commits */
+
+        return $commits;
+    }
 }
