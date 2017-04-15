@@ -3717,6 +3717,7 @@ class GithubController extends \App\Http\Controllers\Controller
      * @see https://developer.github.com/v3/repos/commits/#get-a-single-commit
      * @TODO Better sanitize parameters
      * @TODO Write better documentation
+     * @TODO Support additional media types to fetch diff and patch formats
      */
     public function getRepositoryCommit($owner, $repository, $sha)
     {
