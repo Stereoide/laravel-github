@@ -244,6 +244,7 @@ Route::get('github/deleteCommitComment/{owner}/{repository}/{id}', '\Stereoide\G
 
 Route::get('github/repositoryCommits/{owner}/{repository}', '\Stereoide\Github\GithubController@getRepositoryCommits');
 Route::get('github/repositoryCommit/{owner}/{repository}/{sha}', function($owner, $repository, $sha) { dd(Github::getRepositoryCommit($owner, $repository, $sha)); });
+Route::get('github/compareCommits/{owner}/{repository}/{base}/{head}', function($owner, $repository, $base, $head) { dd(Github::compareCommits($owner, $repository, $base, $head)); });
 
 /* Catch-all */
 

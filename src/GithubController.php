@@ -3729,4 +3729,30 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $commit;
     }
+
+    /**
+     * Compare two commits
+     *
+     * Both :base and :head must be branch names in :repo. To compare branches across other repositories in the same
+     * network as :repo, use the format <USERNAME>:branch.
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $sha
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/commits/#compare-two-commits
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     * @TODO Support additional media types to fetch diff and patch formats
+     */
+    public function compareCommits($owner, $repository, $base, $head)
+    {
+        /* Compare commits */
+
+        list($statusCode, $headers, $comparison) = GithubController::get('repos/' . $owner . '/' . $repository . '/compare/' . $base . '...' . $head);
+
+        /* Return comparison */
+
+        return $comparison;
+    }
 }
