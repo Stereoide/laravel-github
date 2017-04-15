@@ -3944,4 +3944,62 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $file;
     }
+
+    /**
+     * Delete a file
+     *
+     * This method deletes a file in a repository
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $sha
+     * @param string $path
+     * @param string $message
+     * @param string $branch
+     * @param string $committerName
+     * @param string $committerEmail
+     * @param string $authorName
+     * @param string $authorEmail
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/contents/#delete-a-file
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     */
+    function deleteFile($owner, $repository, $sha, $path, $message, $branch = null, $committerName = null, $committerEmail = null, $authorName = null, $authorEmail = null)
+    {
+        /* Assemble data */
+
+        $data = [
+            'sha' => $sha,
+            'message' => $message,
+        ];
+
+        if (!is_null($branch)) {
+            $data['branch'] = $branch;
+        }
+
+        if (!is_null($committerName) && !is_null($committerEmail)) {
+            $data['committer'] = [
+                'name' => $committerName,
+                'email' => $committerEmail
+            ];
+        }
+
+        if (!is_null($authorName) && !is_null($authorEmail)) {
+            $data['author'] = [
+                'name' => $authorName,
+                'email' => $authorEmail
+            ];
+        }
+
+        $data = json_encode($data);
+
+        /* Delete file */
+
+        list($statusCode, $headers, $file) = GithubController::delete('repos/' . $owner . '/' . $repository . '/contents/' . $path, $data);
+
+        /* Return file */
+
+        return $file;
+    }
 }
