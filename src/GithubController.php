@@ -3781,4 +3781,45 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $readme;
     }
+
+    /**
+     * Get contents
+     *
+     * This method returns the preferred README for a repository
+     *
+     * @param $owner
+     * @param $repository
+     * @param $path
+     * @param $ref
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/contents/#get-contents
+     * @TODO Better sanitize parameters
+     * @TODO Support additional media types
+     * @TODO Write better documentation
+     * @TODO Implement correct datatype classes
+     */
+    function getRepositoryContents($owner, $repository, $path, $ref = null)
+    {
+        /* Assemble URL */
+
+        $url = 'repos/' . $owner . '/' . $repository . '/contents/' . $path;
+
+        if (!is_null($ref)) {
+            $url .= '&ref=' . $ref;
+        }
+
+        /* Fetch contents */
+
+        list($statusCode, $headers, $contents) = GithubController::get($url);
+
+        /* Determine result type */
+
+        if (is_array($contents)) {
+            $contents = collect($contents);
+        }
+
+        /* Return contents */
+
+        return $contents;
+    }
 }

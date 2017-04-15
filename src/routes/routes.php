@@ -249,6 +249,8 @@ Route::get('github/compareCommits/{owner}/{repository}/{base}/{head}', function(
 /* Contents */
 
 Route::get('github/repositoryReadme/{owner}/{repository}', function($owner, $repository) { dd(Github::getRepositoryReadme($owner, $repository)); });
+Route::get('github/repositoryContents/{owner}/{repository}/{path}/{ref}', function($owner, $repository, $path, $ref) { dd(Github::getRepositoryContents($owner, $repository, $path, $ref)); });
+Route::get('github/repositoryContents/{owner}/{repository}/{path}', function($owner, $repository, $path) { dd(Github::getRepositoryContents($owner, $repository, $path)); });
 
 /* Catch-all */
 
