@@ -3738,7 +3738,8 @@ class GithubController extends \App\Http\Controllers\Controller
      *
      * @param string $owner
      * @param string $repository
-     * @param string $sha
+     * @param string $base
+     * @param string $head
      * @return mixed
      * @see https://developer.github.com/v3/repos/commits/#compare-two-commits
      * @TODO Better sanitize parameters
