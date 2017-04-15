@@ -3822,4 +3822,64 @@ class GithubController extends \App\Http\Controllers\Controller
 
         return $contents;
     }
+
+    /**
+     * Create a file
+     *
+     * This method creates a new file in a repository
+     *
+     * @param string $owner
+     * @param string $repository
+     * @param string $path
+     * @param string $message
+     * @param string $sourceFilePath
+     * @param string $branch
+     * @param string $committerName
+     * @param string $committerEmail
+     * @param string $authorName
+     * @param string $authorEmail
+     * @return mixed
+     * @see https://developer.github.com/v3/repos/contents/#create-a-file
+     * @TODO Better sanitize parameters
+     * @TODO Write better documentation
+     * @TODO Implement correct datatype classes
+     * @TODO Assert the source file in question exists
+     */
+    function createFile($owner, $repository, $path, $message, $sourceFilePath, $branch = null, $committerName = null, $committerEmail = null, $authorName = null, $authorEmail = null)
+    {
+        /* Assemble data */
+
+        $data = [
+            'message' => $message,
+            'content' => base64_encode(file_get_contents($sourceFilePath)),
+        ];
+
+        if (!is_null($branch)) {
+            $data['branch'] = $branch;
+        }
+
+        if (!is_null($committerName) && !is_null($committerEmail)) {
+            $data['committer'] = [
+                'name' => $committerName,
+                'email' => $committerEmail
+            ];
+        }
+
+        if (!is_null($authorName) && !is_null($authorEmail)) {
+            $data['author'] = [
+                'name' => $authorName,
+                'email' => $authorEmail
+            ];
+        }
+
+        $data = json_encode($data);
+
+        /* Create file */
+
+        list($statusCode, $headers, $file) = GithubController::put('repos/' . $owner . '/' . $repository . '/contents/' . $path, [], $data);
+
+        /* Return file */
+
+        return $file;
+    }
 }
